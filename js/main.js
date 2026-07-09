@@ -171,7 +171,7 @@ const revealObserver = new IntersectionObserver((entries) => {
       entry.target.classList.add('visible');
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 
 revealEls.forEach(el => revealObserver.observe(el));
 
@@ -590,3 +590,23 @@ function initPageAvatar() {
 }
 
 document.addEventListener('DOMContentLoaded', initPageAvatar);
+
+// ---- Fix: Trigger reveals for elements already in viewport on load ----
+function triggerInitialReveals() {
+  const revealEls = document.querySelectorAll('.reveal');
+  revealEls.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) {
+      el.classList.add('visible');
+    }
+  });
+}
+
+// Run immediately and after a short delay to catch canvas-rendered content
+document.addEventListener('DOMContentLoaded', () => {
+  triggerInitialReveals();
+  setTimeout(triggerInitialReveals, 300);
+  setTimeout(triggerInitialReveals, 800);
+});
+
+window.addEventListener('scroll', triggerInitialReveals, { passive: true });
