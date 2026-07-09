@@ -117,25 +117,25 @@ footer a{color:var(--accent);text-decoration:none;}
 .page-title{font-family:"Press Start 2P",monospace;font-size:clamp(.8rem,2vw,1.2rem);color:var(--accent);margin-bottom:.5rem;letter-spacing:2px;}
 .page-sub{font-family:"Playfair Display",serif;font-size:1.1rem;color:var(--tan);font-style:italic;margin-bottom:1rem;}
 .divider{width:80px;height:3px;background:var(--accent);margin:1rem auto 2rem;position:relative;}
-.divider::before,.divider::after{content:"★";position:absolute;top:50%;transform:translateY(-50%);color:var(--accent);font-size:.8rem;}
+.divider::before,.divider::after{content:"&#9733;";position:absolute;top:50%;transform:translateY(-50%);color:var(--accent);font-size:.8rem;}
 .divider::before{left:-1.5rem;}.divider::after{right:-1.5rem;}
 .project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2.5rem;max-width:1200px;margin:0 auto;padding:0 2rem 6rem;}
 .proj-card{background:var(--card);border:3px solid var(--accent);overflow:hidden;box-shadow:6px 6px 0 var(--coffee);transition:.3s;}
 .proj-card:hover{transform:translate(-4px,-4px);box-shadow:10px 10px 0 var(--coffee);}
 .proj-card.featured{grid-column:span 2;}
-.proj-preview{width:100%;height:200px;background:var(--navy);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-bottom:3px solid var(--accent);}
-.proj-preview canvas{width:100%;height:100%;object-fit:cover;image-rendering:pixelated;}
+.proj-preview{width:100%;height:200px;background:var(--navy);position:relative;overflow:hidden;border-bottom:3px solid var(--accent);}
+.proj-preview canvas{width:100%;height:100%;display:block;image-rendering:pixelated;}
 .proj-preview-label{position:absolute;top:.5rem;right:.5rem;font-family:"Press Start 2P",monospace;font-size:.32rem;color:var(--accent);background:var(--card);border:1px solid var(--accent);padding:.2rem .4rem;}
 .proj-info{padding:1.5rem;}
 .proj-num{font-family:"Press Start 2P",monospace;font-size:.38rem;color:var(--slate);margin-bottom:.3rem;}
-.proj-name{font-family:"Press Start 2P",monospace;font-size:.62rem;color:var(--accent);margin-bottom:.8rem;letter-spacing:1px;line-height:1.5;}
+.proj-name{font-family:"Press Start 2P",monospace;font-size:.6rem;color:var(--accent);margin-bottom:.8rem;letter-spacing:1px;line-height:1.5;}
 .proj-desc{font-size:.88rem;opacity:.9;line-height:1.7;margin-bottom:1rem;}
 .proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem;}
-.tag{font-family:"Press Start 2P",monospace;font-size:.32rem;padding:.25rem .5rem;border:1px solid var(--lav);color:var(--lav);letter-spacing:.5px;}
+.tag{font-family:"Press Start 2P",monospace;font-size:.32rem;padding:.25rem .5rem;border:1px solid var(--lav);color:var(--lav);}
 .tag.g{border-color:var(--mint);color:var(--mint);}
 .tag.y{border-color:var(--gold);color:var(--gold);}
 .tag.p{border-color:var(--pink);color:var(--pink);}
-.proj-link{font-family:"Press Start 2P",monospace;font-size:.38rem;padding:.5rem .8rem;border:2px solid var(--mint);color:var(--mint);text-decoration:none;letter-spacing:.5px;transition:.3s;display:inline-flex;align-items:center;gap:.4rem;}
+.proj-link{font-family:"Press Start 2P",monospace;font-size:.38rem;padding:.5rem .8rem;border:2px solid var(--mint);color:var(--mint);text-decoration:none;transition:.3s;display:inline-flex;align-items:center;gap:.4rem;}
 .proj-link:hover{background:var(--mint);color:var(--bg);}
 @media(max-width:768px){.proj-card.featured{grid-column:span 1;}}
 
@@ -147,82 +147,75 @@ footer a{color:var(--accent);text-decoration:none;}
 <nav>
   <a href="index.html" class="logo">NMO ✦</a>
   <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="projects.html" class="active">Projects</a></li><li><a href="skills.html">Skills</a></li><li><a href="contact.html">Contact</a></li></ul>
-  <button class="theme-btn" id="themeBtn">☀️</button>
+  <button class="theme-btn" id="themeBtn">&#x2600;&#xFE0F;</button>
 </nav>
 <div class="vinyl-wrap">
   <div class="vinyl" id="vinyl"></div>
-  <button class="mute-btn" id="muteBtn">🔈</button>
-  <div class="vinyl-label">prod. Metzmusic<br/>free use ✓</div>
+  <button class="mute-btn" id="muteBtn">&#x1F508;</button>
+  <div class="vinyl-label">prod. Metzmusic<br/>free use &#x2713;</div>
 </div>
 
 <section class="page-hero">
-  <span style="position:absolute;top:20%;left:5%;font-size:2rem;opacity:.15;animation:fbounce 6s ease-in-out infinite;">🦋</span>
-  <span style="position:absolute;top:40%;right:5%;font-size:1.5rem;opacity:.15;animation:fbounce 8s ease-in-out 1s infinite;">🦋</span>
   <h1 class="page-title">Projects</h1>
-  <p class="page-sub">things I built with love (and a lot of coffee ☕)</p>
+  <p class="page-sub">things I built with love (and a lot of coffee)</p>
   <div class="divider"></div>
-  <p style="font-size:.9rem;opacity:.8;max-width:600px;margin:0 auto;">Every project here is something I built end-to-end — from idea through deployment.</p>
+  <p style="font-size:.9rem;opacity:.8;max-width:600px;margin:0 auto;">Every project here is something I built end-to-end.</p>
 </section>
 <div class="project-grid">
   <div class="proj-card featured">
-    <div class="proj-preview"><canvas id="canvasPixelPlay"></canvas><span class="proj-preview-label">LIVE ANIMATION ▶</span></div>
+    <div class="proj-preview"><canvas id="canvasPixelPlay"></canvas><span class="proj-preview-label">LIVE ANIMATION</span></div>
     <div class="proj-info">
-      <p class="proj-num">01 ✦</p>
-      <h2 class="proj-name">PixelPlay</h2>
-      <p class="proj-desc">A browser-based AI music player built in vanilla JavaScript. Features local file playback, YouTube streaming, AI-generated pixel art per song using Pollinations.ai, ID3 tag metadata reading, queue system, and localStorage persistence. Built during Anthropic's AI Fluency course.</p>
-      <div class="proj-tags"><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag g">Pollinations.ai</span><span class="tag g">YouTube IFrame API</span><span class="tag y">AI Art</span><span class="tag p">Anthropic</span></div>
-      <a href="https://github.com/nmillso1/PixelPlay" target="_blank" class="proj-link">💻 GitHub →</a>
+      <p class="proj-num">01</p><h2 class="proj-name">PixelPlay</h2>
+      <p class="proj-desc">A browser-based AI music player in vanilla JavaScript. Local file playback, YouTube streaming, AI-generated pixel art per song via Pollinations.ai, queue system, listening history, localStorage persistence. Built during Anthropic AI Fluency course.</p>
+      <div class="proj-tags"><span class="tag">JavaScript</span><span class="tag g">Pollinations.ai</span><span class="tag g">YouTube IFrame API</span><span class="tag y">AI Art</span><span class="tag p">Anthropic</span></div>
+      <a href="https://github.com/nmillso1/PixelPlay" target="_blank" class="proj-link">GitHub</a>
     </div>
   </div>
   <div class="proj-card">
-    <div class="proj-preview"><canvas id="canvasSecMon"></canvas><span class="proj-preview-label">LIVE ANIMATION ▶</span></div>
+    <div class="proj-preview"><canvas id="canvasSecMon"></canvas><span class="proj-preview-label">LIVE ANIMATION</span></div>
     <div class="proj-info">
-      <p class="proj-num">02 ✦</p>
-      <h2 class="proj-name">AI Security Monitor</h2>
-      <p class="proj-desc">AI-powered security monitoring system. Ingests logs, applies MITRE ATT&CK detection logic, integrates Claude via REST API for automated incident reports, with prompt injection defenses and human-in-the-loop safety checkpoints.</p>
-      <div class="proj-tags"><span class="tag">Python</span><span class="tag g">Claude API</span><span class="tag">REST API</span><span class="tag y">MITRE ATT&CK</span><span class="tag p">NIST AI RMF</span></div>
-      <a href="https://github.com/nmillso1" target="_blank" class="proj-link">💻 GitHub →</a>
+      <p class="proj-num">02</p><h2 class="proj-name">AI Security Monitor</h2>
+      <p class="proj-desc">AI-powered security monitoring system. Ingests logs, applies MITRE ATT&amp;CK detection logic, integrates Claude via REST API for automated incident reports, with prompt injection defenses and human-in-the-loop safety checkpoints.</p>
+      <div class="proj-tags"><span class="tag">Python</span><span class="tag g">Claude API</span><span class="tag y">MITRE ATT&amp;CK</span><span class="tag p">NIST AI RMF</span></div>
+      <a href="https://github.com/nmillso1" target="_blank" class="proj-link">GitHub</a>
     </div>
   </div>
   <div class="proj-card">
-    <div class="proj-preview"><canvas id="canvasDiagram"></canvas><span class="proj-preview-label">LIVE ANIMATION ▶</span></div>
+    <div class="proj-preview"><canvas id="canvasDiagram"></canvas><span class="proj-preview-label">LIVE ANIMATION</span></div>
     <div class="proj-info">
-      <p class="proj-num">03 ✦</p>
-      <h2 class="proj-name">Diagram Tutor</h2>
-      <p class="proj-desc">Floating desktop AI study assistant co-built with a research partner and Dr. Dillon at UMBC. Uses Ollama (qwen3:4b) for chat and Claude API for diagram generation. Built to help visual learners without replacing teacher judgment.</p>
-      <div class="proj-tags"><span class="tag">Python</span><span class="tag">PyQt5</span><span class="tag g">Claude API</span><span class="tag y">Ollama</span><span class="tag p">Education</span></div>
-      <a href="https://github.com/nmillso1/diagram-generator" target="_blank" class="proj-link">💻 GitHub →</a>
+      <p class="proj-num">03</p><h2 class="proj-name">Diagram Tutor</h2>
+      <p class="proj-desc">Floating desktop AI study assistant co-built with a research partner and Dr. Dillon at UMBC. Uses Ollama qwen3:4b for chat and Claude API for diagram generation. Helps visual learners without replacing teacher judgment.</p>
+      <div class="proj-tags"><span class="tag">Python</span><span class="tag">PyQt5</span><span class="tag g">Claude API</span><span class="tag y">Ollama</span></div>
+      <a href="https://github.com/nmillso1/diagram-generator" target="_blank" class="proj-link">GitHub</a>
     </div>
   </div>
   <div class="proj-card">
-    <div class="proj-preview"><canvas id="canvasCafe"></canvas><span class="proj-preview-label">LIVE ANIMATION ▶</span></div>
+    <div class="proj-preview"><canvas id="canvasCafe"></canvas><span class="proj-preview-label">LIVE ANIMATION</span></div>
     <div class="proj-info">
-      <p class="proj-num">04 ✦</p>
-      <h2 class="proj-name">Bean There Cafe Finder</h2>
+      <p class="proj-num">04</p><h2 class="proj-name">Bean There Cafe Finder</h2>
       <p class="proj-desc">Progressive Web App for discovering local cafes in the Baltimore/Catonsville area. Built with Leaflet.js, OpenStreetMap, and Overpass API with a manually curated cafes.json dataset.</p>
-      <div class="proj-tags"><span class="tag">JavaScript</span><span class="tag g">Leaflet.js</span><span class="tag">OpenStreetMap</span><span class="tag y">Overpass API</span><span class="tag p">PWA</span></div>
-      <a href="https://github.com/nmillso1/Bean-There-Cafe-Finder" target="_blank" class="proj-link">💻 GitHub →</a>
+      <div class="proj-tags"><span class="tag">JavaScript</span><span class="tag g">Leaflet.js</span><span class="tag y">Overpass API</span><span class="tag p">PWA</span></div>
+      <a href="https://github.com/nmillso1/Bean-There-Cafe-Finder" target="_blank" class="proj-link">GitHub</a>
     </div>
   </div>
   <div class="proj-card">
-    <div class="proj-preview"><canvas id="canvasChat"></canvas><span class="proj-preview-label">LIVE ANIMATION ▶</span></div>
+    <div class="proj-preview"><canvas id="canvasChat"></canvas><span class="proj-preview-label">LIVE ANIMATION</span></div>
     <div class="proj-info">
-      <p class="proj-num">05 ✦</p>
-      <h2 class="proj-name">IS436 Group Chat App</h2>
-      <p class="proj-desc">Multi-client networked chat application built in a 5-person Agile team for UMBC's IS 436 capstone. Multithreaded Python TCP socket server, Tkinter GUI, thread-safe state management, persistent logging. Supports 5+ simultaneous clients.</p>
-      <div class="proj-tags"><span class="tag">Python</span><span class="tag g">TCP Sockets</span><span class="tag">Threading</span><span class="tag y">Tkinter</span><span class="tag p">Agile/Scrum</span></div>
-      <a href="https://github.com/nmillso1/IS436-Group-Chat-Application" target="_blank" class="proj-link">💻 GitHub →</a>
+      <p class="proj-num">05</p><h2 class="proj-name">IS436 Group Chat App</h2>
+      <p class="proj-desc">Multi-client networked chat app built in a 5-person Agile team for UMBC IS 436 capstone. Multithreaded Python TCP socket server, Tkinter GUI, thread-safe state management, persistent logging. Supports 5+ simultaneous clients.</p>
+      <div class="proj-tags"><span class="tag">Python</span><span class="tag g">TCP Sockets</span><span class="tag y">Tkinter</span><span class="tag p">Agile/Scrum</span></div>
+      <a href="https://github.com/nmillso1/IS436-Group-Chat-Application" target="_blank" class="proj-link">GitHub</a>
     </div>
   </div>
 </div>
 <div style="text-align:center;padding:2rem 0 4rem;">
-  <a href="https://github.com/nmillso1" target="_blank" class="btn">See All Projects on GitHub →</a>
+  <a href="https://github.com/nmillso1" target="_blank" class="btn">See All Projects on GitHub</a>
 </div>
 
 <footer>
-  <p>✦ crafted with 🍪 + 🧶 + ☕ by Noel Mills-Odoi ✦</p>
+  <p>&#x2726; crafted with &#x1F36A; + &#x1F9F6; + &#x2615; by Noel Mills-Odoi &#x2726;</p>
   <p><a href="mailto:nmills6635@gmail.com">nmills6635@gmail.com</a> | <a href="https://linkedin.com/in/noel-mills-odoi" target="_blank">LinkedIn</a> | <a href="https://github.com/nmillso1" target="_blank">GitHub</a></p>
-  <p>🎵 Music: <a href="https://bsta.rs/40xWSc" target="_blank">prod. Metzmusic</a> (free use, credited)</p>
+  <p>&#x1F3B5; Music: <a href="https://bsta.rs/40xWSc" target="_blank">prod. Metzmusic</a> (free use, credited)</p>
 </footer>
 <script>
 
@@ -387,84 +380,135 @@ function type(){
 type();
 
 
-function animCanvas(canvas, drawFn) {
-  if(!canvas) return;
-  let f=0;
-  function loop(){ drawFn(canvas,f++); requestAnimationFrame(loop); }
-  loop();
+function runCanvas(id, fn) {
+  var cv = document.getElementById(id);
+  if (!cv) return;
+  var f = 0;
+  (function loop(){ fn(cv, f++); requestAnimationFrame(loop); })();
 }
 
-function drawPixelPlay(canvas, f) {
-  const ctx=canvas.getContext('2d'); canvas.width=300; canvas.height=200;
-  ctx.fillStyle='#0F1A2A'; ctx.fillRect(0,0,300,200);
-  const cx=70,cy=100,ang=f*.05;
-  ctx.save(); ctx.translate(cx,cy); ctx.rotate(ang);
-  ctx.beginPath(); ctx.arc(0,0,45,0,Math.PI*2); ctx.fillStyle='#1a1a2e'; ctx.fill();
-  ctx.strokeStyle='#C9A8E2'; ctx.lineWidth=2; ctx.stroke();
-  for(let r=15;r<43;r+=6){ ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.strokeStyle='rgba(201,168,226,.2)'; ctx.lineWidth=1; ctx.stroke(); }
-  ctx.beginPath(); ctx.arc(0,0,8,0,Math.PI*2); ctx.fillStyle='#C9A8E2'; ctx.fill();
-  ctx.restore();
-  [140,165,190].forEach((x,i)=>{ ctx.font='16px serif'; ctx.fillStyle=`rgba(201,168,226,${.3+Math.sin(f*.05+i)*.3})`; ctx.fillText('♪',x,((f*2+i*40)%120)+40); });
-  ctx.beginPath(); ctx.moveTo(130,150);
-  for(let x=0;x<140;x++){ ctx.lineTo(130+x,150+Math.sin((x*.15)+f*.1)*15); }
-  ctx.strokeStyle='#A8D8C2'; ctx.lineWidth=2; ctx.stroke();
-  ctx.font='8px "Press Start 2P",monospace'; ctx.fillStyle='#E8C97A'; ctx.fillText('PixelPlay',130,120);
+function drawPixelPlay(cv, f) {
+  cv.width=300; cv.height=200;
+  var c=cv.getContext('2d');
+  c.fillStyle='#0F1A2A'; c.fillRect(0,0,300,200);
+  c.save(); c.translate(70,100); c.rotate(f*.05);
+  c.beginPath(); c.arc(0,0,45,0,Math.PI*2); c.fillStyle='#1a1a2e'; c.fill();
+  c.strokeStyle='#C9A8E2'; c.lineWidth=2; c.stroke();
+  for(var r=15;r<43;r+=6){c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.strokeStyle='rgba(201,168,226,.15)';c.lineWidth=1;c.stroke();}
+  c.beginPath();c.arc(0,0,8,0,Math.PI*2);c.fillStyle='#C9A8E2';c.fill();
+  c.restore();
+  [140,165,190].forEach(function(x,i){
+    c.font='16px serif';
+    c.fillStyle='rgba(201,168,226,'+(0.3+Math.sin(f*.05+i)*.3)+')';
+    c.fillText('\u266A',x,((f*2+i*40)%120)+40);
+  });
+  c.beginPath(); c.moveTo(130,150);
+  for(var x=0;x<140;x++){c.lineTo(130+x,150+Math.sin((x*.15)+f*.1)*15);}
+  c.strokeStyle='#A8D8C2'; c.lineWidth=2; c.stroke();
+  c.font='8px "Press Start 2P",monospace'; c.fillStyle='#E8C97A'; c.fillText('PixelPlay',130,120);
 }
 
-function drawSecMon(canvas, f) {
-  const ctx=canvas.getContext('2d'); canvas.width=300; canvas.height=200;
-  ctx.fillStyle='#0a0f1a'; ctx.fillRect(0,0,300,200);
-  ctx.strokeStyle='#A8D8C2'; ctx.lineWidth=2; ctx.strokeRect(5,5,290,190);
-  ctx.fillStyle='#0F2A1A'; ctx.fillRect(5,5,290,20);
-  ctx.font='6px "Press Start 2P",monospace'; ctx.fillStyle='#A8D8C2'; ctx.fillText('AI SECURITY MONITOR v1.0',15,18);
-  const alerts=[{t:'ALERT: Anomaly detected',s:'HIGH',c:'#CE1126'},{t:'LOG: Auth failure x3',s:'MED',c:'#E8C97A'},{t:'PASS: Output validated',s:'OK',c:'#A8D8C2'},{t:'AI: Report generated',s:'INFO',c:'#C9A8E2'}];
-  alerts.forEach((a,i)=>{ const y=40+i*35; ctx.fillStyle=a.c+'22'; ctx.fillRect(10,y-10,280,28); ctx.strokeStyle=a.c; ctx.lineWidth=1; ctx.strokeRect(10,y-10,280,28); ctx.font='5px "Press Start 2P",monospace'; ctx.fillStyle=a.c; ctx.fillText('['+a.s+']',15,y+5); ctx.fillStyle='#FFF8F0'; ctx.font='5px sans-serif'; ctx.fillText(a.t,65,y+5); if(Math.floor(f/20)%2===0&&a.s==='HIGH'){ ctx.beginPath(); ctx.arc(275,y,5,0,Math.PI*2); ctx.fillStyle=a.c; ctx.fill(); } });
-  if(f>400) f=0;
+function drawSecMon(cv, f) {
+  cv.width=300; cv.height=200;
+  var c=cv.getContext('2d');
+  c.fillStyle='#0a0f1a'; c.fillRect(0,0,300,200);
+  c.strokeStyle='#A8D8C2'; c.lineWidth=2; c.strokeRect(5,5,290,190);
+  c.fillStyle='#0F2A1A'; c.fillRect(5,5,290,20);
+  c.font='5px "Press Start 2P",monospace'; c.fillStyle='#A8D8C2'; c.fillText('AI SECURITY MONITOR',12,17);
+  var al=[
+    {t:'ALERT: Anomaly detected',s:'HIGH',col:'#CE1126'},
+    {t:'LOG: Auth failure x3',s:'MED',col:'#E8C97A'},
+    {t:'PASS: Output validated',s:'OK',col:'#A8D8C2'},
+    {t:'AI: Report generated',s:'INFO',col:'#C9A8E2'}
+  ];
+  al.forEach(function(a,i){
+    var y=40+i*36;
+    c.fillStyle=a.col+'22'; c.fillRect(10,y-10,280,28);
+    c.strokeStyle=a.col; c.lineWidth=1; c.strokeRect(10,y-10,280,28);
+    c.font='5px "Press Start 2P",monospace'; c.fillStyle=a.col; c.fillText('['+a.s+']',15,y+4);
+    c.fillStyle='#FFF8F0'; c.font='5px sans-serif'; c.fillText(a.t,62,y+4);
+    if(Math.floor(f/20)%2===0&&a.s==='HIGH'){c.beginPath();c.arc(278,y,4,0,Math.PI*2);c.fillStyle=a.col;c.fill();}
+  });
 }
 
-function drawDiagram(canvas, f) {
-  const ctx=canvas.getContext('2d'); canvas.width=300; canvas.height=200;
-  ctx.fillStyle='#0F1A2A'; ctx.fillRect(0,0,300,200);
-  ctx.fillStyle='#1a2a3a'; ctx.fillRect(30,20,240,140); ctx.strokeStyle='#C9A8E2'; ctx.lineWidth=2; ctx.strokeRect(30,20,240,140);
-  ctx.fillStyle='#25344F'; ctx.fillRect(30,20,240,20);
-  ctx.font='7px "Press Start 2P",monospace'; ctx.fillStyle='#C9A8E2'; ctx.fillText('Diagram Tutor',40,33);
-  const nodes=[{x:80,y:100,l:'Input'},{x:150,y:80,l:'AI'},{x:220,y:100,l:'Output'}];
-  const pulse=Math.sin(f*.05)*5;
-  nodes.forEach((n,i)=>{ if(i<nodes.length-1){ ctx.beginPath(); ctx.moveTo(n.x+20,n.y); ctx.lineTo(nodes[i+1].x-20,nodes[i+1].y); ctx.strokeStyle=`rgba(168,216,194,${.5+Math.sin(f*.05+i)*.3})`; ctx.lineWidth=2; ctx.stroke(); } ctx.beginPath(); ctx.arc(n.x,n.y+(i===1?pulse:0),18,0,Math.PI*2); ctx.fillStyle=i===1?'#6F4D38':'#25344F'; ctx.fill(); ctx.strokeStyle=i===1?'#E8C97A':'#C9A8E2'; ctx.lineWidth=2; ctx.stroke(); ctx.font='5px sans-serif'; ctx.fillStyle='#FFF8F0'; ctx.textAlign='center'; ctx.fillText(n.l,n.x,n.y+(i===1?pulse:0)+2); });
-  ctx.textAlign='left';
+function drawDiagram(cv, f) {
+  cv.width=300; cv.height=200;
+  var c=cv.getContext('2d');
+  c.fillStyle='#0F1A2A'; c.fillRect(0,0,300,200);
+  c.fillStyle='#1a2a3a'; c.fillRect(30,20,240,140);
+  c.strokeStyle='#C9A8E2'; c.lineWidth=2; c.strokeRect(30,20,240,140);
+  c.fillStyle='#25344F'; c.fillRect(30,20,240,20);
+  c.font='6px "Press Start 2P",monospace'; c.fillStyle='#C9A8E2'; c.fillText('Diagram Tutor',40,33);
+  var nodes=[{x:80,y:100,l:'Input'},{x:150,y:80,l:'AI'},{x:220,y:100,l:'Output'}];
+  var pulse=Math.sin(f*.05)*5;
+  nodes.forEach(function(n,i){
+    if(i<2){
+      c.beginPath(); c.moveTo(n.x+20,n.y); c.lineTo(nodes[i+1].x-20,nodes[i+1].y);
+      c.strokeStyle='rgba(168,216,194,'+(0.5+Math.sin(f*.05+i)*.3)+')';
+      c.lineWidth=2; c.stroke();
+    }
+    var py=n.y+(i===1?pulse:0);
+    c.beginPath(); c.arc(n.x,py,18,0,Math.PI*2);
+    c.fillStyle=i===1?'#6F4D38':'#25344F'; c.fill();
+    c.strokeStyle=i===1?'#E8C97A':'#C9A8E2'; c.lineWidth=2; c.stroke();
+    c.font='5px sans-serif'; c.fillStyle='#FFF8F0'; c.textAlign='center'; c.fillText(n.l,n.x,py+2);
+  });
+  c.textAlign='left';
 }
 
-function drawCafe(canvas, f) {
-  const ctx=canvas.getContext('2d'); canvas.width=300; canvas.height=200;
-  ctx.fillStyle='#1a2a3a'; ctx.fillRect(0,0,300,200);
-  ctx.strokeStyle='rgba(97,120,145,.2)'; ctx.lineWidth=1;
-  for(let x=0;x<300;x+=30){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,200); ctx.stroke(); }
-  for(let y=0;y<200;y+=30){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(300,y); ctx.stroke(); }
-  ctx.strokeStyle='rgba(97,120,145,.4)'; ctx.lineWidth=6;
-  ctx.beginPath(); ctx.moveTo(0,90); ctx.lineTo(300,90); ctx.stroke();
-  ctx.beginPath(); ctx.moveTo(150,0); ctx.lineTo(150,200); ctx.stroke();
-  [{x:80,y:100},{x:140,y:70},{x:190,y:120},{x:230,y:80},{x:110,y:130}].forEach((c,i)=>{ const p=Math.sin(f*.05+i*.8)*4; ctx.beginPath(); ctx.arc(c.x,c.y,12+p,0,Math.PI*2); ctx.fillStyle='rgba(111,77,56,.3)'; ctx.fill(); ctx.beginPath(); ctx.arc(c.x,c.y,8,0,Math.PI*2); ctx.fillStyle='#6F4D38'; ctx.fill(); ctx.strokeStyle='#E8C97A'; ctx.lineWidth=2; ctx.stroke(); ctx.font='8px serif'; ctx.textAlign='center'; ctx.fillText('☕',c.x,c.y+3); });
-  ctx.textAlign='left'; ctx.font='7px "Press Start 2P",monospace'; ctx.fillStyle='#C9A8E2'; ctx.fillText('Bean There',10,20);
+function drawCafe(cv, f) {
+  cv.width=300; cv.height=200;
+  var c=cv.getContext('2d');
+  c.fillStyle='#1a2a3a'; c.fillRect(0,0,300,200);
+  c.strokeStyle='rgba(97,120,145,.2)'; c.lineWidth=1;
+  for(var x=0;x<300;x+=30){c.beginPath();c.moveTo(x,0);c.lineTo(x,200);c.stroke();}
+  for(var y=0;y<200;y+=30){c.beginPath();c.moveTo(0,y);c.lineTo(300,y);c.stroke();}
+  c.strokeStyle='rgba(97,120,145,.4)'; c.lineWidth=6;
+  c.beginPath();c.moveTo(0,90);c.lineTo(300,90);c.stroke();
+  c.beginPath();c.moveTo(150,0);c.lineTo(150,200);c.stroke();
+  [{x:80,y:100},{x:140,y:70},{x:190,y:120},{x:230,y:80},{x:110,y:130}].forEach(function(cafe,i){
+    var p=Math.sin(f*.05+i*.8)*4;
+    c.beginPath();c.arc(cafe.x,cafe.y,12+p,0,Math.PI*2);c.fillStyle='rgba(111,77,56,.3)';c.fill();
+    c.beginPath();c.arc(cafe.x,cafe.y,8,0,Math.PI*2);c.fillStyle='#6F4D38';c.fill();
+    c.strokeStyle='#E8C97A';c.lineWidth=2;c.stroke();
+    c.font='10px serif';c.textAlign='center';c.fillText('\u2615',cafe.x,cafe.y+4);
+  });
+  c.textAlign='left';
+  c.font='6px "Press Start 2P",monospace';c.fillStyle='#C9A8E2';c.fillText('Bean There',10,18);
 }
 
-function drawChat(canvas, f) {
-  const ctx=canvas.getContext('2d'); canvas.width=300; canvas.height=200;
-  ctx.fillStyle='#0F1A2A'; ctx.fillRect(0,0,300,200);
-  ctx.fillStyle='#1a2a3a'; ctx.fillRect(20,15,260,150); ctx.strokeStyle='#617891'; ctx.lineWidth=2; ctx.strokeRect(20,15,260,150);
-  ctx.fillStyle='#25344F'; ctx.fillRect(20,15,260,22);
-  ctx.font='6px "Press Start 2P",monospace'; ctx.fillStyle='#A8D8C2'; ctx.fillText('TCP Chat | 5 clients',30,30);
-  const msgs=[{t:'hey! 👋',l:true,y:55},{t:'hello! 😊',l:false,y:85},{t:'connected!',l:true,y:115},{t:'5 users online',l:false,y:145}];
-  msgs.forEach((m,i)=>{ if(f>i*60){ const op=Math.min(1,(f-i*60)/30); const x=m.l?35:165; ctx.fillStyle=m.l?`rgba(37,52,79,${op})`:`rgba(111,77,56,${op})`; ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(x,m.y,100,20,4); else ctx.rect(x,m.y,100,20); ctx.fill(); ctx.font='6px sans-serif'; ctx.fillStyle=`rgba(255,248,240,${op})`; ctx.textAlign=m.l?'left':'right'; ctx.fillText(m.t,m.l?x+6:x+94,m.y+13); } });
-  if(f>400) f=0; ctx.textAlign='left';
+function drawChat(cv, f) {
+  cv.width=300; cv.height=200;
+  var c=cv.getContext('2d');
+  c.fillStyle='#0F1A2A'; c.fillRect(0,0,300,200);
+  c.fillStyle='#1a2a3a'; c.fillRect(20,15,260,150);
+  c.strokeStyle='#617891'; c.lineWidth=2; c.strokeRect(20,15,260,150);
+  c.fillStyle='#25344F'; c.fillRect(20,15,260,22);
+  c.font='5px "Press Start 2P",monospace'; c.fillStyle='#A8D8C2'; c.fillText('TCP Chat | 5 clients',28,29);
+  var lf=f%360;
+  var msgs=[{t:'hey! :wave:',l:true,y:55},{t:'hello! :smile:',l:false,y:85},{t:'connected!',l:true,y:115},{t:'5 users online',l:false,y:145}];
+  msgs.forEach(function(m,i){
+    if(lf>i*80){
+      var op=Math.min(1,(lf-i*80)/30);
+      var x=m.l?35:165;
+      c.fillStyle=m.l?'rgba(37,52,79,'+op+')':'rgba(111,77,56,'+op+')';
+      c.fillRect(x,m.y,100,20);
+      c.font='6px sans-serif'; c.fillStyle='rgba(255,248,240,'+op+')';
+      c.textAlign=m.l?'left':'right';
+      c.fillText(m.t,m.l?x+6:x+94,m.y+13);
+    }
+  });
+  c.textAlign='left';
 }
 
-window.addEventListener('load',()=>{
-  animCanvas(document.getElementById('canvasPixelPlay'), drawPixelPlay);
-  animCanvas(document.getElementById('canvasSecMon'), drawSecMon);
-  animCanvas(document.getElementById('canvasDiagram'), drawDiagram);
-  animCanvas(document.getElementById('canvasCafe'), drawCafe);
-  animCanvas(document.getElementById('canvasChat'), drawChat);
-});
+// Start immediately using setTimeout(0) -- guaranteed after DOM is parsed
+setTimeout(function(){
+  runCanvas('canvasPixelPlay', drawPixelPlay);
+  runCanvas('canvasSecMon', drawSecMon);
+  runCanvas('canvasDiagram', drawDiagram);
+  runCanvas('canvasCafe', drawCafe);
+  runCanvas('canvasChat', drawChat);
+}, 0);
 
 </script>
 </body>

@@ -113,22 +113,22 @@ footer a{color:var(--accent);text-decoration:none;}
 @media(max-width:768px){.nav-links{gap:.6rem}.nav-links a{font-size:.38rem;padding:.3rem .4rem}.hero-name{font-size:1rem}.stats{gap:1rem}}
 
 
-.page-hero{padding:8rem 2rem 3rem;text-align:center;position:relative;}
+.page-hero{padding:8rem 2rem 3rem;text-align:center;}
 .page-title{font-family:"Press Start 2P",monospace;font-size:clamp(.8rem,2vw,1.2rem);color:var(--accent);margin-bottom:.5rem;letter-spacing:2px;}
 .page-sub{font-family:"Playfair Display",serif;font-size:1.1rem;color:var(--tan);font-style:italic;margin-bottom:1rem;}
 .divider{width:80px;height:3px;background:var(--accent);margin:1rem auto 2rem;position:relative;}
-.divider::before,.divider::after{content:"★";position:absolute;top:50%;transform:translateY(-50%);color:var(--accent);font-size:.8rem;}
+.divider::before,.divider::after{content:"&#9733;";position:absolute;top:50%;transform:translateY(-50%);color:var(--accent);font-size:.8rem;}
 .divider::before{left:-1.5rem;}.divider::after{right:-1.5rem;}
 .skills-layout{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:1100px;margin:0 auto;padding:0 2rem 6rem;}
 .skill-cat{background:var(--card);border:3px solid var(--accent);padding:2rem;box-shadow:6px 6px 0 var(--coffee);}
 .skill-cat-title{font-family:"Press Start 2P",monospace;font-size:.55rem;color:var(--accent);margin-bottom:1.5rem;letter-spacing:1px;}
 .skill-wrap{margin-bottom:1.2rem;}
-.skill-label{font-family:"Press Start 2P",monospace;font-size:.42rem;color:var(--text);margin-bottom:.4rem;display:flex;justify-content:space-between;letter-spacing:.5px;}
-.skill-bar{height:14px;background:rgba(97,120,145,.15);border:2px solid var(--accent);position:relative;overflow:hidden;}
-.skill-fill{height:100%;background:linear-gradient(90deg,var(--lav),var(--mint));width:0%;transition:width 1.5s cubic-bezier(.4,0,.2,1);}
+.skill-label{font-family:"Press Start 2P",monospace;font-size:.38rem;color:var(--text);margin-bottom:.4rem;display:flex;justify-content:space-between;}
+.skill-bar{height:14px;background:rgba(97,120,145,.15);border:2px solid var(--accent);overflow:hidden;}
+.skill-fill{height:100%;background:linear-gradient(90deg,var(--lav),var(--mint));width:0%;transition:width 1.5s ease;}
 .tech-cloud{grid-column:span 2;display:flex;flex-wrap:wrap;gap:.8rem;justify-content:center;padding:2rem;background:var(--card);border:3px solid var(--accent);box-shadow:6px 6px 0 var(--coffee);}
-.tech-badge{font-family:"Press Start 2P",monospace;font-size:.38rem;padding:.5rem .8rem;border:2px solid var(--accent);color:var(--text);letter-spacing:.5px;transition:.3s;cursor:default;}
-.tech-badge:hover{background:var(--accent);color:var(--bg);transform:scale(1.08) rotate(-1deg);box-shadow:3px 3px 0 var(--coffee);}
+.tech-badge{font-family:"Press Start 2P",monospace;font-size:.38rem;padding:.5rem .8rem;border:2px solid var(--accent);color:var(--text);transition:.3s;cursor:default;}
+.tech-badge:hover{background:var(--accent);color:var(--bg);transform:scale(1.08);box-shadow:3px 3px 0 var(--coffee);}
 .tech-badge.py{border-color:var(--gold);color:var(--gold);}
 .tech-badge.ai{border-color:var(--lav);color:var(--lav);}
 .tech-badge.sec{border-color:#ff6b7a;color:#ff6b7a;}
@@ -138,7 +138,7 @@ footer a{color:var(--accent);text-decoration:none;}
 .cert-card{background:var(--card);border:3px solid var(--gold);padding:1.5rem;box-shadow:5px 5px 0 var(--coffee);text-align:center;transition:.3s;}
 .cert-card:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--coffee);}
 .cert-icon{font-size:2rem;display:block;margin-bottom:.8rem;}
-.cert-name{font-family:"Press Start 2P",monospace;font-size:.45rem;color:var(--gold);margin-bottom:.4rem;letter-spacing:.5px;line-height:1.6;}
+.cert-name{font-family:"Press Start 2P",monospace;font-size:.4rem;color:var(--gold);margin-bottom:.4rem;line-height:1.8;}
 .cert-org{font-size:.85rem;opacity:.7;}
 .cert-date{font-family:"Press Start 2P",monospace;font-size:.32rem;color:var(--slate);margin-top:.5rem;}
 @media(max-width:768px){.skills-layout{grid-template-columns:1fr;}.tech-cloud,.certs-grid{grid-column:span 1;}}
@@ -151,76 +151,76 @@ footer a{color:var(--accent);text-decoration:none;}
 <nav>
   <a href="index.html" class="logo">NMO ✦</a>
   <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="projects.html">Projects</a></li><li><a href="skills.html" class="active">Skills</a></li><li><a href="contact.html">Contact</a></li></ul>
-  <button class="theme-btn" id="themeBtn">☀️</button>
+  <button class="theme-btn" id="themeBtn">&#x2600;&#xFE0F;</button>
 </nav>
 <div class="vinyl-wrap">
   <div class="vinyl" id="vinyl"></div>
-  <button class="mute-btn" id="muteBtn">🔈</button>
-  <div class="vinyl-label">prod. Metzmusic<br/>free use ✓</div>
+  <button class="mute-btn" id="muteBtn">&#x1F508;</button>
+  <div class="vinyl-label">prod. Metzmusic<br/>free use &#x2713;</div>
 </div>
 
 <section class="page-hero">
   <h1 class="page-title">Skills</h1>
-  <p class="page-sub">what I've actually built and used</p>
+  <p class="page-sub">what I have actually built and used</p>
   <div class="divider"></div>
 </section>
 <div class="skills-layout">
   <div class="skill-cat">
-    <h2 class="skill-cat-title">🐍 Languages</h2>
+    <h2 class="skill-cat-title">Languages</h2>
     <div class="skill-wrap"><div class="skill-label"><span>Python</span><span>Primary</span></div><div class="skill-bar"><div class="skill-fill" data-w="90"></div></div></div>
     <div class="skill-wrap"><div class="skill-label"><span>JavaScript</span><span>PixelPlay + APIs</span></div><div class="skill-bar"><div class="skill-fill" data-w="75"></div></div></div>
-    <div class="skill-wrap"><div class="skill-label"><span>SQL</span><span>MySQL, PostgreSQL, Oracle</span></div><div class="skill-bar"><div class="skill-fill" data-w="78"></div></div></div>
+    <div class="skill-wrap"><div class="skill-label"><span>SQL</span><span>MySQL, PG, Oracle</span></div><div class="skill-bar"><div class="skill-fill" data-w="78"></div></div></div>
     <div class="skill-wrap"><div class="skill-label"><span>PHP</span><span>Full Stack App</span></div><div class="skill-bar"><div class="skill-fill" data-w="65"></div></div></div>
     <div class="skill-wrap"><div class="skill-label"><span>Java</span><span>OOP Coursework</span></div><div class="skill-bar"><div class="skill-fill" data-w="60"></div></div></div>
     <div class="skill-wrap"><div class="skill-label"><span>Bash</span><span>Linux Scripting</span></div><div class="skill-bar"><div class="skill-fill" data-w="65"></div></div></div>
     <div class="skill-wrap"><div class="skill-label"><span>HTML / CSS</span><span>Web Dev</span></div><div class="skill-bar"><div class="skill-fill" data-w="82"></div></div></div>
   </div>
   <div class="skill-cat">
-    <h2 class="skill-cat-title">🤖 AI & Security</h2>
-    <div class="skill-wrap"><div class="skill-label"><span>Claude API / LLM Integration</span><span>Production</span></div><div class="skill-bar"><div class="skill-fill" data-w="82"></div></div></div>
-    <div class="skill-wrap"><div class="skill-label"><span>Prompt Engineering</span><span>Applied + Tested</span></div><div class="skill-bar"><div class="skill-fill" data-w="80"></div></div></div>
+    <h2 class="skill-cat-title">AI &amp; Security</h2>
+    <div class="skill-wrap"><div class="skill-label"><span>Claude API / LLM</span><span>Production</span></div><div class="skill-bar"><div class="skill-fill" data-w="82"></div></div></div>
+    <div class="skill-wrap"><div class="skill-label"><span>Prompt Engineering</span><span>Applied</span></div><div class="skill-bar"><div class="skill-fill" data-w="80"></div></div></div>
     <div class="skill-wrap"><div class="skill-label"><span>Output Validation</span><span>Built Systems</span></div><div class="skill-bar"><div class="skill-fill" data-w="75"></div></div></div>
-    <div class="skill-wrap"><div class="skill-label"><span>MITRE ATT&CK</span><span>Applied</span></div><div class="skill-bar"><div class="skill-fill" data-w="70"></div></div></div>
+    <div class="skill-wrap"><div class="skill-label"><span>MITRE ATT&amp;CK</span><span>Applied</span></div><div class="skill-bar"><div class="skill-fill" data-w="70"></div></div></div>
     <div class="skill-wrap"><div class="skill-label"><span>NIST RMF / AI RMF</span><span>Frameworks</span></div><div class="skill-bar"><div class="skill-fill" data-w="68"></div></div></div>
     <div class="skill-wrap"><div class="skill-label"><span>Adversarial Testing</span><span>Self-Directed</span></div><div class="skill-bar"><div class="skill-fill" data-w="65"></div></div></div>
   </div>
   <div class="skill-cat">
-    <h2 class="skill-cat-title">⚙️ Engineering</h2>
+    <h2 class="skill-cat-title">Engineering</h2>
     <div class="skill-wrap"><div class="skill-label"><span>REST API Design</span><span>Multiple Projects</span></div><div class="skill-bar"><div class="skill-fill" data-w="82"></div></div></div>
     <div class="skill-wrap"><div class="skill-label"><span>Full Stack Dev</span><span>PHP + MySQL + JS</span></div><div class="skill-bar"><div class="skill-fill" data-w="72"></div></div></div>
-    <div class="skill-wrap"><div class="skill-label"><span>TCP/IP Socket Programming</span><span>Chat App</span></div><div class="skill-bar"><div class="skill-fill" data-w="70"></div></div></div>
-    <div class="skill-wrap"><div class="skill-label"><span>Linux / Apache Admin</span><span>Server Deployed</span></div><div class="skill-bar"><div class="skill-fill" data-w="70"></div></div></div>
+    <div class="skill-wrap"><div class="skill-label"><span>TCP/IP Sockets</span><span>Chat App</span></div><div class="skill-bar"><div class="skill-fill" data-w="70"></div></div></div>
+    <div class="skill-wrap"><div class="skill-label"><span>Linux / Apache</span><span>Server Deployed</span></div><div class="skill-bar"><div class="skill-fill" data-w="70"></div></div></div>
     <div class="skill-wrap"><div class="skill-label"><span>Git / Agile / Scrum</span><span>Daily Use</span></div><div class="skill-bar"><div class="skill-fill" data-w="78"></div></div></div>
   </div>
   <div class="skill-cat">
-    <h2 class="skill-cat-title">📊 Data</h2>
+    <h2 class="skill-cat-title">Data</h2>
     <div class="skill-wrap"><div class="skill-label"><span>MySQL</span><span>Schema + Queries</span></div><div class="skill-bar"><div class="skill-fill" data-w="78"></div></div></div>
     <div class="skill-wrap"><div class="skill-label"><span>PostgreSQL</span><span>Applied</span></div><div class="skill-bar"><div class="skill-fill" data-w="70"></div></div></div>
     <div class="skill-wrap"><div class="skill-label"><span>Oracle SQL</span><span>Coursework</span></div><div class="skill-bar"><div class="skill-fill" data-w="65"></div></div></div>
     <div class="skill-wrap"><div class="skill-label"><span>Pandas</span><span>Data Analysis</span></div><div class="skill-bar"><div class="skill-fill" data-w="65"></div></div></div>
-    <div class="skill-wrap"><div class="skill-label"><span>ETL Pipeline Design</span><span>Built Systems</span></div><div class="skill-bar"><div class="skill-fill" data-w="62"></div></div></div>
+    <div class="skill-wrap"><div class="skill-label"><span>ETL Pipeline</span><span>Built Systems</span></div><div class="skill-bar"><div class="skill-fill" data-w="62"></div></div></div>
   </div>
   <div class="tech-cloud">
-    <h2 class="skill-cat-title" style="width:100%;text-align:center;margin-bottom:1.5rem;">🛠️ Full Tech Stack</h2>
+    <h2 class="skill-cat-title" style="width:100%;text-align:center;margin-bottom:1.5rem;">Full Tech Stack</h2>
     <span class="tech-badge py">Python</span><span class="tech-badge py">JavaScript</span><span class="tech-badge py">PHP</span><span class="tech-badge py">Java</span><span class="tech-badge py">SQL</span><span class="tech-badge py">Bash</span><span class="tech-badge py">HTML/CSS</span>
-    <span class="tech-badge ai">Claude API</span><span class="tech-badge ai">Ollama</span><span class="tech-badge ai">Pollinations.ai</span><span class="tech-badge ai">Prompt Engineering</span><span class="tech-badge ai">RAG Concepts</span><span class="tech-badge ai">Agentic Workflows</span>
-    <span class="tech-badge sec">MITRE ATT&CK</span><span class="tech-badge sec">NIST RMF</span><span class="tech-badge sec">OWASP</span><span class="tech-badge sec">DevSecOps</span><span class="tech-badge sec">Red Teaming</span>
+    <span class="tech-badge ai">Claude API</span><span class="tech-badge ai">Ollama</span><span class="tech-badge ai">Pollinations.ai</span><span class="tech-badge ai">Prompt Engineering</span><span class="tech-badge ai">RAG Concepts</span>
+    <span class="tech-badge sec">MITRE ATT&amp;CK</span><span class="tech-badge sec">NIST RMF</span><span class="tech-badge sec">OWASP</span><span class="tech-badge sec">DevSecOps</span><span class="tech-badge sec">Red Teaming</span>
     <span class="tech-badge web">REST APIs</span><span class="tech-badge web">TCP Sockets</span><span class="tech-badge web">Linux/Apache</span><span class="tech-badge web">Git</span><span class="tech-badge web">Docker</span>
     <span class="tech-badge db">MySQL</span><span class="tech-badge db">PostgreSQL</span><span class="tech-badge db">Oracle SQL</span><span class="tech-badge db">Pandas</span><span class="tech-badge db">ETL</span>
     <span class="tech-badge">Claude Code</span><span class="tech-badge">GitHub Copilot</span><span class="tech-badge">Zapier</span><span class="tech-badge">PyQt5</span><span class="tech-badge">Leaflet.js</span>
   </div>
   <div class="certs-grid">
-    <div class="cert-card"><span class="cert-icon">🛡️</span><p class="cert-name">CompTIA Security+ SY0-701</p><p class="cert-org">CompTIA</p><p class="cert-date">Scheduled: July 2026</p></div>
-    <div class="cert-card"><span class="cert-icon">🤖</span><p class="cert-name">Claude 101</p><p class="cert-org">Anthropic</p><p class="cert-date">Completed: July 2026</p></div>
-    <div class="cert-card"><span class="cert-icon">✨</span><p class="cert-name">AI Fluency: Framework & Foundations</p><p class="cert-org">Anthropic</p><p class="cert-date">Completed: July 2026</p></div>
-    <div class="cert-card"><span class="cert-icon">🏆</span><p class="cert-name">Delegate Jheanelle Wilkins Scholarship</p><p class="cert-org">Maryland State Legislature</p><p class="cert-date">Awarded: 2024 — $1,000</p></div>
+    <div class="cert-card"><span class="cert-icon">&#x1F6E1;&#xFE0F;</span><p class="cert-name">CompTIA Security+ SY0-701</p><p class="cert-org">CompTIA</p><p class="cert-date">Scheduled: July 2026</p></div>
+    <div class="cert-card"><span class="cert-icon">&#x1F916;</span><p class="cert-name">Claude 101</p><p class="cert-org">Anthropic</p><p class="cert-date">Completed: July 2026</p></div>
+    <div class="cert-card"><span class="cert-icon">&#x2728;</span><p class="cert-name">AI Fluency: Framework &amp; Foundations</p><p class="cert-org">Anthropic</p><p class="cert-date">Completed: July 2026</p></div>
+    <div class="cert-card"><span class="cert-icon">&#x1F3C6;</span><p class="cert-name">Delegate Jheanelle Wilkins Scholarship</p><p class="cert-org">Maryland State Legislature</p><p class="cert-date">Awarded: 2024 -- $1,000</p></div>
   </div>
 </div>
 
 <footer>
-  <p>✦ crafted with 🍪 + 🧶 + ☕ by Noel Mills-Odoi ✦</p>
+  <p>&#x2726; crafted with &#x1F36A; + &#x1F9F6; + &#x2615; by Noel Mills-Odoi &#x2726;</p>
   <p><a href="mailto:nmills6635@gmail.com">nmills6635@gmail.com</a> | <a href="https://linkedin.com/in/noel-mills-odoi" target="_blank">LinkedIn</a> | <a href="https://github.com/nmillso1" target="_blank">GitHub</a></p>
-  <p>🎵 Music: <a href="https://bsta.rs/40xWSc" target="_blank">prod. Metzmusic</a> (free use, credited)</p>
+  <p>&#x1F3B5; Music: <a href="https://bsta.rs/40xWSc" target="_blank">prod. Metzmusic</a> (free use, credited)</p>
 </footer>
 <script>
 
@@ -385,18 +385,21 @@ function type(){
 type();
 
 
-window.addEventListener('load',()=>{
-  const fills = document.querySelectorAll('.skill-fill');
-  const obs = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){
-        const w = e.target.getAttribute('data-w');
-        e.target.style.width = w + '%';
+setTimeout(function(){
+  var fills = document.querySelectorAll('.skill-fill');
+  function check(){
+    fills.forEach(function(el){
+      var r=el.getBoundingClientRect();
+      if(r.top < window.innerHeight - 30){
+        el.style.width = el.getAttribute('data-w') + '%';
       }
     });
-  },{threshold:.3});
-  fills.forEach(f=>obs.observe(f));
-});
+  }
+  check();
+  window.addEventListener('scroll', check, {passive:true});
+  setTimeout(check, 300);
+  setTimeout(check, 800);
+}, 0);
 
 </script>
 </body>
