@@ -275,7 +275,7 @@
     <!-- Avatar -->
     <div class="hero-avatar-area">
       <div class="hero-avatar-ring">
-        <canvas id="heroAvatarCanvas" width="140" height="140" class="pixel-art"></canvas>
+        <canvas id="heroAvatarCanvas" width="128" height="128" class="pixel-art"></canvas>
       </div>
       <div class="orbit-icons">
         <span class="orbit-icon">🦋</span>
@@ -468,8 +468,7 @@
       7: '#C9A8E2',   // jacket accents
     };
 
-    canvas.width = 14 * s;
-    canvas.height = 14 * s;
+    // Hero avatar loaded from PNG via avatar.js
 
     pixels.forEach((row, y) => {
       row.forEach((cell, x) => {

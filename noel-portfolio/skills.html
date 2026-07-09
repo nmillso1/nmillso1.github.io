@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skills | Noel Mills-Odoi</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .skills-hero {
+      padding: 8rem 2rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skills-layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .skills-layout { grid-template-columns: 1fr; }
+    }
+
+    .skill-category {
+      background: var(--card-bg);
+      border: 3px solid var(--accent);
+      padding: 2rem;
+      box-shadow: 6px 6px 0 var(--coffee);
+      position: relative;
+    }
+
+    .skill-category-title {
+      font-family: var(--font-pixel);
+      font-size: 0.6rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .skill-bar-wrap {
+      margin-bottom: 1.2rem;
+    }
+
+    .skill-label {
+      font-family: var(--font-pixel);
+      font-size: 0.45rem;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+      display: flex;
+      justify-content: space-between;
+      letter-spacing: 0.5px;
+    }
+
+    .skill-bar {
+      height: 14px;
+      background: rgba(97,120,145,0.15);
+      border: 2px solid var(--accent);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--lavender), var(--mint));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .skill-fill.animated {
+      transform: scaleX(1);
+    }
+
+    /* Scanline on bars */
+    .skill-bar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        90deg, transparent, transparent 10px,
+        rgba(255,255,255,0.05) 10px, rgba(255,255,255,0.05) 11px
+      );
+    }
+
+    /* Tech icon cloud */
+    .tech-cloud {
+      grid-column: span 2;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: center;
+      padding: 2rem;
+      background: var(--card-bg);
+      border: 3px solid var(--accent);
+      box-shadow: 6px 6px 0 var(--coffee);
+    }
+
+    .tech-badge {
+      font-family: var(--font-pixel);
+      font-size: 0.4rem;
+      padding: 0.5rem 0.8rem;
+      border: 2px solid var(--accent);
+      color: var(--text);
+      letter-spacing: 0.5px;
+      transition: all 0.3s;
+      cursor: default;
+      background: transparent;
+    }
+
+    .tech-badge:hover {
+      background: var(--accent);
+      color: var(--bg);
+      transform: scale(1.08) rotate(-1deg);
+      box-shadow: 3px 3px 0 var(--coffee);
+    }
+
+    .tech-badge.py { border-color: var(--gold); color: var(--gold); }
+    .tech-badge.ai { border-color: var(--lavender); color: var(--lavender); }
+    .tech-badge.sec { border-color: var(--crimson); color: #ff6b7a; }
+    .tech-badge.web { border-color: var(--mint); color: var(--mint); }
+    .tech-badge.db { border-color: var(--tan); color: var(--tan); }
+
+    /* Certs section */
+    .certs-section {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .cert-card {
+      background: var(--card-bg);
+      border: 3px solid var(--gold);
+      padding: 1.5rem;
+      box-shadow: 5px 5px 0 var(--coffee);
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .cert-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 7px 7px 0 var(--coffee);
+    }
+
+    .cert-icon { font-size: 2rem; display: block; margin-bottom: 0.8rem; }
+    .cert-name {
+      font-family: var(--font-pixel);
+      font-size: 0.5rem;
+      color: var(--gold);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.5px;
+      line-height: 1.5;
+    }
+    .cert-org { font-size: 0.85rem; color: var(--text); opacity: 0.7; }
+    .cert-date { font-family: var(--font-pixel); font-size: 0.35rem; color: var(--slate); margin-top: 0.5rem; }
+
+    .cert-card.pending { border-color: var(--lavender); }
+    .cert-card.pending .cert-name { color: var(--lavender); }
+
+    /* Skill level legend */
+    .legend {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 1rem 0 2rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-pixel);
+      font-size: 0.4rem;
+      color: var(--text);
+      opacity: 0.7;
+    }
+
+    .legend-bar {
+      width: 30px;
+      height: 8px;
+      background: linear-gradient(90deg, var(--lavender), var(--mint));
+      border: 1px solid var(--accent);
+    }
+  </style>
+</head>
+<body>
+
+<div class="floating-elements" id="floatingElements"></div>
+
+<div class="avatar-walker" id="avatarWalker" style="bottom:90px;">
+  <div class="avatar-bubble"></div>
+  <canvas class="avatar-sprite" id="avatarCanvas" width="48" height="64"></canvas>
+</div>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">NMO ✦</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="theme-toggle" id="themeToggle">☀️</button>
+</nav>
+
+<div class="vinyl-player">
+  <div class="vinyl-record" id="vinyl"></div>
+  <button class="mute-btn" id="muteBtn">🔈</button>
+  <div class="vinyl-label">prod. Metzmusic<br/>free use ✓</div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="skills-hero">
+  <div style="position:absolute;inset:0;pointer-events:none;z-index:0;">
+    <span style="position:absolute;top:25%;left:8%;font-size:1.2rem;opacity:0.15;animation:float-bounce 3s ease-in-out infinite;">⭐</span>
+    <span style="position:absolute;top:50%;right:10%;font-size:0.8rem;opacity:0.15;animation:float-bounce 4s ease-in-out 0.5s infinite;">✨</span>
+    <span style="position:absolute;bottom:20%;left:15%;font-size:1rem;opacity:0.15;animation:float-bounce 3.5s ease-in-out 1s infinite;">💜</span>
+  </div>
+  <div style="position:relative;z-index:1;">
+    <h1 class="section-title" style="font-size:1.2rem;margin-bottom:0.5rem;">Skills</h1>
+    <p class="section-sub">what I've actually built and used</p>
+    <div class="section-divider"></div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-bar"></div>Learning</div>
+      <div class="legend-item"><div class="legend-bar" style="opacity:0.6"></div>Comfortable</div>
+      <div class="legend-item"><div class="legend-bar" style="opacity:1"></div>Proficient</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SKILLS GRID ===== -->
+<div class="skills-layout">
+
+  <!-- Programming Languages -->
+  <div class="skill-category reveal">
+    <h2 class="skill-category-title">🐍 Languages</h2>
+
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>Python</span><span>Primary Language</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>JavaScript</span><span>PixelPlay, APIs</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>SQL</span><span>MySQL, PostgreSQL, Oracle</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>PHP</span><span>Full Stack Web App</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>Java</span><span>OOP, UMBC Coursework</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>Bash / Shell</span><span>Scripting, Linux Admin</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>HTML / CSS</span><span>Web Development</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+    </div>
+  </div>
+
+  <!-- AI & Security -->
+  <div class="skill-category reveal">
+    <h2 class="skill-category-title">🤖 AI & Security</h2>
+
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>LLM Integration (Claude API)</span><span>Production</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>Prompt Engineering</span><span>Applied + Tested</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>Output Validation / RLHF</span><span>Built Systems</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>MITRE ATT&CK</span><span>Applied in Projects</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>NIST RMF / AI RMF</span><span>Frameworks Applied</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:68%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>Adversarial Testing / Red Team</span><span>Self-Directed</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>OWASP / DevSecOps</span><span>Applied Concepts</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:62%"></div></div>
+    </div>
+  </div>
+
+  <!-- Engineering -->
+  <div class="skill-category reveal">
+    <h2 class="skill-category-title">⚙️ Engineering</h2>
+
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>REST API Design</span><span>Multiple Projects</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>Full Stack Development</span><span>PHP + MySQL + JS</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>TCP/IP Socket Programming</span><span>Chat App</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>Linux / Apache Admin</span><span>Server Deployed</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>Git / Version Control</span><span>Daily Use</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>Agile / Scrum</span><span>5-Person Team</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:72%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>Docker</span><span>Fundamentals</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:40%"></div></div>
+    </div>
+  </div>
+
+  <!-- Data -->
+  <div class="skill-category reveal">
+    <h2 class="skill-category-title">📊 Data</h2>
+
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>MySQL</span><span>Schema Design + Queries</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>PostgreSQL</span><span>Applied</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>Oracle SQL</span><span>UMBC Coursework</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>Pandas</span><span>Data Analysis Projects</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>ETL Pipeline Design</span><span>Built Systems</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:62%"></div></div>
+    </div>
+    <div class="skill-bar-wrap">
+      <div class="skill-label"><span>Relational Schema Design</span><span>Normalized DBs</span></div>
+      <div class="skill-bar"><div class="skill-fill" style="width:75%"></div></div>
+    </div>
+  </div>
+
+  <!-- Tech Cloud -->
+  <div class="tech-cloud reveal">
+    <h2 class="skill-category-title" style="width:100%;justify-content:center;margin-bottom:1.5rem;">
+      🛠️ Full Tech Stack
+    </h2>
+    <span class="tech-badge py">Python</span>
+    <span class="tech-badge py">JavaScript</span>
+    <span class="tech-badge py">PHP</span>
+    <span class="tech-badge py">Java</span>
+    <span class="tech-badge py">SQL</span>
+    <span class="tech-badge py">Bash</span>
+    <span class="tech-badge py">HTML / CSS</span>
+    <span class="tech-badge ai">Claude API</span>
+    <span class="tech-badge ai">Ollama</span>
+    <span class="tech-badge ai">Pollinations.ai</span>
+    <span class="tech-badge ai">Prompt Engineering</span>
+    <span class="tech-badge ai">RAG Concepts</span>
+    <span class="tech-badge ai">Agentic Workflows</span>
+    <span class="tech-badge sec">MITRE ATT&CK</span>
+    <span class="tech-badge sec">NIST RMF</span>
+    <span class="tech-badge sec">OWASP</span>
+    <span class="tech-badge sec">DevSecOps</span>
+    <span class="tech-badge sec">Red Teaming</span>
+    <span class="tech-badge web">REST APIs</span>
+    <span class="tech-badge web">TCP Sockets</span>
+    <span class="tech-badge web">Linux/Apache</span>
+    <span class="tech-badge web">Git</span>
+    <span class="tech-badge web">Agile/Scrum</span>
+    <span class="tech-badge web">Docker</span>
+    <span class="tech-badge db">MySQL</span>
+    <span class="tech-badge db">PostgreSQL</span>
+    <span class="tech-badge db">Oracle SQL</span>
+    <span class="tech-badge db">Pandas</span>
+    <span class="tech-badge db">ETL Pipelines</span>
+    <span class="tech-badge">PyQt5</span>
+    <span class="tech-badge">Tkinter</span>
+    <span class="tech-badge">Leaflet.js</span>
+    <span class="tech-badge">Claude Code</span>
+    <span class="tech-badge">GitHub Copilot</span>
+    <span class="tech-badge">Zapier</span>
+    <span class="tech-badge">Microsoft Office 365</span>
+  </div>
+
+  <!-- Certifications -->
+  <div class="certs-section reveal">
+    <div class="cert-card">
+      <span class="cert-icon">🛡️</span>
+      <p class="cert-name">CompTIA Security+<br/>SY0-701</p>
+      <p class="cert-org">CompTIA</p>
+      <p class="cert-date">Scheduled: July 2026</p>
+    </div>
+    <div class="cert-card">
+      <span class="cert-icon">🤖</span>
+      <p class="cert-name">Claude 101</p>
+      <p class="cert-org">Anthropic</p>
+      <p class="cert-date">Completed: July 2026</p>
+    </div>
+    <div class="cert-card">
+      <span class="cert-icon">✨</span>
+      <p class="cert-name">AI Fluency: Framework<br/>& Foundations</p>
+      <p class="cert-org">Anthropic</p>
+      <p class="cert-date">Completed: July 2026</p>
+    </div>
+    <div class="cert-card">
+      <span class="cert-icon">🏆</span>
+      <p class="cert-name">Delegate Jheanelle<br/>Wilkins Scholarship</p>
+      <p class="cert-org">Maryland State Legislature</p>
+      <p class="cert-date">Awarded: 2024 — $1,000</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>✦ crafted with 🍪 + 🧶 + ☕ by Noel Mills-Odoi ✦</p>
+  <p>nmillso1.github.io | <a href="mailto:nmills6635@gmail.com">nmills6635@gmail.com</a></p>
+  <p>🎵 Ambient music: <a href="https://bsta.rs/40xWSc" target="_blank">prod. Metzmusic</a> (free use, credited)</p>
+</footer>
+
+<script src="js/avatar.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/main.js"></script>
+<script>
+  function drawWalkAvatar(canvas) {
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    ctx.imageSmoothingEnabled = false;
+    const s = 4;
+    const pixels = [
+      [0,0,2,2,2,2,2,2,0,0],[0,2,1,1,1,1,1,1,2,0],
+      [0,2,3,3,3,3,3,3,2,0],[0,2,3,4,3,3,4,3,2,0],
+      [0,2,3,3,5,3,3,3,2,0],[0,0,6,6,6,6,6,6,0,0],
+      [0,6,6,7,6,6,7,6,6,0],[0,6,6,6,6,6,6,6,6,0],
+    ];
+    const colors = {1:'#A8D8C2',2:'#25344F',3:'#8B5E52',4:'#3a2520',5:'#D4826E',6:'#617891',7:'#C9A8E2'};
+    canvas.width = 10*s; canvas.height = 8*s;
+    pixels.forEach((row,y)=>row.forEach((cell,x)=>{
+      if(cell&&colors[cell]){ctx.fillStyle=colors[cell];ctx.fillRect(x*s,y*s,s,s);}
+    }));
+  }
+  drawWalkAvatar(document.getElementById('avatarCanvas'));
+</script>
+</body>
+</html>

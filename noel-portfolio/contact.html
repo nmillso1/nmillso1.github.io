@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | Noel Mills-Odoi</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .contact-hero {
+      padding: 8rem 2rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 2rem 6rem;
+    }
+
+    .contact-intro {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .contact-intro p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text);
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto 1rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .contact-card {
+      background: var(--card-bg);
+      border: 3px solid var(--accent);
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--text);
+      box-shadow: 5px 5px 0 var(--coffee);
+      transition: all 0.3s ease;
+    }
+
+    .contact-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 8px 8px 0 var(--coffee);
+      border-color: var(--lavender);
+      color: var(--lavender);
+    }
+
+    .contact-icon-wrap {
+      width: 52px;
+      height: 52px;
+      background: var(--navy);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+
+    .contact-card:hover .contact-icon-wrap {
+      background: var(--lavender);
+      border-color: var(--lavender);
+    }
+
+    .contact-text {}
+    .contact-label {
+      font-family: var(--font-pixel);
+      font-size: 0.45rem;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.5px;
+      display: block;
+    }
+
+    .contact-value {
+      font-size: 0.85rem;
+      opacity: 0.8;
+      word-break: break-all;
+    }
+
+    /* ---- Pixel avatar waving ---- */
+    .wave-avatar {
+      text-align: center;
+      margin: 3rem 0;
+      position: relative;
+    }
+
+    .wave-avatar canvas {
+      display: block;
+      margin: 0 auto;
+      image-rendering: pixelated;
+    }
+
+    .speech-bubble {
+      background: var(--card-bg);
+      border: 3px solid var(--accent);
+      padding: 1rem 1.5rem;
+      font-family: var(--font-pixel);
+      font-size: 0.5rem;
+      color: var(--accent);
+      display: inline-block;
+      margin-bottom: 1rem;
+      position: relative;
+      letter-spacing: 0.5px;
+      line-height: 2;
+      box-shadow: 4px 4px 0 var(--coffee);
+    }
+
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: var(--accent);
+    }
+
+    /* ---- Availability status ---- */
+    .availability {
+      text-align: center;
+      margin: 2rem 0;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--card-bg);
+      border: 3px solid var(--mint);
+      padding: 0.6rem 1.2rem;
+      font-family: var(--font-pixel);
+      font-size: 0.45rem;
+      color: var(--mint);
+      letter-spacing: 0.5px;
+      box-shadow: 4px 4px 0 var(--coffee);
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--mint);
+      animation: blink 1.5s step-end infinite;
+    }
+
+    /* ---- Decorative butterflies ---- */
+    .butterfly-corner {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* ---- Fun facts ---- */
+    .fun-facts {
+      background: var(--card-bg);
+      border: 3px solid var(--accent);
+      padding: 2rem;
+      box-shadow: 5px 5px 0 var(--coffee);
+      margin: 2rem 0;
+    }
+
+    .fun-facts-title {
+      font-family: var(--font-pixel);
+      font-size: 0.55rem;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      letter-spacing: 1px;
+    }
+
+    .fun-fact-item {
+      display: flex;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text);
+      opacity: 0.9;
+    }
+
+    .fun-fact-item .emoji {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="floating-elements" id="floatingElements"></div>
+
+<div class="avatar-walker" id="avatarWalker" style="bottom:90px;">
+  <div class="avatar-bubble"></div>
+  <canvas class="avatar-sprite" id="avatarCanvas" width="48" height="64"></canvas>
+</div>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-logo">NMO ✦</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="theme-toggle" id="themeToggle">☀️</button>
+</nav>
+
+<div class="vinyl-player">
+  <div class="vinyl-record" id="vinyl"></div>
+  <button class="mute-btn" id="muteBtn">🔈</button>
+  <div class="vinyl-label">prod. Metzmusic<br/>free use ✓</div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="contact-hero">
+  <span class="butterfly-corner" style="top:6rem;left:5%;animation:flutter 5s ease-in-out infinite;">🦋</span>
+  <span class="butterfly-corner" style="top:6rem;right:5%;animation:flutter 7s ease-in-out 1s infinite;">🦋</span>
+  <span class="butterfly-corner" style="bottom:1rem;left:15%;animation:flutter 6s ease-in-out 0.5s infinite;">🌸</span>
+
+  <h1 class="section-title" style="font-size:1.2rem;margin-bottom:0.5rem;">Say Hello 👋</h1>
+  <p class="section-sub">let's build something together</p>
+  <div class="section-divider"></div>
+</section>
+
+<!-- ===== MAIN CONTACT ===== -->
+<div class="contact-main">
+
+  <!-- Waving avatar -->
+  <div class="wave-avatar reveal">
+    <div class="speech-bubble">
+      hey! I'm available for opportunities ✨<br/>
+      let's connect — I don't bite 🍪
+    </div>
+    <canvas id="contactAvatarCanvas" width="140" height="140" class="pixel-art" style="width:140px;height:140px;"></canvas>
+  </div>
+
+  <!-- Availability badge -->
+  <div class="availability reveal">
+    <div class="status-badge">
+      <div class="status-dot"></div>
+      Open to Work — Entry Level Software Engineering & AI Roles
+    </div>
+  </div>
+
+  <!-- Contact intro -->
+  <div class="contact-intro reveal">
+    <p>
+      I respond to emails, LinkedIn messages, and good memes.
+      Whether you're a recruiter, a collaborator, or just someone who vibes —
+      reach out. I promise the first thing I say will make you smile. 😄
+    </p>
+  </div>
+
+  <!-- Contact links -->
+  <div class="contact-grid reveal">
+
+    <a href="mailto:nmills6635@gmail.com" class="contact-card">
+      <div class="contact-icon-wrap">📧</div>
+      <div class="contact-text">
+        <span class="contact-label">Email</span>
+        <span class="contact-value">nmills6635@gmail.com</span>
+      </div>
+    </a>
+
+    <a href="https://linkedin.com/in/noel-mills-odoi" target="_blank" class="contact-card">
+      <div class="contact-icon-wrap">💼</div>
+      <div class="contact-text">
+        <span class="contact-label">LinkedIn</span>
+        <span class="contact-value">linkedin.com/in/noel-mills-odoi</span>
+      </div>
+    </a>
+
+    <a href="https://github.com/nmillso1" target="_blank" class="contact-card">
+      <div class="contact-icon-wrap">💻</div>
+      <div class="contact-text">
+        <span class="contact-label">GitHub</span>
+        <span class="contact-value">github.com/nmillso1</span>
+      </div>
+    </a>
+
+    <a href="https://nmillso1.github.io" target="_blank" class="contact-card">
+      <div class="contact-icon-wrap">🌐</div>
+      <div class="contact-text">
+        <span class="contact-label">Portfolio</span>
+        <span class="contact-value">nmillso1.github.io</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Fun facts -->
+  <div class="fun-facts reveal">
+    <h3 class="fun-facts-title">✦ A Few Things About Me</h3>
+    <div class="fun-fact-item">
+      <span class="emoji">🍪</span>
+      <span>I will absolutely bring cookies to a team meeting. No, you don't need to ask.</span>
+    </div>
+    <div class="fun-fact-item">
+      <span class="emoji">🧶</span>
+      <span>I crochet while listening to SZA and thinking about system architecture. Multitasking queen.</span>
+    </div>
+    <div class="fun-fact-item">
+      <span class="emoji">🇬🇭</span>
+      <span>Proud Ghanaian-American from Silver Spring, MD. West African roots, East Coast energy.</span>
+    </div>
+    <div class="fun-fact-item">
+      <span class="emoji">🦋</span>
+      <span>I believe good code — like a butterfly — starts as something messy and transforms into something beautiful.</span>
+    </div>
+    <div class="fun-fact-item">
+      <span class="emoji">🎵</span>
+      <span>Current playlist: SZA, Frank Ocean, Tyler the Creator, Kehlani, Giveon. The vibe is always intentional.</span>
+    </div>
+    <div class="fun-fact-item">
+      <span class="emoji">⛸️</span>
+      <span>Yes, I rollerskate. Yes, I've crashed. Yes, I got back up. Engineering mindset.</span>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:2rem;" class="reveal">
+    <a href="about.html" class="btn-pixel" style="margin-right:1rem;">← Back to About</a>
+    <a href="projects.html" class="btn-pixel filled">See My Projects →</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>✦ crafted with 🍪 + 🧶 + ☕ by Noel Mills-Odoi ✦</p>
+  <p>nmillso1.github.io | <a href="mailto:nmills6635@gmail.com">nmills6635@gmail.com</a></p>
+  <p>🎵 Ambient music: <a href="https://bsta.rs/40xWSc" target="_blank">prod. Metzmusic</a> (free use, credited)</p>
+  <p style="margin-top:0.5rem;font-size:0.35rem;">© 2026 Noel L. Mills-Odoi — nmillso1.github.io</p>
+</footer>
+
+<script src="js/avatar.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/main.js"></script>
+<script>
+  // College girl avatar variant
+  function drawCollegeAvatar(canvas) {
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    ctx.imageSmoothingEnabled = false;
+    const s = 10;
+
+    // College girl: hoodie + backpack vibes
+    const pixels = [
+      [0,0,0,0,2,2,2,2,2,2,2,2,0,0],
+      [0,0,2,2,1,1,1,1,1,1,1,1,2,2],
+      [0,2,1,1,3,3,3,3,3,3,1,1,2,0],
+      [0,2,1,3,3,3,3,3,3,3,3,1,2,0],
+      [0,2,1,3,4,3,3,3,3,4,3,1,2,0],
+      [0,2,1,3,3,3,3,3,3,3,3,1,2,0],
+      [0,2,1,3,3,5,3,3,5,3,3,1,2,0],
+      [0,2,1,1,3,3,3,3,3,3,1,1,2,0],
+      [0,0,A,A,A,A,A,A,A,A,A,A,0,0],
+      [0,A,A,A,A,A,A,A,A,A,A,A,A,0],
+      [0,A,A,B,A,A,A,A,A,A,B,A,A,0],
+      [0,A,A,A,A,A,A,A,A,A,A,A,A,0],
+      [0,0,A,A,A,A,A,A,A,A,A,A,0,0],
+      [0,0,0,A,A,A,0,0,A,A,A,0,0,0],
+    ];
+
+    // Note: Can't use variables in array literals like that, using numbers instead
+    const pixelsFixed = [
+      [0,0,0,0,2,2,2,2,2,2,2,2,0,0],
+      [0,0,2,2,1,1,1,1,1,1,1,1,2,2],
+      [0,2,1,1,3,3,3,3,3,3,1,1,2,0],
+      [0,2,1,3,3,3,3,3,3,3,3,1,2,0],
+      [0,2,1,3,4,3,3,3,3,4,3,1,2,0],
+      [0,2,1,3,3,3,3,3,3,3,3,1,2,0],
+      [0,2,1,3,3,5,3,3,5,3,3,1,2,0],
+      [0,2,1,1,3,3,3,3,3,3,1,1,2,0],
+      [0,0,8,8,8,8,8,8,8,8,8,8,0,0],
+      [0,8,8,8,8,8,8,8,8,8,8,8,8,0],
+      [0,8,8,9,8,8,8,8,8,8,9,8,8,0],
+      [0,8,8,8,8,8,8,8,8,8,8,8,8,0],
+      [0,0,8,8,8,8,8,8,8,8,8,8,0,0],
+      [0,0,0,8,8,8,0,0,8,8,8,0,0,0],
+    ];
+
+    const colors = {
+      1: '#A8D8C2', 2: '#25344F', 3: '#8B5E52',
+      4: '#3a2520', 5: '#D4826E',
+      8: '#C9A8E2',  // lavender hoodie
+      9: '#FFF8F0',  // hoodie pocket/detail
+    };
+
+    canvas.width = 14 * s;
+    canvas.height = 14 * s;
+
+    pixelsFixed.forEach((row, y) => {
+      row.forEach((cell, x) => {
+        if (cell && colors[cell]) {
+          ctx.fillStyle = colors[cell];
+          ctx.fillRect(x * s, y * s, s, s);
+        }
+      });
+    });
+  }
+
+  drawCollegeAvatar(document.getElementById('contactAvatarCanvas'));
+
+  function drawWalkAvatar(canvas) {
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    ctx.imageSmoothingEnabled = false;
+    const s = 4;
+    const pixels = [
+      [0,0,2,2,2,2,2,2,0,0],[0,2,1,1,1,1,1,1,2,0],
+      [0,2,3,3,3,3,3,3,2,0],[0,2,3,4,3,3,4,3,2,0],
+      [0,2,3,3,5,3,3,3,2,0],[0,0,6,6,6,6,6,6,0,0],
+      [0,6,6,7,6,6,7,6,6,0],[0,6,6,6,6,6,6,6,6,0],
+    ];
+    const colors = {1:'#A8D8C2',2:'#25344F',3:'#8B5E52',4:'#3a2520',5:'#D4826E',6:'#617891',7:'#C9A8E2'};
+    canvas.width = 10*s; canvas.height = 8*s;
+    pixels.forEach((row,y)=>row.forEach((cell,x)=>{
+      if(cell&&colors[cell]){ctx.fillStyle=colors[cell];ctx.fillRect(x*s,y*s,s,s);}
+    }));
+  }
+  drawWalkAvatar(document.getElementById('avatarCanvas'));
+</script>
+</body>
+</html>
