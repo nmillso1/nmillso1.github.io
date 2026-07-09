@@ -1,646 +1,435 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About Me | Noel Mills-Odoi</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <style>
-    .about-hero {
-      min-height: 60vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      padding: 8rem 2rem 4rem;
-      text-align: center;
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About Me | Noel Mills-Odoi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
 
-    /* Maryland + Ghana shape outlines in background */
-    .country-outlines {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
+:root{
+  --navy:#25344F;--slate:#617891;--tan:#D5B893;--coffee:#6F4D38;
+  --crimson:#632024;--lav:#C9A8E2;--mint:#A8D8C2;--cream:#FFF8F0;
+  --gold:#E8C97A;--pink:#F2C4CE;
+  --bg:#0F1A2A;--card:#1a2a3a;--text:#FFF8F0;--accent:#C9A8E2;--nav:#0a1520;
+}
+body.light{--bg:#FFF8F0;--card:#fff;--text:#1a1a2e;--nav:#FFF8F0;--accent:#6F4D38;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s;}
 
-    .state-shape {
-      position: absolute;
-      opacity: 0.05;
-      font-size: 18rem;
-      filter: blur(1px);
-    }
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--nav);border-bottom:3px solid var(--accent);padding:.75rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Press Start 2P',monospace;font-size:.65rem;color:var(--accent);text-decoration:none;}
+.nav-links{display:flex;gap:1.2rem;list-style:none;}
+.nav-links a{font-family:'Press Start 2P',monospace;font-size:.45rem;color:var(--text);text-decoration:none;padding:.4rem .7rem;border:2px solid transparent;transition:.3s;letter-spacing:1px;}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);border-color:var(--accent);}
+.theme-btn{background:none;border:2px solid var(--accent);color:var(--accent);font-size:1rem;cursor:pointer;padding:.3rem .6rem;border-radius:4px;}
 
-    .state-shape.md {
-      color: var(--crimson);
-      left: -6rem;
-      top: 50%;
-      transform: translateY(-50%);
-    }
+.vinyl-wrap{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;display:flex;flex-direction:column;align-items:center;gap:.4rem;}
+.vinyl{width:56px;height:56px;border-radius:50%;background:conic-gradient(#1a1a1a 0deg,#333 30deg,#1a1a1a 60deg,#333 90deg,#1a1a1a 120deg,#333 150deg,#1a1a1a 180deg,#333 210deg,#1a1a1a 240deg,#333 270deg,#1a1a1a 300deg,#333 330deg,#1a1a1a 360deg);border:3px solid var(--accent);cursor:pointer;position:relative;box-shadow:0 0 15px rgba(201,168,226,.4);}
+.vinyl::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--lav);border:2px solid var(--coffee);}
+.vinyl.spin{animation:vspin 3s linear infinite;}
+.mute-btn{background:var(--card);border:2px solid var(--accent);color:var(--accent);font-size:.65rem;cursor:pointer;padding:.2rem .4rem;font-family:'Press Start 2P',monospace;}
+.vinyl-label{font-family:'Press Start 2P',monospace;font-size:.32rem;color:var(--accent);text-align:center;opacity:.8;line-height:1.6;}
 
-    .state-shape.gh {
-      color: var(--gold);
-      right: -4rem;
-      top: 50%;
-      transform: translateY(-50%);
-    }
+#floats{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
 
-    /* Flag strips */
-    .flag-display {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin: 1.5rem 0;
-      flex-wrap: wrap;
-    }
+#walker{position:fixed;bottom:90px;z-index:998;pointer-events:none;display:flex;flex-direction:column;align-items:center;}
+.bubble{background:var(--cream);color:#1a1a2e;border:2px solid var(--navy);border-radius:8px;padding:.3rem .5rem;font-family:'Press Start 2P',monospace;font-size:.3rem;margin-bottom:4px;white-space:nowrap;opacity:0;transition:opacity .3s;}
 
-    .flag-card {
-      background: var(--card-bg);
-      border: 3px solid var(--accent);
-      padding: 0.8rem 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      box-shadow: 4px 4px 0 var(--coffee);
-    }
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:6rem 2rem 2rem;text-align:center;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(97,120,145,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(97,120,145,.08) 1px,transparent 1px);background-size:32px 32px;}
+.hero-content{position:relative;z-index:2;}
 
-    /* Ghana flag colors */
-    .ghana-flag {
-      width: 48px;
-      height: 32px;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
+.av-wrap{position:relative;width:180px;height:180px;margin:0 auto 2rem;}
+.av-ring{width:180px;height:180px;border-radius:50%;border:4px solid var(--lav);box-shadow:0 0 0 4px var(--coffee),0 0 30px rgba(201,168,226,.5);overflow:hidden;background:var(--navy);display:flex;align-items:center;justify-content:center;animation:pglow 3s ease-in-out infinite;}
+.av-ring img{width:180px;height:180px;object-fit:cover;image-rendering:pixelated;}
+.orbit{position:absolute;inset:-20px;animation:vspin 12s linear infinite;pointer-events:none;}
+.orbit span{position:absolute;font-size:1.2rem;}
+.orbit span:nth-child(1){top:0;left:50%;transform:translateX(-50%);}
+.orbit span:nth-child(2){top:50%;right:0;transform:translateY(-50%);}
+.orbit span:nth-child(3){bottom:0;left:50%;transform:translateX(-50%);}
+.orbit span:nth-child(4){top:50%;left:0;transform:translateY(-50%);}
 
-    .ghana-flag .stripe { flex: 1; }
-    .ghana-flag .stripe.r { background: #006B3F; }
-    .ghana-flag .stripe.g { background: #FCD116; position: relative; }
-    .ghana-flag .stripe.b { background: #CE1126; }
-    .ghana-flag .stripe.g::after {
-      content: '★';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #000;
-      font-size: 10px;
-      line-height: 1;
-    }
+.greeting{font-family:'Press Start 2P',monospace;font-size:.6rem;color:var(--lav);letter-spacing:3px;margin-bottom:1rem;}
+.hero-name{font-family:'Press Start 2P',monospace;font-size:clamp(.9rem,3.5vw,1.8rem);color:var(--text);line-height:1.5;margin-bottom:1rem;text-shadow:4px 4px 0 var(--coffee);}
+.hero-name span{color:var(--lav);}
+.tagline{font-family:'Playfair Display',serif;font-size:clamp(1rem,2.5vw,1.4rem);color:var(--tan);font-style:italic;margin-bottom:.5rem;min-height:2rem;}
+.cursor{display:inline-block;width:3px;height:1em;background:var(--lav);margin-left:2px;animation:blink 1s step-end infinite;vertical-align:middle;}
+.locs{display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;}
+.loc{font-family:'Press Start 2P',monospace;font-size:.4rem;padding:.4rem .8rem;border:2px solid var(--mint);color:var(--mint);letter-spacing:.5px;}
+.hero-sub{font-size:.95rem;color:var(--slate);max-width:500px;line-height:1.8;margin:.5rem auto 2rem;}
+.ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
 
-    /* Maryland flag colors */
-    .md-flag {
-      width: 48px;
-      height: 32px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
+.star{position:absolute;pointer-events:none;color:var(--lav);animation:twinkle 2s ease-in-out infinite;}
 
-    .md-flag .q1 { background: repeating-linear-gradient(45deg, #000 0px, #000 4px, #FFD700 4px, #FFD700 8px); }
-    .md-flag .q2 { background: repeating-linear-gradient(-45deg, #CE1126 0px, #CE1126 4px, #fff 4px, #fff 8px); }
-    .md-flag .q3 { background: repeating-linear-gradient(-45deg, #CE1126 0px, #CE1126 4px, #fff 4px, #fff 8px); }
-    .md-flag .q4 { background: repeating-linear-gradient(45deg, #000 0px, #000 4px, #FFD700 4px, #FFD700 8px); }
+.btn{font-family:'Press Start 2P',monospace;font-size:.5rem;padding:.8rem 1.4rem;border:3px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;text-decoration:none;letter-spacing:1px;transition:.3s;display:inline-block;box-shadow:4px 4px 0 var(--coffee);}
+.btn:hover{background:var(--accent);color:var(--bg);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--coffee);}
+.btn.fill{background:var(--accent);color:var(--bg);}
+.btn.fill:hover{background:transparent;color:var(--accent);}
 
-    .flag-text {
-      font-family: var(--font-pixel);
-      font-size: 0.45rem;
-      color: var(--text);
-      line-height: 1.6;
-    }
+.marquee-wrap{overflow:hidden;padding:.8rem 0;border-top:2px solid var(--accent);border-bottom:2px solid var(--accent);background:rgba(37,52,79,.3);}
+.marquee-track{display:flex;gap:2rem;width:max-content;animation:mscroll 30s linear infinite;}
+.mi{font-family:'Press Start 2P',monospace;font-size:.5rem;color:var(--tan);white-space:nowrap;letter-spacing:2px;}
+.dot{color:var(--lav);margin:0 .8rem;}
 
-    /* ---- Profile section ---- */
-    .profile-layout {
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 3rem;
-      max-width: 1000px;
-      margin: 0 auto;
-      align-items: start;
-    }
+.stats{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;padding:2.5rem 2rem;background:var(--card);border-top:3px solid var(--accent);border-bottom:3px solid var(--accent);}
+.stat{text-align:center;}
+.stat-n{font-family:'Press Start 2P',monospace;font-size:1.3rem;color:var(--lav);display:block;text-shadow:3px 3px 0 var(--coffee);}
+.stat-l{font-family:'Press Start 2P',monospace;font-size:.38rem;color:var(--tan);letter-spacing:1px;margin-top:.3rem;display:block;}
 
-    .profile-card {
-      background: var(--card-bg);
-      border: 3px solid var(--accent);
-      padding: 2rem;
-      text-align: center;
-      box-shadow: 6px 6px 0 var(--coffee);
-      position: sticky;
-      top: 5rem;
-    }
+.features{padding:5rem 2rem;max-width:1100px;margin:0 auto;}
+.sec-title{font-family:'Press Start 2P',monospace;font-size:clamp(.7rem,2vw,1rem);color:var(--accent);text-align:center;margin-bottom:.5rem;letter-spacing:2px;}
+.sec-sub{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--tan);text-align:center;font-style:italic;margin-bottom:1rem;}
+.divider{width:80px;height:3px;background:var(--accent);margin:1rem auto 3rem;position:relative;}
+.divider::before,.divider::after{content:'★';position:absolute;top:50%;transform:translateY(-50%);color:var(--accent);font-size:.8rem;}
+.divider::before{left:-1.5rem;}.divider::after{right:-1.5rem;}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;}
+.feat-card{background:var(--card);border:3px solid var(--accent);padding:1.5rem;text-align:center;box-shadow:5px 5px 0 var(--coffee);transition:.3s;position:relative;overflow:hidden;}
+.feat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--lav),var(--mint),var(--gold));background-size:200% 100%;animation:shimmer 3s linear infinite;}
+.feat-card:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--coffee);}
+.feat-icon{font-size:2.5rem;display:block;margin-bottom:1rem;animation:bidl 2s ease-in-out infinite;}
+.feat-title{font-family:'Press Start 2P',monospace;font-size:.5rem;color:var(--accent);margin-bottom:.5rem;letter-spacing:1px;}
+.feat-desc{font-size:.85rem;opacity:.9;line-height:1.6;}
 
-    .profile-avatar-wrap {
-      width: 160px;
-      height: 160px;
-      margin: 0 auto 1.5rem;
-      border-radius: 50%;
-      border: 4px solid var(--lavender);
-      box-shadow: 0 0 0 4px var(--coffee);
-      overflow: hidden;
-      background: var(--navy);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: pulse-glow 3s ease-in-out infinite;
-    }
+.teaser{background:var(--card);border-top:3px solid var(--accent);border-bottom:3px solid var(--accent);padding:4rem 2rem;}
+.teaser-inner{max-width:700px;margin:0 auto;text-align:center;}
+.quote{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--tan);font-style:italic;border-left:4px solid var(--lav);padding-left:1rem;text-align:left;margin:2rem 0;}
+.teaser-inner p{font-size:1rem;line-height:1.9;opacity:.9;margin-bottom:1rem;}
 
-    .profile-name {
-      font-family: var(--font-pixel);
-      font-size: 0.6rem;
-      color: var(--accent);
-      margin-bottom: 0.3rem;
-      letter-spacing: 1px;
-    }
+footer{background:var(--nav);border-top:3px solid var(--accent);padding:2rem;text-align:center;font-family:'Press Start 2P',monospace;font-size:.38rem;opacity:.8;line-height:2.2;letter-spacing:1px;}
+footer a{color:var(--accent);text-decoration:none;}
 
-    .profile-title {
-      font-family: var(--font-serif);
-      font-size: 0.9rem;
-      color: var(--tan);
-      font-style: italic;
-      margin-bottom: 1rem;
-    }
+@keyframes vspin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes pglow{0%,100%{box-shadow:0 0 0 4px var(--coffee),0 0 15px rgba(201,168,226,.3)}50%{box-shadow:0 0 0 4px var(--coffee),0 0 30px rgba(201,168,226,.7)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes twinkle{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
+@keyframes bidl{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes mscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes fbounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
 
-    .profile-links {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      margin-top: 1.2rem;
-    }
+@media(max-width:768px){.nav-links{gap:.6rem}.nav-links a{font-size:.38rem;padding:.3rem .4rem}.hero-name{font-size:1rem}.stats{gap:1rem}}
 
-    .profile-link {
-      font-family: var(--font-pixel);
-      font-size: 0.4rem;
-      padding: 0.5rem;
-      border: 2px solid var(--accent);
-      color: var(--text);
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
 
-    .profile-link:hover {
-      background: var(--accent);
-      color: var(--bg);
-    }
+.page-hero{padding:8rem 2rem 3rem;text-align:center;position:relative;overflow:hidden;}
+.page-title{font-family:"Press Start 2P",monospace;font-size:clamp(.8rem,2vw,1.2rem);color:var(--accent);margin-bottom:.5rem;letter-spacing:2px;}
+.page-sub{font-family:"Playfair Display",serif;font-size:1.1rem;color:var(--tan);font-style:italic;margin-bottom:1rem;}
+.divider{width:80px;height:3px;background:var(--accent);margin:1rem auto 2rem;position:relative;}
+.divider::before,.divider::after{content:"★";position:absolute;top:50%;transform:translateY(-50%);color:var(--accent);font-size:.8rem;}
+.divider::before{left:-1.5rem;}.divider::after{right:-1.5rem;}
+.flags{display:flex;gap:1rem;justify-content:center;margin:1.5rem 0;flex-wrap:wrap;}
+.flag-card{background:var(--card);border:3px solid var(--accent);padding:.8rem 1.2rem;display:flex;align-items:center;gap:.8rem;box-shadow:4px 4px 0 var(--coffee);}
+.ghana-flag{width:48px;height:32px;display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.2);}
+.ghana-flag .r{flex:1;background:#006B3F;}
+.ghana-flag .y{flex:1;background:#FCD116;position:relative;}
+.ghana-flag .y::after{content:"★";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#000;font-size:10px;}
+.ghana-flag .bl{flex:1;background:#CE1126;}
+.md-flag{width:48px;height:32px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;border:1px solid rgba(255,255,255,.2);}
+.md-flag .q1,.md-flag .q4{background:repeating-linear-gradient(45deg,#000 0px,#000 4px,#FFD700 4px,#FFD700 8px);}
+.md-flag .q2,.md-flag .q3{background:repeating-linear-gradient(-45deg,#CE1126 0px,#CE1126 4px,#fff 4px,#fff 8px);}
+.flag-text{font-family:"Press Start 2P",monospace;font-size:.4rem;color:var(--text);line-height:1.8;}
+.about-layout{display:grid;grid-template-columns:280px 1fr;gap:3rem;max-width:1000px;margin:0 auto;padding:2rem 2rem 6rem;align-items:start;}
+.profile-card{background:var(--card);border:3px solid var(--accent);padding:2rem;text-align:center;box-shadow:6px 6px 0 var(--coffee);position:sticky;top:5rem;}
+.profile-avatar{width:140px;height:140px;margin:0 auto 1.5rem;border-radius:50%;border:4px solid var(--lav);box-shadow:0 0 0 4px var(--coffee);overflow:hidden;background:var(--navy);display:flex;align-items:center;justify-content:center;animation:pglow 3s ease-in-out infinite;}
+.profile-avatar img{width:140px;height:140px;object-fit:cover;image-rendering:pixelated;}
+.profile-name{font-family:"Press Start 2P",monospace;font-size:.55rem;color:var(--accent);margin-bottom:.4rem;letter-spacing:1px;}
+.profile-title{font-family:"Playfair Display",serif;font-size:.9rem;color:var(--tan);font-style:italic;margin-bottom:1rem;}
+.profile-links{display:flex;flex-direction:column;gap:.6rem;margin-top:1.2rem;}
+.profile-link{font-family:"Press Start 2P",monospace;font-size:.38rem;padding:.5rem;border:2px solid var(--accent);color:var(--text);text-decoration:none;letter-spacing:.5px;transition:all .3s;display:flex;align-items:center;gap:.5rem;}
+.profile-link:hover{background:var(--accent);color:var(--bg);}
+.story h3{font-family:"Press Start 2P",monospace;font-size:.55rem;color:var(--accent);margin:2rem 0 .8rem;letter-spacing:1px;}
+.story p{font-size:1rem;line-height:1.9;margin-bottom:1.2rem;opacity:.9;}
+.story .hi{color:var(--lav);font-weight:700;}
+.hobby-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:1rem;margin:1.5rem 0;}
+.hobby-card{background:var(--card);border:2px solid var(--accent);padding:1rem;text-align:center;box-shadow:3px 3px 0 var(--coffee);transition:.3s;}
+.hobby-card:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--coffee);}
+.hobby-icon{font-size:1.8rem;display:block;margin-bottom:.5rem;}
+.hobby-name{font-family:"Press Start 2P",monospace;font-size:.38rem;color:var(--accent);}
+.timeline{position:relative;padding-left:2rem;border-left:3px solid var(--accent);}
+.tl-item{position:relative;margin-bottom:2rem;padding-left:1.5rem;}
+.tl-item::before{content:"★";position:absolute;left:-2.2rem;top:0;color:var(--accent);font-size:1rem;background:var(--bg);padding:0 3px;}
+.tl-year{font-family:"Press Start 2P",monospace;font-size:.42rem;color:var(--lav);margin-bottom:.3rem;letter-spacing:1px;}
+.tl-event{font-size:.9rem;opacity:.9;line-height:1.6;}
+.states-grid{display:flex;flex-wrap:wrap;gap:.5rem;margin:1rem 0;}
+.state-badge{font-family:"Press Start 2P",monospace;font-size:.38rem;padding:.4rem .6rem;border:2px solid var(--mint);color:var(--mint);background:rgba(168,216,194,.08);transition:.3s;cursor:default;}
+.state-badge:hover{background:var(--mint);color:var(--bg);transform:scale(1.1);}
+.map-box{background:var(--card);border:3px solid var(--accent);padding:1.5rem;box-shadow:5px 5px 0 var(--coffee);margin:1.5rem 0;}
+.map-title{font-family:"Press Start 2P",monospace;font-size:.5rem;color:var(--accent);margin-bottom:1rem;text-align:center;}
+@media(max-width:768px){.about-layout{grid-template-columns:1fr;}}
 
-    /* ---- Story section ---- */
-    .story-section p {
-      font-size: 1rem;
-      line-height: 1.9;
-      margin-bottom: 1.2rem;
-      color: var(--text);
-      opacity: 0.9;
-    }
-
-    .story-section h3 {
-      font-family: var(--font-pixel);
-      font-size: 0.6rem;
-      color: var(--accent);
-      margin: 2rem 0 0.8rem;
-      letter-spacing: 1px;
-    }
-
-    .story-section .highlight {
-      color: var(--lavender);
-      font-weight: 700;
-    }
-
-    .hobby-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 1rem;
-      margin: 1.5rem 0;
-    }
-
-    .hobby-card {
-      background: var(--card-bg);
-      border: 2px solid var(--accent);
-      padding: 1rem;
-      text-align: center;
-      box-shadow: 3px 3px 0 var(--coffee);
-      transition: all 0.3s;
-    }
-
-    .hobby-card:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 5px 5px 0 var(--coffee);
-    }
-
-    .hobby-icon { font-size: 1.8rem; display: block; margin-bottom: 0.5rem; }
-    .hobby-name { font-family: var(--font-pixel); font-size: 0.4rem; color: var(--accent); letter-spacing: 0.5px; }
-
-    /* ---- Timeline ---- */
-    .timeline {
-      position: relative;
-      padding-left: 2rem;
-      border-left: 3px solid var(--accent);
-    }
-
-    .timeline-item {
-      position: relative;
-      margin-bottom: 2rem;
-      padding-left: 1.5rem;
-    }
-
-    .timeline-item::before {
-      content: '★';
-      position: absolute;
-      left: -2.2rem;
-      top: 0;
-      color: var(--accent);
-      font-size: 1rem;
-      background: var(--bg);
-      padding: 0 3px;
-    }
-
-    .timeline-year {
-      font-family: var(--font-pixel);
-      font-size: 0.45rem;
-      color: var(--lavender);
-      margin-bottom: 0.3rem;
-      letter-spacing: 1px;
-    }
-
-    .timeline-event {
-      font-size: 0.95rem;
-      color: var(--text);
-      opacity: 0.9;
-      line-height: 1.5;
-    }
-
-    /* ---- Travel Map ---- */
-    .travel-section {
-      margin: 3rem 0;
-    }
-
-    .us-map-visual {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
-      gap: 0.4rem;
-      margin: 1rem 0;
-    }
-
-    .visited-state {
-      font-family: var(--font-pixel);
-      font-size: 0.4rem;
-      padding: 0.4rem 0.3rem;
-      border: 2px solid var(--mint);
-      color: var(--mint);
-      background: rgba(168,216,194,0.08);
-      text-align: center;
-      transition: all 0.3s;
-      cursor: default;
-      position: relative;
-    }
-
-    .visited-state:hover {
-      background: var(--mint);
-      color: var(--bg);
-      transform: scale(1.1);
-      z-index: 2;
-    }
-
-    .visited-state::before { content: '📍 '; }
-  </style>
+</style>
 </head>
 <body>
-
-<div class="floating-elements" id="floatingElements"></div>
-
-<div class="avatar-walker" id="avatarWalker" style="bottom:90px;">
-  <div class="avatar-bubble"></div>
-  <canvas class="avatar-sprite" id="avatarCanvas" width="48" height="64"></canvas>
-</div>
-
-<nav class="navbar">
-  <a href="index.html" class="nav-logo">NMO ✦</a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="projects.html">Projects</a></li>
-    <li><a href="skills.html">Skills</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <button class="theme-toggle" id="themeToggle">☀️</button>
+<div id="floats"></div>
+<div id="walker"><div class="bubble" id="bubble"></div><canvas id="walkCanvas" style="image-rendering:pixelated;"></canvas></div>
+<nav>
+  <a href="index.html" class="logo">NMO ✦</a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html" class="active">About</a></li><li><a href="projects.html">Projects</a></li><li><a href="skills.html">Skills</a></li><li><a href="contact.html">Contact</a></li></ul>
+  <button class="theme-btn" id="themeBtn">☀️</button>
 </nav>
-
-<div class="vinyl-player">
-  <div class="vinyl-record" id="vinyl"></div>
+<div class="vinyl-wrap">
+  <div class="vinyl" id="vinyl"></div>
   <button class="mute-btn" id="muteBtn">🔈</button>
   <div class="vinyl-label">prod. Metzmusic<br/>free use ✓</div>
 </div>
 
-<!-- ===== ABOUT HERO ===== -->
-<section class="about-hero">
-  <div class="country-outlines">
-    <!-- Maryland shape suggestion -->
-    <div class="state-shape md">
-      <svg viewBox="0 0 200 120" width="400" height="240" style="opacity:0.12;fill:#CE1126;">
-        <path d="M10,60 L30,30 L80,25 L120,35 L160,20 L190,40 L185,60 L170,70 L150,80 L130,75 L100,85 L80,90 L60,80 L40,75 Z"/>
-      </svg>
+<section class="page-hero">
+  <span style="position:absolute;top:20%;left:8%;font-size:1.5rem;opacity:.2;animation:fbounce 5s ease-in-out infinite;">🦋</span>
+  <span style="position:absolute;top:60%;right:10%;font-size:1rem;opacity:.2;animation:fbounce 7s ease-in-out 1s infinite;">🌸</span>
+  <h1 class="page-title">About Me</h1>
+  <p class="page-sub">the story behind the code</p>
+  <div class="divider"></div>
+  <div class="flags">
+    <div class="flag-card">
+      <div class="ghana-flag"><div class="r"></div><div class="y"></div><div class="bl"></div></div>
+      <div class="flag-text">Ghana<br/><span style="color:var(--tan);">West Africa</span></div>
     </div>
-    <!-- Ghana shape suggestion -->
-    <div class="state-shape gh" style="right:-2rem;top:50%;transform:translateY(-50%);">
-      <svg viewBox="0 0 120 160" width="200" height="270" style="opacity:0.1;fill:#FCD116;">
-        <path d="M20,10 L100,10 L110,50 L100,100 L80,150 L60,155 L40,150 L20,100 L10,50 Z"/>
-      </svg>
-    </div>
-
-    <!-- Scattered butterflies -->
-    <span style="position:absolute;top:20%;left:8%;font-size:1.5rem;animation:flutter 5s ease-in-out infinite;opacity:0.5;">🦋</span>
-    <span style="position:absolute;top:60%;right:10%;font-size:1rem;animation:flutter 7s ease-in-out 1s infinite;opacity:0.4;">🦋</span>
-    <span style="position:absolute;bottom:15%;left:25%;font-size:0.8rem;animation:flutter 6s ease-in-out 0.5s infinite;opacity:0.4;">🌸</span>
-    <span style="position:absolute;top:30%;right:20%;font-size:0.8rem;animation:float-bounce 4s ease-in-out infinite;opacity:0.5;">☕</span>
-  </div>
-
-  <div style="position:relative;z-index:2;">
-    <h1 class="section-title" style="font-size:1.2rem;margin-bottom:0.5rem;">About Me</h1>
-    <p class="section-sub">the story behind the code</p>
-
-    <div class="flag-display">
-      <div class="flag-card">
-        <div class="ghana-flag">
-          <div class="stripe r"></div>
-          <div class="stripe g"></div>
-          <div class="stripe b"></div>
-        </div>
-        <div class="flag-text">Ghana<br/><span style="color:var(--tan);">West Africa</span></div>
-      </div>
-      <div class="flag-card">
-        <div class="md-flag">
-          <div class="q1"></div>
-          <div class="q2"></div>
-          <div class="q3"></div>
-          <div class="q4"></div>
-        </div>
-        <div class="flag-text">Maryland<br/><span style="color:var(--tan);">Silver Spring</span></div>
-      </div>
+    <div class="flag-card">
+      <div class="md-flag"><div class="q1"></div><div class="q2"></div><div class="q3"></div><div class="q4"></div></div>
+      <div class="flag-text">Maryland<br/><span style="color:var(--tan);">Silver Spring</span></div>
     </div>
   </div>
 </section>
 
-<!-- ===== MAIN ABOUT CONTENT ===== -->
-<section class="section" style="padding-top:2rem;">
-  <div class="profile-layout">
-
-    <!-- Left: Profile Card -->
-    <div class="profile-card reveal">
-      <div class="profile-avatar-wrap">
-        <canvas id="aboutAvatarCanvas" width="140" height="140" class="pixel-art"></canvas>
-      </div>
-
-      <p class="profile-name">Noel L. Mills-Odoi</p>
-      <p class="profile-title">Software Engineer & AI Researcher</p>
-
-      <div style="margin:0.8rem 0;">
-        <span style="font-family:var(--font-pixel);font-size:0.4rem;color:var(--tan);">📍 Silver Spring, MD</span><br/>
-        <span style="font-family:var(--font-pixel);font-size:0.4rem;color:var(--tan);">🎓 UMBC IS, May 2026</span><br/>
-        <span style="font-family:var(--font-pixel);font-size:0.4rem;color:var(--tan);">🔐 CompTIA Sec+ (July 2026)</span>
-      </div>
-
-      <div class="profile-links">
-        <a href="mailto:nmills6635@gmail.com" class="profile-link">📧 Email Me</a>
-        <a href="https://linkedin.com/in/noel-mills-odoi" class="profile-link" target="_blank">💼 LinkedIn</a>
-        <a href="https://github.com/nmillso1" class="profile-link" target="_blank">💻 GitHub</a>
-        <a href="contact.html" class="profile-link">✉️ Contact Page</a>
-      </div>
-
-      <!-- Outfit label -->
-      <p style="font-family:var(--font-pixel);font-size:0.35rem;color:var(--slate);margin-top:1rem;opacity:0.7;">
-        [ business casual mode ]
-      </p>
+<div class="about-layout">
+  <div class="profile-card">
+    <div class="profile-avatar">
+      <img src="assets/avatar_hero.png" alt="Noel Mills-Odoi"/>
     </div>
-
-    <!-- Right: Story -->
-    <div class="story-section">
-      <div class="reveal">
-        <h3>✦ The Hook</h3>
-        <p>
-          I'm not just someone grinding for a paycheck. I'm the person who walks into the room and
-          immediately makes you feel like you've known them forever. The first thing out of my mouth
-          will make you <span class="highlight">laugh or grin from ear to ear</span> — and when
-          things get hard, I'm the one who shows up, listens, and takes action.
-        </p>
-      </div>
-
-      <div class="reveal">
-        <h3>✦ The Journey</h3>
-        <p>
-          I'm a <span class="highlight">May 2026 Information Systems graduate from UMBC</span> —
-          a proud HBCU-adjacent Black woman in tech from Silver Spring, Maryland, with roots in Ghana. 🇬🇭
-        </p>
-        <p>
-          My path to tech wasn't linear. I led UMBC's Women in Cybersecurity chapter when it was
-          practically inactive, rebuilt it from the ground up, organized our first campus CTF
-          fundraiser, and watched it become a community that people actually wanted to be part of.
-          That taught me that the most important skill in tech isn't the code — it's the people.
-        </p>
-      </div>
-
-      <div class="reveal">
-        <h3>✦ What I Build</h3>
-        <p>
-          My technical home is at the intersection of <span class="highlight">AI security</span>
-          and <span class="highlight">software engineering</span>. I've built AI-powered security
-          monitoring systems that apply MITRE ATT&CK logic, integrated Claude via REST API for
-          automated incident response, and deliberately tried to break my own systems to find
-          failure modes. I think like an attacker and build like an engineer.
-        </p>
-        <p>
-          But I also build things just because they're cool — like PixelPlay, a browser-based
-          AI music player that generates pixel art for every song. Because why not?
-        </p>
-      </div>
-
-      <!-- Hobbies -->
-      <div class="reveal">
-        <h3>✦ When I'm Not Coding</h3>
-        <div class="hobby-grid">
-          <div class="hobby-card">
-            <span class="hobby-icon">🍪</span>
-            <span class="hobby-name">Baking Cookies</span>
-          </div>
-          <div class="hobby-card">
-            <span class="hobby-icon">🧶</span>
-            <span class="hobby-name">Crocheting</span>
-          </div>
-          <div class="hobby-card">
-            <span class="hobby-icon">🎵</span>
-            <span class="hobby-name">R&B / Hip-Hop</span>
-          </div>
-          <div class="hobby-card">
-            <span class="hobby-icon">✈️</span>
-            <span class="hobby-name">Traveling</span>
-          </div>
-          <div class="hobby-card">
-            <span class="hobby-icon">⛸️</span>
-            <span class="hobby-name">Rollerskating</span>
-          </div>
-          <div class="hobby-card">
-            <span class="hobby-icon">🛹</span>
-            <span class="hobby-name">Skateboarding</span>
-          </div>
-          <div class="hobby-card">
-            <span class="hobby-icon">🌸</span>
-            <span class="hobby-name">Lavender Chai</span>
-          </div>
-          <div class="hobby-card">
-            <span class="hobby-icon">🦋</span>
-            <span class="hobby-name">Butterfly Watching</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Timeline -->
-      <div class="reveal">
-        <h3>✦ Timeline</h3>
-        <div class="timeline">
-          <div class="timeline-item">
-            <p class="timeline-year">2024</p>
-            <p class="timeline-event">
-              🏆 Awarded Delegate Jheanelle Wilkins Scholarship ($1,000 — competitively selected statewide)<br/>
-              🎓 President of WiCyS UMBC chapter — rebuilt from inactive, ran first campus CTF
-            </p>
-          </div>
-          <div class="timeline-item">
-            <p class="timeline-year">2025</p>
-            <p class="timeline-event">
-              💻 Built full stack web app + Linux server from scratch<br/>
-              🔐 Started AI-powered security monitoring research project<br/>
-              🧑‍💻 Joined Costco Wholesale as Cashier's Assistant (Wheaton, MD)
-            </p>
-          </div>
-          <div class="timeline-item">
-            <p class="timeline-year">2026</p>
-            <p class="timeline-event">
-              🎓 Graduated UMBC — B.S. Information Systems (May 2026)<br/>
-              🤖 Completed Anthropic Claude 101 + AI Fluency certifications<br/>
-              🎵 Built PixelPlay — AI music player capstone project<br/>
-              🔬 Co-developing Diagram Tutor with Dr. Dillon at UMBC<br/>
-              📋 Applied to Anthropic Fellows Program + Claude Corps Fellowship
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Travel Map -->
-      <div class="travel-section reveal">
-        <h3>✦ Places I've Been</h3>
-        <p style="font-size:0.85rem;opacity:0.8;margin-bottom:1rem;">
-          I've explored 13 US states so far — and counting. ✈️🗺️
-        </p>
-        <div class="map-container">
-          <p class="map-title">🗺️ Visited States</p>
-          <div class="us-map-visual">
-            <div class="visited-state" title="Massachusetts">MA</div>
-            <div class="visited-state" title="New York">NY</div>
-            <div class="visited-state" title="New Jersey">NJ</div>
-            <div class="visited-state" title="Maryland (home!)">MD 🏠</div>
-            <div class="visited-state" title="Virginia">VA</div>
-            <div class="visited-state" title="Georgia">GA</div>
-            <div class="visited-state" title="California">CA</div>
-            <div class="visited-state" title="Colorado">CO</div>
-            <div class="visited-state" title="Texas">TX</div>
-            <div class="visited-state" title="Pennsylvania">PA</div>
-            <div class="visited-state" title="Indiana">IN</div>
-            <div class="visited-state" title="Ohio">OH</div>
-            <div class="visited-state" title="Delaware">DE</div>
-          </div>
-          <p style="text-align:center;font-family:var(--font-pixel);font-size:0.4rem;color:var(--tan);margin-top:1rem;">
-            13 states ✦ 1 planet ✦ infinite adventures ahead
-          </p>
-        </div>
-      </div>
-
+    <p class="profile-name">Noel L. Mills-Odoi</p>
+    <p class="profile-title">Software Engineer & AI Researcher</p>
+    <div style="font-family:'Press Start 2P',monospace;font-size:.38rem;color:var(--tan);line-height:2.2;margin:.8rem 0;">
+      📍 Silver Spring, MD<br/>🎓 UMBC IS, May 2026<br/>🔐 CompTIA Sec+ (July 2026)
+    </div>
+    <div class="profile-links">
+      <a href="mailto:nmills6635@gmail.com" class="profile-link">📧 Email Me</a>
+      <a href="https://linkedin.com/in/noel-mills-odoi" class="profile-link" target="_blank">💼 LinkedIn</a>
+      <a href="https://github.com/nmillso1" class="profile-link" target="_blank">💻 GitHub</a>
     </div>
   </div>
-</section>
+
+  <div class="story">
+    <h3>✦ The Hook</h3>
+    <p>I'm not just someone grinding for a paycheck. I'm the person who walks into the room and immediately makes you feel like you've known them forever. The first thing out of my mouth will make you <span class="hi">laugh or grin from ear to ear</span> — and when things get hard, I'm the one who shows up, listens, and takes action.</p>
+
+    <h3>✦ The Journey</h3>
+    <p>I'm a <span class="hi">May 2026 UMBC Information Systems graduate</span> — a proud Ghanaian-American from Silver Spring, Maryland. 🇬🇭🇺🇸</p>
+    <p>I led UMBC's Women in Cybersecurity chapter when it was practically inactive, rebuilt it from the ground up, organized our first campus CTF fundraiser, and watched it become a community people actually wanted to be part of.</p>
+
+    <h3>✦ What I Build</h3>
+    <p>My technical home is at the intersection of <span class="hi">AI security</span> and <span class="hi">software engineering</span>. I build security monitoring systems with MITRE ATT&CK logic, integrate Claude via REST API, and deliberately try to break my own systems to find failure modes.</p>
+
+    <h3>✦ When I'm Not Coding</h3>
+    <div class="hobby-grid">
+      <div class="hobby-card"><span class="hobby-icon">🍪</span><span class="hobby-name">Baking Cookies</span></div>
+      <div class="hobby-card"><span class="hobby-icon">🧶</span><span class="hobby-name">Crocheting</span></div>
+      <div class="hobby-card"><span class="hobby-icon">🎵</span><span class="hobby-name">R&B / Hip-Hop</span></div>
+      <div class="hobby-card"><span class="hobby-icon">✈️</span><span class="hobby-name">Traveling</span></div>
+      <div class="hobby-card"><span class="hobby-icon">⛸️</span><span class="hobby-name">Rollerskating</span></div>
+      <div class="hobby-card"><span class="hobby-icon">🛹</span><span class="hobby-name">Skateboarding</span></div>
+      <div class="hobby-card"><span class="hobby-icon">🌸</span><span class="hobby-name">Lavender Chai</span></div>
+      <div class="hobby-card"><span class="hobby-icon">🦋</span><span class="hobby-name">Butterflies</span></div>
+    </div>
+
+    <h3>✦ Timeline</h3>
+    <div class="timeline">
+      <div class="tl-item"><p class="tl-year">2024</p><p class="tl-event">🏆 Delegate Jheanelle Wilkins Scholarship ($1,000, competitively selected statewide)<br/>🎓 Rebuilt WiCyS UMBC chapter, ran first campus CTF fundraiser</p></div>
+      <div class="tl-item"><p class="tl-year">2025</p><p class="tl-event">💻 Built full stack web app + Linux server from scratch<br/>🔐 Started AI-powered security monitoring research project</p></div>
+      <div class="tl-item"><p class="tl-year">2026</p><p class="tl-event">🎓 Graduated UMBC — B.S. Information Systems (May 2026)<br/>🤖 Completed Anthropic Claude 101 + AI Fluency certifications<br/>🎵 Built PixelPlay — AI music player<br/>🔬 Co-developing Diagram Tutor with Dr. Dillon at UMBC<br/>📋 Applied to Anthropic Fellows + Claude Corps Fellowships</p></div>
+    </div>
+
+    <h3>✦ Places I've Been</h3>
+    <div class="map-box">
+      <p class="map-title">🗺️ 13 States Visited</p>
+      <div class="states-grid">
+        <div class="state-badge" title="Massachusetts">📍 MA</div>
+        <div class="state-badge" title="New York">📍 NY</div>
+        <div class="state-badge" title="New Jersey">📍 NJ</div>
+        <div class="state-badge" title="Maryland (home!)">📍 MD 🏠</div>
+        <div class="state-badge" title="Virginia">📍 VA</div>
+        <div class="state-badge" title="Georgia">📍 GA</div>
+        <div class="state-badge" title="California">📍 CA</div>
+        <div class="state-badge" title="Colorado">📍 CO</div>
+        <div class="state-badge" title="Texas">📍 TX</div>
+        <div class="state-badge" title="Pennsylvania">📍 PA</div>
+        <div class="state-badge" title="Indiana">📍 IN</div>
+        <div class="state-badge" title="Ohio">📍 OH</div>
+        <div class="state-badge" title="Delaware">📍 DE</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <footer>
   <p>✦ crafted with 🍪 + 🧶 + ☕ by Noel Mills-Odoi ✦</p>
-  <p>nmillso1.github.io | <a href="mailto:nmills6635@gmail.com">nmills6635@gmail.com</a></p>
-  <p>🎵 Ambient music: <a href="https://bsta.rs/40xWSc" target="_blank">prod. Metzmusic</a> (free use, credited)</p>
+  <p><a href="mailto:nmills6635@gmail.com">nmills6635@gmail.com</a> | <a href="https://linkedin.com/in/noel-mills-odoi" target="_blank">LinkedIn</a> | <a href="https://github.com/nmillso1" target="_blank">GitHub</a></p>
+  <p>🎵 Music: <a href="https://bsta.rs/40xWSc" target="_blank">prod. Metzmusic</a> (free use, credited)</p>
 </footer>
-
-<script src="js/avatar.js"></script>
-<script src="js/audio.js"></script>
-<script src="js/main.js"></script>
 <script>
-  // Business casual avatar variant
-  function drawBusinessAvatar(canvas) {
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    ctx.imageSmoothingEnabled = false;
-    const s = 10;
 
-    // Business casual: blazer variant (darker jacket, professional)
-    const pixels = [
-      [0,0,0,0,2,2,2,2,2,2,2,2,0,0],
-      [0,0,2,2,1,1,1,1,1,1,1,1,2,2],
-      [0,2,1,1,3,3,3,3,3,3,1,1,2,0],
-      [0,2,1,3,3,3,3,3,3,3,3,1,2,0],
-      [0,2,1,3,4,3,3,3,3,4,3,1,2,0],
-      [0,2,1,3,3,3,3,3,3,3,3,1,2,0],
-      [0,2,1,3,3,5,3,3,5,3,3,1,2,0],
-      [0,2,1,1,3,3,3,3,3,3,1,1,2,0],
-      [0,0,8,8,8,8,8,8,8,8,8,8,0,0],
-      [0,8,8,9,8,8,8,8,8,8,9,8,8,0],
-      [0,8,9,9,8,8,8,8,8,8,9,9,8,0],
-      [0,8,8,8,8,8,8,8,8,8,8,8,8,0],
-      [0,0,8,8,8,8,8,8,8,8,8,8,0,0],
-      [0,0,0,8,8,8,0,0,8,8,8,0,0,0],
-    ];
+// ── THEME ──
+const body = document.body;
+const themeBtn = document.getElementById('themeBtn');
+if(localStorage.getItem('theme')==='light'){body.classList.add('light');themeBtn.textContent='🌙';}
+themeBtn.addEventListener('click',()=>{
+  body.classList.toggle('light');
+  const l=body.classList.contains('light');
+  themeBtn.textContent=l?'🌙':'☀️';
+  localStorage.setItem('theme',l?'light':'dark');
+});
 
-    const colors = {
-      1: '#A8D8C2', 2: '#25344F', 3: '#8B5E52',
-      4: '#3a2520', 5: '#D4826E',
-      8: '#1a2a3a',  // dark blazer
-      9: '#C9A8E2',  // lapel accent
-    };
-
-    canvas.width = 14 * s;
-    canvas.height = 14 * s;
-    pixels.forEach((row, y) => {
-      row.forEach((cell, x) => {
-        if (cell && colors[cell]) {
-          ctx.fillStyle = colors[cell];
-          ctx.fillRect(x * s, y * s, s, s);
-        }
-      });
-    });
+// ── AUDIO ──
+let audio=null,playing=false;
+const vinyl=document.getElementById('vinyl');
+const muteBtn=document.getElementById('muteBtn');
+function toggleAudio(){
+  if(!audio){audio=new Audio('assets/ambient.mp3');audio.loop=true;audio.volume=0.35;}
+  if(!playing){
+    audio.play().catch(()=>{});
+    playing=true;vinyl.classList.add('spin');muteBtn.textContent='🔊';
+  }else{
+    audio.pause();playing=false;vinyl.classList.remove('spin');muteBtn.textContent='🔈';
   }
+}
+vinyl.addEventListener('click',toggleAudio);
+muteBtn.addEventListener('click',toggleAudio);
 
-  drawBusinessAvatar(document.getElementById('aboutAvatarCanvas'));
+// ── CUTE CHIBI WALK SPRITE ──
+const AV={
+  '_':null,'S':'#7A4528','s':'#9B6040','d':'#5C3317',
+  'H':'#2C1A0E','h':'#4A2C1A','L':'#3D2310',
+  'f':'#D4826E','g':'#E8C97A','e':'#2C1A0E','W':'#FFF8F0',
+  'P':'#C47A5A','K':'#D4926A',
+  'A':'#7B5EA7','B':'#9B7EC7','C':'#5B3E87',
+  'T':'#FFF8F0','t':'#E8DCC8',
+  'N':'#E8C97A','R':'#D4A870',
+  'J':'#3A5A8A','j':'#4A6A9A',
+  'X':'#6B3D1E','G':'#6F4D38',
+};
 
-  // Walking avatar
-  function drawWalkAvatar(canvas) {
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    ctx.imageSmoothingEnabled = false;
-    const s = 4;
-    const pixels = [
-      [0,0,2,2,2,2,2,2,0,0],
-      [0,2,1,1,1,1,1,1,2,0],
-      [0,2,3,3,3,3,3,3,2,0],
-      [0,2,3,4,3,3,4,3,2,0],
-      [0,2,3,3,5,3,3,3,2,0],
-      [0,0,6,6,6,6,6,6,0,0],
-      [0,6,6,7,6,6,7,6,6,0],
-      [0,6,6,6,6,6,6,6,6,0],
-    ];
-    const colors = { 1:'#A8D8C2',2:'#25344F',3:'#8B5E52',4:'#3a2520',5:'#D4826E',6:'#617891',7:'#C9A8E2' };
-    canvas.width = 10 * s; canvas.height = 8 * s;
-    pixels.forEach((row,y) => row.forEach((cell,x) => {
-      if(cell && colors[cell]){ ctx.fillStyle=colors[cell]; ctx.fillRect(x*s,y*s,s,s); }
-    }));
+// Frame A -- left leg forward
+const FA=[
+  ['_','_','H','H','H','H','H','H','H','H','H','H','_','_','_','_'],
+  ['_','H','h','L','h','H','H','H','h','L','h','H','H','_','_','_'],
+  ['_','H','h','L','L','L','h','h','L','L','h','H','H','_','_','_'],
+  ['H','H','H','H','H','S','S','S','S','H','H','H','H','_','_','_'],
+  ['H','H','_','S','e','W','e','e','W','e','S','H','H','_','_','_'],
+  ['H','H','_','S','S','P','P','P','P','S','S','H','H','_','_','_'],
+  ['_','H','H','H','S','S','d','d','S','S','H','H','H','_','_','_'],
+  ['_','_','A','A','A','T','T','T','T','A','A','A','_','_','_','_'],
+  ['_','A','B','A','A','A','A','A','A','A','A','B','A','_','_','_'],
+  ['_','A','A','C','A','A','A','A','A','A','C','A','A','_','_','_'],
+  ['A','A','A','A','S','A','A','A','A','S','A','A','A','A','_','_'],
+  ['_','_','_','A','A','A','A','A','A','A','A','A','_','_','_','_'],
+  ['_','_','_','_','A','A','_','_','A','A','_','_','_','_','_','_'],
+  ['_','_','_','A','A','_','_','_','_','_','A','_','_','_','_','_'],
+  ['_','_','A','A','_','_','_','_','_','_','A','A','_','_','_','_'],
+  ['_','_','G','G','_','_','_','_','_','_','G','G','_','_','_','_'],
+  ['_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_'],
+  ['_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_'],
+];
+
+// Frame B -- right leg forward
+const FB=[
+  ['_','_','H','H','H','H','H','H','H','H','H','H','_','_','_','_'],
+  ['_','H','h','L','h','H','H','H','h','L','h','H','H','_','_','_'],
+  ['_','H','h','L','L','L','h','h','L','L','h','H','H','_','_','_'],
+  ['H','H','H','H','H','S','S','S','S','H','H','H','H','_','_','_'],
+  ['H','H','_','S','e','W','e','e','W','e','S','H','H','_','_','_'],
+  ['H','H','_','S','S','P','P','P','P','S','S','H','H','_','_','_'],
+  ['_','H','H','H','S','S','d','d','S','S','H','H','H','_','_','_'],
+  ['_','_','A','A','A','T','T','T','T','A','A','A','_','_','_','_'],
+  ['_','A','B','A','A','A','A','A','A','A','A','B','A','_','_','_'],
+  ['_','A','A','C','A','A','A','A','A','A','C','A','A','_','_','_'],
+  ['A','A','A','A','S','A','A','A','A','S','A','A','A','A','_','_'],
+  ['_','_','_','A','A','A','A','A','A','A','A','A','_','_','_','_'],
+  ['_','_','_','_','A','A','_','_','A','A','_','_','_','_','_','_'],
+  ['_','_','_','_','A','_','_','_','_','A','A','_','_','_','_','_'],
+  ['_','_','_','_','A','A','_','_','_','_','A','A','_','_','_','_'],
+  ['_','_','_','_','G','G','_','_','_','_','G','G','_','_','_','_'],
+  ['_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_'],
+  ['_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_'],
+];
+
+const walkCanvas=document.getElementById('walkCanvas');
+let walkFrame=0,walkerX=-80,walkerDir=1,bubbleTimer=0,sayIdx=0;
+const sayings=['hello world! ✨','hire me pls 👩‍💻','i love cookies 🍪','SZA is life 🎵','be kind 💜','debug mode: on 🐛','crocheting 🧶','Ghana represent 🇬🇭'];
+const bubbleEl=document.getElementById('bubble');
+const walker=document.getElementById('walker');
+
+function drawWalk(){
+  const sprite=Math.floor(walkFrame/12)%2===0?FA:FB;
+  const ctx=walkCanvas.getContext('2d');
+  ctx.imageSmoothingEnabled=false;
+  const W=sprite[0].length,H=sprite.length,SC=4;
+  walkCanvas.width=W*SC;walkCanvas.height=H*SC;
+  ctx.clearRect(0,0,walkCanvas.width,walkCanvas.height);
+  sprite.forEach((row,y)=>row.forEach((cell,x)=>{
+    const c=AV[cell];if(c){ctx.fillStyle=c;ctx.fillRect(x*SC,y*SC,SC,SC);}
+  }));
+}
+
+function animateWalker(){
+  walkerX+=0.8*walkerDir;
+  if(walkerX>window.innerWidth+80){walkerDir=-1;walker.style.transform='scaleX(-1)';}
+  if(walkerX<-80){walkerDir=1;walker.style.transform='scaleX(1)';}
+  walker.style.left=walkerX+'px';
+  // counter-flip bubble so text stays readable
+  bubbleEl.style.transform=walkerDir===-1?'scaleX(-1)':'scaleX(1)';
+  walkFrame++;
+  bubbleTimer++;
+  if(bubbleTimer>280){
+    bubbleTimer=0;
+    bubbleEl.textContent=sayings[sayIdx++%sayings.length];
+    bubbleEl.style.opacity='1';
+    setTimeout(()=>{bubbleEl.style.opacity='0';},2500);
   }
-  drawWalkAvatar(document.getElementById('avatarCanvas'));
+  drawWalk();
+  requestAnimationFrame(animateWalker);
+}
+animateWalker();
+
+// ── CURSOR TRAIL ──
+document.addEventListener('mousemove',e=>{
+  const el=document.createElement('div');
+  el.textContent=['✨','⭐','💜','🌸','🍪'][Math.floor(Math.random()*5)];
+  el.style.cssText=`position:fixed;left:${e.clientX}px;top:${e.clientY}px;font-size:.8rem;pointer-events:none;z-index:9999;opacity:1;transition:opacity .8s,transform .8s;transform:translateY(0);`;
+  document.body.appendChild(el);
+  requestAnimationFrame(()=>{el.style.opacity='0';el.style.transform='translateY(-20px)';});
+  setTimeout(()=>el.remove(),800);
+});
+
+// ── FLOATING ELEMENTS ──
+const floats=document.getElementById('floats');
+const emojis=['🦋','🍪','🎵','🧶','⭐','🌸','✨','🎶'];
+function spawnFloat(){
+  const el=document.createElement('div');
+  el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+  el.style.cssText=`position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${.8+Math.random()*.8}rem;opacity:${.3+Math.random()*.4};animation:fbounce ${3+Math.random()*4}s ease-in-out ${Math.random()*2}s infinite;pointer-events:none;`;
+  floats.appendChild(el);
+  setTimeout(()=>el.remove(),12000);
+}
+for(let i=0;i<8;i++)setTimeout(spawnFloat,i*400);
+setInterval(spawnFloat,2500);
+
+// ── TYPING TAGLINE ──
+const tags=['AI Security Researcher','Software Engineer','Cookie Scientist 🍪','LLM Whisperer','UMBC IS Grad \'26','Crochet Enthusiast 🧶'];
+let ti=0,ci=0,del=false;
+const tagEl=document.getElementById('tagline');
+function type(){
+  const cur=tags[ti];
+  if(!del){ci++;tagEl.innerHTML=cur.substring(0,ci)+'<span class="cursor"></span>';
+    if(ci===cur.length){del=true;setTimeout(type,2000);return;}
+  }else{ci--;tagEl.innerHTML=cur.substring(0,ci)+'<span class="cursor"></span>';
+    if(ci===0){del=false;ti=(ti+1)%tags.length;}
+  }
+  setTimeout(type,del?50:80);
+}
+type();
+
+
 </script>
 </body>
 </html>

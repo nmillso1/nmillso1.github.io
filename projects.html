@@ -1,522 +1,471 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects | Noel Mills-Odoi</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <style>
-    .projects-hero {
-      padding: 8rem 2rem 3rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Projects | Noel Mills-Odoi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
 
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2.5rem;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
+:root{
+  --navy:#25344F;--slate:#617891;--tan:#D5B893;--coffee:#6F4D38;
+  --crimson:#632024;--lav:#C9A8E2;--mint:#A8D8C2;--cream:#FFF8F0;
+  --gold:#E8C97A;--pink:#F2C4CE;
+  --bg:#0F1A2A;--card:#1a2a3a;--text:#FFF8F0;--accent:#C9A8E2;--nav:#0a1520;
+}
+body.light{--bg:#FFF8F0;--card:#fff;--text:#1a1a2e;--nav:#FFF8F0;--accent:#6F4D38;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s;}
 
-    .project-card {
-      background: var(--card-bg);
-      border: 3px solid var(--accent);
-      overflow: hidden;
-      box-shadow: 6px 6px 0 var(--coffee);
-      transition: all 0.3s ease;
-    }
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--nav);border-bottom:3px solid var(--accent);padding:.75rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Press Start 2P',monospace;font-size:.65rem;color:var(--accent);text-decoration:none;}
+.nav-links{display:flex;gap:1.2rem;list-style:none;}
+.nav-links a{font-family:'Press Start 2P',monospace;font-size:.45rem;color:var(--text);text-decoration:none;padding:.4rem .7rem;border:2px solid transparent;transition:.3s;letter-spacing:1px;}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);border-color:var(--accent);}
+.theme-btn{background:none;border:2px solid var(--accent);color:var(--accent);font-size:1rem;cursor:pointer;padding:.3rem .6rem;border-radius:4px;}
 
-    .project-card:hover {
-      transform: translate(-4px, -4px);
-      box-shadow: 10px 10px 0 var(--coffee);
-    }
+.vinyl-wrap{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;display:flex;flex-direction:column;align-items:center;gap:.4rem;}
+.vinyl{width:56px;height:56px;border-radius:50%;background:conic-gradient(#1a1a1a 0deg,#333 30deg,#1a1a1a 60deg,#333 90deg,#1a1a1a 120deg,#333 150deg,#1a1a1a 180deg,#333 210deg,#1a1a1a 240deg,#333 270deg,#1a1a1a 300deg,#333 330deg,#1a1a1a 360deg);border:3px solid var(--accent);cursor:pointer;position:relative;box-shadow:0 0 15px rgba(201,168,226,.4);}
+.vinyl::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--lav);border:2px solid var(--coffee);}
+.vinyl.spin{animation:vspin 3s linear infinite;}
+.mute-btn{background:var(--card);border:2px solid var(--accent);color:var(--accent);font-size:.65rem;cursor:pointer;padding:.2rem .4rem;font-family:'Press Start 2P',monospace;}
+.vinyl-label{font-family:'Press Start 2P',monospace;font-size:.32rem;color:var(--accent);text-align:center;opacity:.8;line-height:1.6;}
 
-    .project-preview {
-      width: 100%;
-      height: 200px;
-      background: var(--navy);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      border-bottom: 3px solid var(--accent);
-    }
+#floats{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
 
-    .project-preview canvas {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      image-rendering: pixelated;
-    }
+#walker{position:fixed;bottom:90px;z-index:998;pointer-events:none;display:flex;flex-direction:column;align-items:center;}
+.bubble{background:var(--cream);color:#1a1a2e;border:2px solid var(--navy);border-radius:8px;padding:.3rem .5rem;font-family:'Press Start 2P',monospace;font-size:.3rem;margin-bottom:4px;white-space:nowrap;opacity:0;transition:opacity .3s;}
 
-    .project-preview-label {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-      font-family: var(--font-pixel);
-      font-size: 0.35rem;
-      color: var(--accent);
-      background: var(--card-bg);
-      border: 1px solid var(--accent);
-      padding: 0.2rem 0.4rem;
-      letter-spacing: 0.5px;
-    }
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:6rem 2rem 2rem;text-align:center;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(97,120,145,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(97,120,145,.08) 1px,transparent 1px);background-size:32px 32px;}
+.hero-content{position:relative;z-index:2;}
 
-    .project-info {
-      padding: 1.5rem;
-    }
+.av-wrap{position:relative;width:180px;height:180px;margin:0 auto 2rem;}
+.av-ring{width:180px;height:180px;border-radius:50%;border:4px solid var(--lav);box-shadow:0 0 0 4px var(--coffee),0 0 30px rgba(201,168,226,.5);overflow:hidden;background:var(--navy);display:flex;align-items:center;justify-content:center;animation:pglow 3s ease-in-out infinite;}
+.av-ring img{width:180px;height:180px;object-fit:cover;image-rendering:pixelated;}
+.orbit{position:absolute;inset:-20px;animation:vspin 12s linear infinite;pointer-events:none;}
+.orbit span{position:absolute;font-size:1.2rem;}
+.orbit span:nth-child(1){top:0;left:50%;transform:translateX(-50%);}
+.orbit span:nth-child(2){top:50%;right:0;transform:translateY(-50%);}
+.orbit span:nth-child(3){bottom:0;left:50%;transform:translateX(-50%);}
+.orbit span:nth-child(4){top:50%;left:0;transform:translateY(-50%);}
 
-    .project-number {
-      font-family: var(--font-pixel);
-      font-size: 0.4rem;
-      color: var(--slate);
-      letter-spacing: 1px;
-      margin-bottom: 0.3rem;
-    }
+.greeting{font-family:'Press Start 2P',monospace;font-size:.6rem;color:var(--lav);letter-spacing:3px;margin-bottom:1rem;}
+.hero-name{font-family:'Press Start 2P',monospace;font-size:clamp(.9rem,3.5vw,1.8rem);color:var(--text);line-height:1.5;margin-bottom:1rem;text-shadow:4px 4px 0 var(--coffee);}
+.hero-name span{color:var(--lav);}
+.tagline{font-family:'Playfair Display',serif;font-size:clamp(1rem,2.5vw,1.4rem);color:var(--tan);font-style:italic;margin-bottom:.5rem;min-height:2rem;}
+.cursor{display:inline-block;width:3px;height:1em;background:var(--lav);margin-left:2px;animation:blink 1s step-end infinite;vertical-align:middle;}
+.locs{display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;}
+.loc{font-family:'Press Start 2P',monospace;font-size:.4rem;padding:.4rem .8rem;border:2px solid var(--mint);color:var(--mint);letter-spacing:.5px;}
+.hero-sub{font-size:.95rem;color:var(--slate);max-width:500px;line-height:1.8;margin:.5rem auto 2rem;}
+.ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
 
-    .project-name {
-      font-family: var(--font-pixel);
-      font-size: 0.7rem;
-      color: var(--accent);
-      margin-bottom: 0.8rem;
-      letter-spacing: 1px;
-      line-height: 1.4;
-    }
+.star{position:absolute;pointer-events:none;color:var(--lav);animation:twinkle 2s ease-in-out infinite;}
 
-    .project-desc {
-      font-size: 0.9rem;
-      color: var(--text);
-      opacity: 0.9;
-      line-height: 1.7;
-      margin-bottom: 1rem;
-    }
+.btn{font-family:'Press Start 2P',monospace;font-size:.5rem;padding:.8rem 1.4rem;border:3px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;text-decoration:none;letter-spacing:1px;transition:.3s;display:inline-block;box-shadow:4px 4px 0 var(--coffee);}
+.btn:hover{background:var(--accent);color:var(--bg);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--coffee);}
+.btn.fill{background:var(--accent);color:var(--bg);}
+.btn.fill:hover{background:transparent;color:var(--accent);}
 
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1.2rem;
-    }
+.marquee-wrap{overflow:hidden;padding:.8rem 0;border-top:2px solid var(--accent);border-bottom:2px solid var(--accent);background:rgba(37,52,79,.3);}
+.marquee-track{display:flex;gap:2rem;width:max-content;animation:mscroll 30s linear infinite;}
+.mi{font-family:'Press Start 2P',monospace;font-size:.5rem;color:var(--tan);white-space:nowrap;letter-spacing:2px;}
+.dot{color:var(--lav);margin:0 .8rem;}
 
-    .tag {
-      font-family: var(--font-pixel);
-      font-size: 0.35rem;
-      padding: 0.25rem 0.5rem;
-      border: 1px solid var(--lavender);
-      color: var(--lavender);
-      letter-spacing: 0.5px;
-    }
+.stats{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;padding:2.5rem 2rem;background:var(--card);border-top:3px solid var(--accent);border-bottom:3px solid var(--accent);}
+.stat{text-align:center;}
+.stat-n{font-family:'Press Start 2P',monospace;font-size:1.3rem;color:var(--lav);display:block;text-shadow:3px 3px 0 var(--coffee);}
+.stat-l{font-family:'Press Start 2P',monospace;font-size:.38rem;color:var(--tan);letter-spacing:1px;margin-top:.3rem;display:block;}
 
-    .tag.green { border-color: var(--mint); color: var(--mint); }
-    .tag.gold  { border-color: var(--gold); color: var(--gold); }
-    .tag.pink  { border-color: var(--soft-pink); color: var(--soft-pink); }
+.features{padding:5rem 2rem;max-width:1100px;margin:0 auto;}
+.sec-title{font-family:'Press Start 2P',monospace;font-size:clamp(.7rem,2vw,1rem);color:var(--accent);text-align:center;margin-bottom:.5rem;letter-spacing:2px;}
+.sec-sub{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--tan);text-align:center;font-style:italic;margin-bottom:1rem;}
+.divider{width:80px;height:3px;background:var(--accent);margin:1rem auto 3rem;position:relative;}
+.divider::before,.divider::after{content:'★';position:absolute;top:50%;transform:translateY(-50%);color:var(--accent);font-size:.8rem;}
+.divider::before{left:-1.5rem;}.divider::after{right:-1.5rem;}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;}
+.feat-card{background:var(--card);border:3px solid var(--accent);padding:1.5rem;text-align:center;box-shadow:5px 5px 0 var(--coffee);transition:.3s;position:relative;overflow:hidden;}
+.feat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--lav),var(--mint),var(--gold));background-size:200% 100%;animation:shimmer 3s linear infinite;}
+.feat-card:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--coffee);}
+.feat-icon{font-size:2.5rem;display:block;margin-bottom:1rem;animation:bidl 2s ease-in-out infinite;}
+.feat-title{font-family:'Press Start 2P',monospace;font-size:.5rem;color:var(--accent);margin-bottom:.5rem;letter-spacing:1px;}
+.feat-desc{font-size:.85rem;opacity:.9;line-height:1.6;}
 
-    .project-links {
-      display: flex;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
+.teaser{background:var(--card);border-top:3px solid var(--accent);border-bottom:3px solid var(--accent);padding:4rem 2rem;}
+.teaser-inner{max-width:700px;margin:0 auto;text-align:center;}
+.quote{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--tan);font-style:italic;border-left:4px solid var(--lav);padding-left:1rem;text-align:left;margin:2rem 0;}
+.teaser-inner p{font-size:1rem;line-height:1.9;opacity:.9;margin-bottom:1rem;}
 
-    .project-link-btn {
-      font-family: var(--font-pixel);
-      font-size: 0.4rem;
-      padding: 0.5rem 0.8rem;
-      border: 2px solid var(--accent);
-      color: var(--accent);
-      text-decoration: none;
-      letter-spacing: 0.5px;
-      transition: all 0.3s;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
+footer{background:var(--nav);border-top:3px solid var(--accent);padding:2rem;text-align:center;font-family:'Press Start 2P',monospace;font-size:.38rem;opacity:.8;line-height:2.2;letter-spacing:1px;}
+footer a{color:var(--accent);text-decoration:none;}
 
-    .project-link-btn:hover {
-      background: var(--accent);
-      color: var(--bg);
-    }
+@keyframes vspin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes pglow{0%,100%{box-shadow:0 0 0 4px var(--coffee),0 0 15px rgba(201,168,226,.3)}50%{box-shadow:0 0 0 4px var(--coffee),0 0 30px rgba(201,168,226,.7)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes twinkle{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
+@keyframes bidl{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes mscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes fbounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
 
-    .project-link-btn.gh {
-      border-color: var(--mint);
-      color: var(--mint);
-    }
+@media(max-width:768px){.nav-links{gap:.6rem}.nav-links a{font-size:.38rem;padding:.3rem .4rem}.hero-name{font-size:1rem}.stats{gap:1rem}}
 
-    .project-link-btn.gh:hover {
-      background: var(--mint);
-      color: var(--bg);
-    }
 
-    /* ---- Featured project (bigger) ---- */
-    .project-card.featured {
-      grid-column: span 2;
-    }
+.page-hero{padding:8rem 2rem 3rem;text-align:center;position:relative;}
+.page-title{font-family:"Press Start 2P",monospace;font-size:clamp(.8rem,2vw,1.2rem);color:var(--accent);margin-bottom:.5rem;letter-spacing:2px;}
+.page-sub{font-family:"Playfair Display",serif;font-size:1.1rem;color:var(--tan);font-style:italic;margin-bottom:1rem;}
+.divider{width:80px;height:3px;background:var(--accent);margin:1rem auto 2rem;position:relative;}
+.divider::before,.divider::after{content:"★";position:absolute;top:50%;transform:translateY(-50%);color:var(--accent);font-size:.8rem;}
+.divider::before{left:-1.5rem;}.divider::after{right:-1.5rem;}
+.project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2.5rem;max-width:1200px;margin:0 auto;padding:0 2rem 6rem;}
+.proj-card{background:var(--card);border:3px solid var(--accent);overflow:hidden;box-shadow:6px 6px 0 var(--coffee);transition:.3s;}
+.proj-card:hover{transform:translate(-4px,-4px);box-shadow:10px 10px 0 var(--coffee);}
+.proj-card.featured{grid-column:span 2;}
+.proj-preview{width:100%;height:200px;background:var(--navy);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-bottom:3px solid var(--accent);}
+.proj-preview canvas{width:100%;height:100%;object-fit:cover;image-rendering:pixelated;}
+.proj-preview-label{position:absolute;top:.5rem;right:.5rem;font-family:"Press Start 2P",monospace;font-size:.32rem;color:var(--accent);background:var(--card);border:1px solid var(--accent);padding:.2rem .4rem;}
+.proj-info{padding:1.5rem;}
+.proj-num{font-family:"Press Start 2P",monospace;font-size:.38rem;color:var(--slate);margin-bottom:.3rem;}
+.proj-name{font-family:"Press Start 2P",monospace;font-size:.62rem;color:var(--accent);margin-bottom:.8rem;letter-spacing:1px;line-height:1.5;}
+.proj-desc{font-size:.88rem;opacity:.9;line-height:1.7;margin-bottom:1rem;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem;}
+.tag{font-family:"Press Start 2P",monospace;font-size:.32rem;padding:.25rem .5rem;border:1px solid var(--lav);color:var(--lav);letter-spacing:.5px;}
+.tag.g{border-color:var(--mint);color:var(--mint);}
+.tag.y{border-color:var(--gold);color:var(--gold);}
+.tag.p{border-color:var(--pink);color:var(--pink);}
+.proj-link{font-family:"Press Start 2P",monospace;font-size:.38rem;padding:.5rem .8rem;border:2px solid var(--mint);color:var(--mint);text-decoration:none;letter-spacing:.5px;transition:.3s;display:inline-flex;align-items:center;gap:.4rem;}
+.proj-link:hover{background:var(--mint);color:var(--bg);}
+@media(max-width:768px){.proj-card.featured{grid-column:span 1;}}
 
-    .project-card.featured .project-preview {
-      height: 280px;
-    }
-
-    @media (max-width: 768px) {
-      .project-card.featured { grid-column: span 1; }
-    }
-
-    /* ---- Section divider with butterfly ---- */
-    .butterfly-divider {
-      text-align: center;
-      padding: 1rem;
-      font-size: 1.5rem;
-      color: var(--lavender);
-      opacity: 0.7;
-    }
-
-    /* ---- Pixel scanlines effect on previews ---- */
-    .project-preview::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(0,0,0,0.05) 2px,
-        rgba(0,0,0,0.05) 4px
-      );
-      pointer-events: none;
-      z-index: 1;
-    }
-  </style>
+</style>
 </head>
 <body>
-
-<div class="floating-elements" id="floatingElements"></div>
-
-<div class="avatar-walker" id="avatarWalker" style="bottom:90px;">
-  <div class="avatar-bubble"></div>
-  <canvas class="avatar-sprite" id="avatarCanvas" width="48" height="64"></canvas>
-</div>
-
-<nav class="navbar">
-  <a href="index.html" class="nav-logo">NMO ✦</a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-    <li><a href="projects.html">Projects</a></li>
-    <li><a href="skills.html">Skills</a></li>
-    <li><a href="contact.html">Contact</a></li>
-  </ul>
-  <button class="theme-toggle" id="themeToggle">☀️</button>
+<div id="floats"></div>
+<div id="walker"><div class="bubble" id="bubble"></div><canvas id="walkCanvas" style="image-rendering:pixelated;"></canvas></div>
+<nav>
+  <a href="index.html" class="logo">NMO ✦</a>
+  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="projects.html" class="active">Projects</a></li><li><a href="skills.html">Skills</a></li><li><a href="contact.html">Contact</a></li></ul>
+  <button class="theme-btn" id="themeBtn">☀️</button>
 </nav>
-
-<div class="vinyl-player">
-  <div class="vinyl-record" id="vinyl"></div>
+<div class="vinyl-wrap">
+  <div class="vinyl" id="vinyl"></div>
   <button class="mute-btn" id="muteBtn">🔈</button>
   <div class="vinyl-label">prod. Metzmusic<br/>free use ✓</div>
 </div>
 
-<!-- ===== HERO ===== -->
-<section class="projects-hero">
-  <div style="position:absolute;inset:0;pointer-events:none;z-index:0;">
-    <span style="position:absolute;top:20%;left:5%;font-size:2rem;opacity:0.2;animation:flutter 6s ease-in-out infinite;">🦋</span>
-    <span style="position:absolute;top:40%;right:5%;font-size:1.5rem;opacity:0.2;animation:flutter 8s ease-in-out 1s infinite;">🦋</span>
-  </div>
-  <div style="position:relative;z-index:1;">
-    <h1 class="section-title" style="font-size:1.2rem;margin-bottom:0.5rem;">Projects</h1>
-    <p class="section-sub">things I built with love (and a lot of coffee ☕)</p>
-    <div class="section-divider"></div>
-    <p style="font-size:0.9rem;opacity:0.8;max-width:600px;margin:0 auto;">
-      Every project here is something I built end-to-end — from idea through deployment.
-      Click the animations to see them come alive. 🎮
-    </p>
-  </div>
+<section class="page-hero">
+  <span style="position:absolute;top:20%;left:5%;font-size:2rem;opacity:.15;animation:fbounce 6s ease-in-out infinite;">🦋</span>
+  <span style="position:absolute;top:40%;right:5%;font-size:1.5rem;opacity:.15;animation:fbounce 8s ease-in-out 1s infinite;">🦋</span>
+  <h1 class="page-title">Projects</h1>
+  <p class="page-sub">things I built with love (and a lot of coffee ☕)</p>
+  <div class="divider"></div>
+  <p style="font-size:.9rem;opacity:.8;max-width:600px;margin:0 auto;">Every project here is something I built end-to-end — from idea through deployment.</p>
 </section>
-
-<!-- ===== PROJECT GRID ===== -->
-<section style="padding:2rem 0 6rem;">
-  <div class="project-grid">
-
-    <!-- Project 1: PixelPlay (featured) -->
-    <div class="project-card featured reveal">
-      <div class="project-preview">
-        <canvas id="canvasPixelPlay"></canvas>
-        <span class="project-preview-label">LIVE ANIMATION ▶</span>
-      </div>
-      <div class="project-info">
-        <p class="project-number">01 ✦</p>
-        <h2 class="project-name">PixelPlay</h2>
-        <p class="project-desc">
-          A browser-based AI music player built in vanilla JavaScript. Features local file playback,
-          YouTube streaming via the IFrame API, AI-generated pixel art per song using Pollinations.ai,
-          ID3 tag metadata reading, a queue system, listening history, and localStorage persistence.
-          Built during Anthropic's AI Fluency course as a capstone project.
-        </p>
-        <div class="project-tags">
-          <span class="tag">JavaScript</span>
-          <span class="tag">HTML/CSS</span>
-          <span class="tag green">Pollinations.ai API</span>
-          <span class="tag green">YouTube IFrame API</span>
-          <span class="tag gold">AI-Generated Art</span>
-          <span class="tag">localStorage</span>
-          <span class="tag pink">Anthropic AI Fluency</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/nmillso1/PixelPlay" target="_blank" class="project-link-btn gh">
-            💻 GitHub →
-          </a>
-        </div>
-      </div>
+<div class="project-grid">
+  <div class="proj-card featured">
+    <div class="proj-preview"><canvas id="canvasPixelPlay"></canvas><span class="proj-preview-label">LIVE ANIMATION ▶</span></div>
+    <div class="proj-info">
+      <p class="proj-num">01 ✦</p>
+      <h2 class="proj-name">PixelPlay</h2>
+      <p class="proj-desc">A browser-based AI music player built in vanilla JavaScript. Features local file playback, YouTube streaming, AI-generated pixel art per song using Pollinations.ai, ID3 tag metadata reading, queue system, and localStorage persistence. Built during Anthropic's AI Fluency course.</p>
+      <div class="proj-tags"><span class="tag">JavaScript</span><span class="tag">HTML/CSS</span><span class="tag g">Pollinations.ai</span><span class="tag g">YouTube IFrame API</span><span class="tag y">AI Art</span><span class="tag p">Anthropic</span></div>
+      <a href="https://github.com/nmillso1/PixelPlay" target="_blank" class="proj-link">💻 GitHub →</a>
     </div>
-
-    <!-- Project 2: AI Security Monitor -->
-    <div class="project-card reveal">
-      <div class="project-preview">
-        <canvas id="canvasSecurityMonitor"></canvas>
-        <span class="project-preview-label">LIVE ANIMATION ▶</span>
-      </div>
-      <div class="project-info">
-        <p class="project-number">02 ✦</p>
-        <h2 class="project-name">AI Security Monitor</h2>
-        <p class="project-desc">
-          An AI-powered security monitoring and incident response system. Ingests system logs,
-          applies MITRE ATT&CK-aligned detection logic, integrates Claude via REST API for
-          automated incident report generation, and includes prompt injection defenses
-          and human-in-the-loop safety checkpoints.
-        </p>
-        <div class="project-tags">
-          <span class="tag">Python</span>
-          <span class="tag green">Claude API</span>
-          <span class="tag">REST API</span>
-          <span class="tag gold">MITRE ATT&CK</span>
-          <span class="tag">NIST AI RMF</span>
-          <span class="tag pink">LLM Integration</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/nmillso1" target="_blank" class="project-link-btn gh">
-            💻 GitHub →
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 3: Diagram Tutor -->
-    <div class="project-card reveal">
-      <div class="project-preview">
-        <canvas id="canvasDiagramTutor"></canvas>
-        <span class="project-preview-label">LIVE ANIMATION ▶</span>
-      </div>
-      <div class="project-info">
-        <p class="project-number">03 ✦</p>
-        <h2 class="project-name">Diagram Tutor</h2>
-        <p class="project-desc">
-          A floating desktop AI study assistant co-built with a research partner and faculty
-          advisor Dr. Edward Dillon at UMBC. Uses a local Ollama (qwen3:4b) model for chat
-          and the Claude API for diagram generation. Designed to help visual learners without
-          replacing teacher judgment.
-        </p>
-        <div class="project-tags">
-          <span class="tag">Python</span>
-          <span class="tag">PyQt5</span>
-          <span class="tag green">Claude API</span>
-          <span class="tag gold">Ollama qwen3:4b</span>
-          <span class="tag pink">Education Tech</span>
-          <span class="tag">UMBC Research</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/nmillso1/diagram-generator" target="_blank" class="project-link-btn gh">
-            💻 GitHub →
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 4: Bean There Cafe Finder -->
-    <div class="project-card reveal">
-      <div class="project-preview">
-        <canvas id="canvasCafeFinder"></canvas>
-        <span class="project-preview-label">LIVE ANIMATION ▶</span>
-      </div>
-      <div class="project-info">
-        <p class="project-number">04 ✦</p>
-        <h2 class="project-name">Bean There Cafe Finder</h2>
-        <p class="project-desc">
-          A Progressive Web App (PWA) for discovering local cafes in the Baltimore/Catonsville area.
-          Built with Leaflet.js, OpenStreetMap, and the Overpass API with a manually curated
-          cafes.json dataset covering Catonsville, Arbutus, Ellicott City, and Baltimore MD.
-        </p>
-        <div class="project-tags">
-          <span class="tag">JavaScript</span>
-          <span class="tag green">Leaflet.js</span>
-          <span class="tag">OpenStreetMap</span>
-          <span class="tag gold">Overpass API</span>
-          <span class="tag pink">PWA</span>
-          <span class="tag">HTML/CSS</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/nmillso1/Bean-There-Cafe-Finder" target="_blank" class="project-link-btn gh">
-            💻 GitHub →
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Project 5: IS436 Chat Application -->
-    <div class="project-card reveal">
-      <div class="project-preview">
-        <canvas id="canvasChatApp"></canvas>
-        <span class="project-preview-label">LIVE ANIMATION ▶</span>
-      </div>
-      <div class="project-info">
-        <p class="project-number">05 ✦</p>
-        <h2 class="project-name">IS436 Group Chat App</h2>
-        <p class="project-desc">
-          A multi-client networked chat application built in a 5-person Agile team for UMBC's
-          IS 436 capstone course. Features a multithreaded Python TCP socket server with
-          thread-safe state management, a Tkinter GUI, and persistent logging.
-          Supports 5+ simultaneous client connections.
-        </p>
-        <div class="project-tags">
-          <span class="tag">Python</span>
-          <span class="tag green">TCP Sockets</span>
-          <span class="tag">Threading</span>
-          <span class="tag gold">Tkinter GUI</span>
-          <span class="tag pink">Agile/Scrum</span>
-          <span class="tag">UMBC Capstone</span>
-        </div>
-        <div class="project-links">
-          <a href="https://github.com/nmillso1/IS436-Group-Chat-Application" target="_blank" class="project-link-btn gh">
-            💻 GitHub →
-          </a>
-        </div>
-      </div>
-    </div>
-
   </div>
-
-  <div class="butterfly-divider">
-    🦋 ✨ 🍪 ✨ 🦋
+  <div class="proj-card">
+    <div class="proj-preview"><canvas id="canvasSecMon"></canvas><span class="proj-preview-label">LIVE ANIMATION ▶</span></div>
+    <div class="proj-info">
+      <p class="proj-num">02 ✦</p>
+      <h2 class="proj-name">AI Security Monitor</h2>
+      <p class="proj-desc">AI-powered security monitoring system. Ingests logs, applies MITRE ATT&CK detection logic, integrates Claude via REST API for automated incident reports, with prompt injection defenses and human-in-the-loop safety checkpoints.</p>
+      <div class="proj-tags"><span class="tag">Python</span><span class="tag g">Claude API</span><span class="tag">REST API</span><span class="tag y">MITRE ATT&CK</span><span class="tag p">NIST AI RMF</span></div>
+      <a href="https://github.com/nmillso1" target="_blank" class="proj-link">💻 GitHub →</a>
+    </div>
   </div>
-
-  <div style="text-align:center;padding:2rem;">
-    <a href="https://github.com/nmillso1" target="_blank" class="btn-pixel">
-      See All Projects on GitHub →
-    </a>
+  <div class="proj-card">
+    <div class="proj-preview"><canvas id="canvasDiagram"></canvas><span class="proj-preview-label">LIVE ANIMATION ▶</span></div>
+    <div class="proj-info">
+      <p class="proj-num">03 ✦</p>
+      <h2 class="proj-name">Diagram Tutor</h2>
+      <p class="proj-desc">Floating desktop AI study assistant co-built with a research partner and Dr. Dillon at UMBC. Uses Ollama (qwen3:4b) for chat and Claude API for diagram generation. Built to help visual learners without replacing teacher judgment.</p>
+      <div class="proj-tags"><span class="tag">Python</span><span class="tag">PyQt5</span><span class="tag g">Claude API</span><span class="tag y">Ollama</span><span class="tag p">Education</span></div>
+      <a href="https://github.com/nmillso1/diagram-generator" target="_blank" class="proj-link">💻 GitHub →</a>
+    </div>
   </div>
-</section>
+  <div class="proj-card">
+    <div class="proj-preview"><canvas id="canvasCafe"></canvas><span class="proj-preview-label">LIVE ANIMATION ▶</span></div>
+    <div class="proj-info">
+      <p class="proj-num">04 ✦</p>
+      <h2 class="proj-name">Bean There Cafe Finder</h2>
+      <p class="proj-desc">Progressive Web App for discovering local cafes in the Baltimore/Catonsville area. Built with Leaflet.js, OpenStreetMap, and Overpass API with a manually curated cafes.json dataset.</p>
+      <div class="proj-tags"><span class="tag">JavaScript</span><span class="tag g">Leaflet.js</span><span class="tag">OpenStreetMap</span><span class="tag y">Overpass API</span><span class="tag p">PWA</span></div>
+      <a href="https://github.com/nmillso1/Bean-There-Cafe-Finder" target="_blank" class="proj-link">💻 GitHub →</a>
+    </div>
+  </div>
+  <div class="proj-card">
+    <div class="proj-preview"><canvas id="canvasChat"></canvas><span class="proj-preview-label">LIVE ANIMATION ▶</span></div>
+    <div class="proj-info">
+      <p class="proj-num">05 ✦</p>
+      <h2 class="proj-name">IS436 Group Chat App</h2>
+      <p class="proj-desc">Multi-client networked chat application built in a 5-person Agile team for UMBC's IS 436 capstone. Multithreaded Python TCP socket server, Tkinter GUI, thread-safe state management, persistent logging. Supports 5+ simultaneous clients.</p>
+      <div class="proj-tags"><span class="tag">Python</span><span class="tag g">TCP Sockets</span><span class="tag">Threading</span><span class="tag y">Tkinter</span><span class="tag p">Agile/Scrum</span></div>
+      <a href="https://github.com/nmillso1/IS436-Group-Chat-Application" target="_blank" class="proj-link">💻 GitHub →</a>
+    </div>
+  </div>
+</div>
+<div style="text-align:center;padding:2rem 0 4rem;">
+  <a href="https://github.com/nmillso1" target="_blank" class="btn">See All Projects on GitHub →</a>
+</div>
 
 <footer>
   <p>✦ crafted with 🍪 + 🧶 + ☕ by Noel Mills-Odoi ✦</p>
-  <p>nmillso1.github.io | <a href="mailto:nmills6635@gmail.com">nmills6635@gmail.com</a></p>
-  <p>🎵 Ambient music: <a href="https://bsta.rs/40xWSc" target="_blank">prod. Metzmusic</a> (free use, credited)</p>
+  <p><a href="mailto:nmills6635@gmail.com">nmills6635@gmail.com</a> | <a href="https://linkedin.com/in/noel-mills-odoi" target="_blank">LinkedIn</a> | <a href="https://github.com/nmillso1" target="_blank">GitHub</a></p>
+  <p>🎵 Music: <a href="https://bsta.rs/40xWSc" target="_blank">prod. Metzmusic</a> (free use, credited)</p>
 </footer>
-
-<script src="js/avatar.js"></script>
-<script src="js/audio.js"></script>
-<script src="js/main.js"></script>
 <script>
-  // Security monitor animation
-  function animateSecurityMonitor(canvas) {
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    canvas.width = 300; canvas.height = 200;
-    let frame = 0;
-    const alerts = [
-      { text: 'ALERT: Anomaly detected', sev: 'HIGH', color: '#CE1126' },
-      { text: 'LOG: Auth failure x3', sev: 'MED', color: '#E8C97A' },
-      { text: 'PASS: Output validated ✓', sev: 'OK', color: '#A8D8C2' },
-      { text: 'AI: Report generated', sev: 'INFO', color: '#C9A8E2' },
-    ];
 
-    function draw() {
-      ctx.fillStyle = '#0a0f1a';
-      ctx.fillRect(0, 0, 300, 200);
+// ── THEME ──
+const body = document.body;
+const themeBtn = document.getElementById('themeBtn');
+if(localStorage.getItem('theme')==='light'){body.classList.add('light');themeBtn.textContent='🌙';}
+themeBtn.addEventListener('click',()=>{
+  body.classList.toggle('light');
+  const l=body.classList.contains('light');
+  themeBtn.textContent=l?'🌙':'☀️';
+  localStorage.setItem('theme',l?'light':'dark');
+});
 
-      // Terminal border
-      ctx.strokeStyle = '#A8D8C2';
-      ctx.lineWidth = 2;
-      ctx.strokeRect(5, 5, 290, 190);
-
-      // Header
-      ctx.fillStyle = '#0F2A1A';
-      ctx.fillRect(5, 5, 290, 20);
-      ctx.font = '7px "Press Start 2P", monospace';
-      ctx.fillStyle = '#A8D8C2';
-      ctx.fillText('AI SECURITY MONITOR v1.0', 15, 18);
-
-      // Blinking cursor
-      if (Math.floor(frame / 20) % 2 === 0) {
-        ctx.fillStyle = '#A8D8C2';
-        ctx.fillRect(15, 25, 6, 10);
-      }
-
-      // Scrolling log lines
-      alerts.forEach((alert, i) => {
-        const y = 40 + i * 35;
-        const pulse = Math.sin(frame * 0.05 + i) > 0;
-
-        ctx.fillStyle = `${alert.color}22`;
-        ctx.fillRect(10, y - 10, 280, 28);
-        ctx.strokeStyle = alert.color;
-        ctx.lineWidth = 1;
-        ctx.strokeRect(10, y - 10, 280, 28);
-
-        ctx.font = '5px "Press Start 2P", monospace';
-        ctx.fillStyle = alert.color;
-        ctx.fillText(`[${alert.sev}]`, 15, y + 5);
-
-        ctx.fillStyle = '#FFF8F0';
-        ctx.font = '5px sans-serif';
-        ctx.fillText(alert.text, 65, y + 5);
-
-        // Pulse indicator
-        if (pulse && alert.sev === 'HIGH') {
-          ctx.beginPath();
-          ctx.arc(275, y, 5, 0, Math.PI * 2);
-          ctx.fillStyle = alert.color;
-          ctx.fill();
-        }
-      });
-
-      // MITRE ATT&CK label
-      ctx.font = '5px "Press Start 2P", monospace';
-      ctx.fillStyle = '#617891';
-      ctx.fillText('MITRE ATT&CK + Claude API', 55, 185);
-
-      frame++;
-      requestAnimationFrame(draw);
-    }
-    draw();
+// ── AUDIO ──
+let audio=null,playing=false;
+const vinyl=document.getElementById('vinyl');
+const muteBtn=document.getElementById('muteBtn');
+function toggleAudio(){
+  if(!audio){audio=new Audio('assets/ambient.mp3');audio.loop=true;audio.volume=0.35;}
+  if(!playing){
+    audio.play().catch(()=>{});
+    playing=true;vinyl.classList.add('spin');muteBtn.textContent='🔊';
+  }else{
+    audio.pause();playing=false;vinyl.classList.remove('spin');muteBtn.textContent='🔈';
   }
+}
+vinyl.addEventListener('click',toggleAudio);
+muteBtn.addEventListener('click',toggleAudio);
 
-  // Walking avatar
-  function drawWalkAvatar(canvas) {
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    ctx.imageSmoothingEnabled = false;
-    const s = 4;
-    const pixels = [
-      [0,0,2,2,2,2,2,2,0,0],[0,2,1,1,1,1,1,1,2,0],
-      [0,2,3,3,3,3,3,3,2,0],[0,2,3,4,3,3,4,3,2,0],
-      [0,2,3,3,5,3,3,3,2,0],[0,0,6,6,6,6,6,6,0,0],
-      [0,6,6,7,6,6,7,6,6,0],[0,6,6,6,6,6,6,6,6,0],
-    ];
-    const colors = {1:'#A8D8C2',2:'#25344F',3:'#8B5E52',4:'#3a2520',5:'#D4826E',6:'#617891',7:'#C9A8E2'};
-    canvas.width = 10*s; canvas.height = 8*s;
-    pixels.forEach((row,y)=>row.forEach((cell,x)=>{
-      if(cell&&colors[cell]){ctx.fillStyle=colors[cell];ctx.fillRect(x*s,y*s,s,s);}
-    }));
+// ── CUTE CHIBI WALK SPRITE ──
+const AV={
+  '_':null,'S':'#7A4528','s':'#9B6040','d':'#5C3317',
+  'H':'#2C1A0E','h':'#4A2C1A','L':'#3D2310',
+  'f':'#D4826E','g':'#E8C97A','e':'#2C1A0E','W':'#FFF8F0',
+  'P':'#C47A5A','K':'#D4926A',
+  'A':'#7B5EA7','B':'#9B7EC7','C':'#5B3E87',
+  'T':'#FFF8F0','t':'#E8DCC8',
+  'N':'#E8C97A','R':'#D4A870',
+  'J':'#3A5A8A','j':'#4A6A9A',
+  'X':'#6B3D1E','G':'#6F4D38',
+};
+
+// Frame A -- left leg forward
+const FA=[
+  ['_','_','H','H','H','H','H','H','H','H','H','H','_','_','_','_'],
+  ['_','H','h','L','h','H','H','H','h','L','h','H','H','_','_','_'],
+  ['_','H','h','L','L','L','h','h','L','L','h','H','H','_','_','_'],
+  ['H','H','H','H','H','S','S','S','S','H','H','H','H','_','_','_'],
+  ['H','H','_','S','e','W','e','e','W','e','S','H','H','_','_','_'],
+  ['H','H','_','S','S','P','P','P','P','S','S','H','H','_','_','_'],
+  ['_','H','H','H','S','S','d','d','S','S','H','H','H','_','_','_'],
+  ['_','_','A','A','A','T','T','T','T','A','A','A','_','_','_','_'],
+  ['_','A','B','A','A','A','A','A','A','A','A','B','A','_','_','_'],
+  ['_','A','A','C','A','A','A','A','A','A','C','A','A','_','_','_'],
+  ['A','A','A','A','S','A','A','A','A','S','A','A','A','A','_','_'],
+  ['_','_','_','A','A','A','A','A','A','A','A','A','_','_','_','_'],
+  ['_','_','_','_','A','A','_','_','A','A','_','_','_','_','_','_'],
+  ['_','_','_','A','A','_','_','_','_','_','A','_','_','_','_','_'],
+  ['_','_','A','A','_','_','_','_','_','_','A','A','_','_','_','_'],
+  ['_','_','G','G','_','_','_','_','_','_','G','G','_','_','_','_'],
+  ['_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_'],
+  ['_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_'],
+];
+
+// Frame B -- right leg forward
+const FB=[
+  ['_','_','H','H','H','H','H','H','H','H','H','H','_','_','_','_'],
+  ['_','H','h','L','h','H','H','H','h','L','h','H','H','_','_','_'],
+  ['_','H','h','L','L','L','h','h','L','L','h','H','H','_','_','_'],
+  ['H','H','H','H','H','S','S','S','S','H','H','H','H','_','_','_'],
+  ['H','H','_','S','e','W','e','e','W','e','S','H','H','_','_','_'],
+  ['H','H','_','S','S','P','P','P','P','S','S','H','H','_','_','_'],
+  ['_','H','H','H','S','S','d','d','S','S','H','H','H','_','_','_'],
+  ['_','_','A','A','A','T','T','T','T','A','A','A','_','_','_','_'],
+  ['_','A','B','A','A','A','A','A','A','A','A','B','A','_','_','_'],
+  ['_','A','A','C','A','A','A','A','A','A','C','A','A','_','_','_'],
+  ['A','A','A','A','S','A','A','A','A','S','A','A','A','A','_','_'],
+  ['_','_','_','A','A','A','A','A','A','A','A','A','_','_','_','_'],
+  ['_','_','_','_','A','A','_','_','A','A','_','_','_','_','_','_'],
+  ['_','_','_','_','A','_','_','_','_','A','A','_','_','_','_','_'],
+  ['_','_','_','_','A','A','_','_','_','_','A','A','_','_','_','_'],
+  ['_','_','_','_','G','G','_','_','_','_','G','G','_','_','_','_'],
+  ['_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_'],
+  ['_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_'],
+];
+
+const walkCanvas=document.getElementById('walkCanvas');
+let walkFrame=0,walkerX=-80,walkerDir=1,bubbleTimer=0,sayIdx=0;
+const sayings=['hello world! ✨','hire me pls 👩‍💻','i love cookies 🍪','SZA is life 🎵','be kind 💜','debug mode: on 🐛','crocheting 🧶','Ghana represent 🇬🇭'];
+const bubbleEl=document.getElementById('bubble');
+const walker=document.getElementById('walker');
+
+function drawWalk(){
+  const sprite=Math.floor(walkFrame/12)%2===0?FA:FB;
+  const ctx=walkCanvas.getContext('2d');
+  ctx.imageSmoothingEnabled=false;
+  const W=sprite[0].length,H=sprite.length,SC=4;
+  walkCanvas.width=W*SC;walkCanvas.height=H*SC;
+  ctx.clearRect(0,0,walkCanvas.width,walkCanvas.height);
+  sprite.forEach((row,y)=>row.forEach((cell,x)=>{
+    const c=AV[cell];if(c){ctx.fillStyle=c;ctx.fillRect(x*SC,y*SC,SC,SC);}
+  }));
+}
+
+function animateWalker(){
+  walkerX+=0.8*walkerDir;
+  if(walkerX>window.innerWidth+80){walkerDir=-1;walker.style.transform='scaleX(-1)';}
+  if(walkerX<-80){walkerDir=1;walker.style.transform='scaleX(1)';}
+  walker.style.left=walkerX+'px';
+  // counter-flip bubble so text stays readable
+  bubbleEl.style.transform=walkerDir===-1?'scaleX(-1)':'scaleX(1)';
+  walkFrame++;
+  bubbleTimer++;
+  if(bubbleTimer>280){
+    bubbleTimer=0;
+    bubbleEl.textContent=sayings[sayIdx++%sayings.length];
+    bubbleEl.style.opacity='1';
+    setTimeout(()=>{bubbleEl.style.opacity='0';},2500);
   }
-  drawWalkAvatar(document.getElementById('avatarCanvas'));
+  drawWalk();
+  requestAnimationFrame(animateWalker);
+}
+animateWalker();
 
-  window.addEventListener('load', () => {
-    animatePixelPlay(document.getElementById('canvasPixelPlay'));
-    animateSecurityMonitor(document.getElementById('canvasSecurityMonitor'));
-    animateDiagramTutor(document.getElementById('canvasDiagramTutor'));
-    animateCafeFinder(document.getElementById('canvasCafeFinder'));
-    animateChatApp(document.getElementById('canvasChatApp'));
-  });
+// ── CURSOR TRAIL ──
+document.addEventListener('mousemove',e=>{
+  const el=document.createElement('div');
+  el.textContent=['✨','⭐','💜','🌸','🍪'][Math.floor(Math.random()*5)];
+  el.style.cssText=`position:fixed;left:${e.clientX}px;top:${e.clientY}px;font-size:.8rem;pointer-events:none;z-index:9999;opacity:1;transition:opacity .8s,transform .8s;transform:translateY(0);`;
+  document.body.appendChild(el);
+  requestAnimationFrame(()=>{el.style.opacity='0';el.style.transform='translateY(-20px)';});
+  setTimeout(()=>el.remove(),800);
+});
+
+// ── FLOATING ELEMENTS ──
+const floats=document.getElementById('floats');
+const emojis=['🦋','🍪','🎵','🧶','⭐','🌸','✨','🎶'];
+function spawnFloat(){
+  const el=document.createElement('div');
+  el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+  el.style.cssText=`position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${.8+Math.random()*.8}rem;opacity:${.3+Math.random()*.4};animation:fbounce ${3+Math.random()*4}s ease-in-out ${Math.random()*2}s infinite;pointer-events:none;`;
+  floats.appendChild(el);
+  setTimeout(()=>el.remove(),12000);
+}
+for(let i=0;i<8;i++)setTimeout(spawnFloat,i*400);
+setInterval(spawnFloat,2500);
+
+// ── TYPING TAGLINE ──
+const tags=['AI Security Researcher','Software Engineer','Cookie Scientist 🍪','LLM Whisperer','UMBC IS Grad \'26','Crochet Enthusiast 🧶'];
+let ti=0,ci=0,del=false;
+const tagEl=document.getElementById('tagline');
+function type(){
+  const cur=tags[ti];
+  if(!del){ci++;tagEl.innerHTML=cur.substring(0,ci)+'<span class="cursor"></span>';
+    if(ci===cur.length){del=true;setTimeout(type,2000);return;}
+  }else{ci--;tagEl.innerHTML=cur.substring(0,ci)+'<span class="cursor"></span>';
+    if(ci===0){del=false;ti=(ti+1)%tags.length;}
+  }
+  setTimeout(type,del?50:80);
+}
+type();
+
+
+function animCanvas(canvas, drawFn) {
+  if(!canvas) return;
+  let f=0;
+  function loop(){ drawFn(canvas,f++); requestAnimationFrame(loop); }
+  loop();
+}
+
+function drawPixelPlay(canvas, f) {
+  const ctx=canvas.getContext('2d'); canvas.width=300; canvas.height=200;
+  ctx.fillStyle='#0F1A2A'; ctx.fillRect(0,0,300,200);
+  const cx=70,cy=100,ang=f*.05;
+  ctx.save(); ctx.translate(cx,cy); ctx.rotate(ang);
+  ctx.beginPath(); ctx.arc(0,0,45,0,Math.PI*2); ctx.fillStyle='#1a1a2e'; ctx.fill();
+  ctx.strokeStyle='#C9A8E2'; ctx.lineWidth=2; ctx.stroke();
+  for(let r=15;r<43;r+=6){ ctx.beginPath(); ctx.arc(0,0,r,0,Math.PI*2); ctx.strokeStyle='rgba(201,168,226,.2)'; ctx.lineWidth=1; ctx.stroke(); }
+  ctx.beginPath(); ctx.arc(0,0,8,0,Math.PI*2); ctx.fillStyle='#C9A8E2'; ctx.fill();
+  ctx.restore();
+  [140,165,190].forEach((x,i)=>{ ctx.font='16px serif'; ctx.fillStyle=`rgba(201,168,226,${.3+Math.sin(f*.05+i)*.3})`; ctx.fillText('♪',x,((f*2+i*40)%120)+40); });
+  ctx.beginPath(); ctx.moveTo(130,150);
+  for(let x=0;x<140;x++){ ctx.lineTo(130+x,150+Math.sin((x*.15)+f*.1)*15); }
+  ctx.strokeStyle='#A8D8C2'; ctx.lineWidth=2; ctx.stroke();
+  ctx.font='8px "Press Start 2P",monospace'; ctx.fillStyle='#E8C97A'; ctx.fillText('PixelPlay',130,120);
+}
+
+function drawSecMon(canvas, f) {
+  const ctx=canvas.getContext('2d'); canvas.width=300; canvas.height=200;
+  ctx.fillStyle='#0a0f1a'; ctx.fillRect(0,0,300,200);
+  ctx.strokeStyle='#A8D8C2'; ctx.lineWidth=2; ctx.strokeRect(5,5,290,190);
+  ctx.fillStyle='#0F2A1A'; ctx.fillRect(5,5,290,20);
+  ctx.font='6px "Press Start 2P",monospace'; ctx.fillStyle='#A8D8C2'; ctx.fillText('AI SECURITY MONITOR v1.0',15,18);
+  const alerts=[{t:'ALERT: Anomaly detected',s:'HIGH',c:'#CE1126'},{t:'LOG: Auth failure x3',s:'MED',c:'#E8C97A'},{t:'PASS: Output validated',s:'OK',c:'#A8D8C2'},{t:'AI: Report generated',s:'INFO',c:'#C9A8E2'}];
+  alerts.forEach((a,i)=>{ const y=40+i*35; ctx.fillStyle=a.c+'22'; ctx.fillRect(10,y-10,280,28); ctx.strokeStyle=a.c; ctx.lineWidth=1; ctx.strokeRect(10,y-10,280,28); ctx.font='5px "Press Start 2P",monospace'; ctx.fillStyle=a.c; ctx.fillText('['+a.s+']',15,y+5); ctx.fillStyle='#FFF8F0'; ctx.font='5px sans-serif'; ctx.fillText(a.t,65,y+5); if(Math.floor(f/20)%2===0&&a.s==='HIGH'){ ctx.beginPath(); ctx.arc(275,y,5,0,Math.PI*2); ctx.fillStyle=a.c; ctx.fill(); } });
+  if(f>400) f=0;
+}
+
+function drawDiagram(canvas, f) {
+  const ctx=canvas.getContext('2d'); canvas.width=300; canvas.height=200;
+  ctx.fillStyle='#0F1A2A'; ctx.fillRect(0,0,300,200);
+  ctx.fillStyle='#1a2a3a'; ctx.fillRect(30,20,240,140); ctx.strokeStyle='#C9A8E2'; ctx.lineWidth=2; ctx.strokeRect(30,20,240,140);
+  ctx.fillStyle='#25344F'; ctx.fillRect(30,20,240,20);
+  ctx.font='7px "Press Start 2P",monospace'; ctx.fillStyle='#C9A8E2'; ctx.fillText('Diagram Tutor',40,33);
+  const nodes=[{x:80,y:100,l:'Input'},{x:150,y:80,l:'AI'},{x:220,y:100,l:'Output'}];
+  const pulse=Math.sin(f*.05)*5;
+  nodes.forEach((n,i)=>{ if(i<nodes.length-1){ ctx.beginPath(); ctx.moveTo(n.x+20,n.y); ctx.lineTo(nodes[i+1].x-20,nodes[i+1].y); ctx.strokeStyle=`rgba(168,216,194,${.5+Math.sin(f*.05+i)*.3})`; ctx.lineWidth=2; ctx.stroke(); } ctx.beginPath(); ctx.arc(n.x,n.y+(i===1?pulse:0),18,0,Math.PI*2); ctx.fillStyle=i===1?'#6F4D38':'#25344F'; ctx.fill(); ctx.strokeStyle=i===1?'#E8C97A':'#C9A8E2'; ctx.lineWidth=2; ctx.stroke(); ctx.font='5px sans-serif'; ctx.fillStyle='#FFF8F0'; ctx.textAlign='center'; ctx.fillText(n.l,n.x,n.y+(i===1?pulse:0)+2); });
+  ctx.textAlign='left';
+}
+
+function drawCafe(canvas, f) {
+  const ctx=canvas.getContext('2d'); canvas.width=300; canvas.height=200;
+  ctx.fillStyle='#1a2a3a'; ctx.fillRect(0,0,300,200);
+  ctx.strokeStyle='rgba(97,120,145,.2)'; ctx.lineWidth=1;
+  for(let x=0;x<300;x+=30){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,200); ctx.stroke(); }
+  for(let y=0;y<200;y+=30){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(300,y); ctx.stroke(); }
+  ctx.strokeStyle='rgba(97,120,145,.4)'; ctx.lineWidth=6;
+  ctx.beginPath(); ctx.moveTo(0,90); ctx.lineTo(300,90); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(150,0); ctx.lineTo(150,200); ctx.stroke();
+  [{x:80,y:100},{x:140,y:70},{x:190,y:120},{x:230,y:80},{x:110,y:130}].forEach((c,i)=>{ const p=Math.sin(f*.05+i*.8)*4; ctx.beginPath(); ctx.arc(c.x,c.y,12+p,0,Math.PI*2); ctx.fillStyle='rgba(111,77,56,.3)'; ctx.fill(); ctx.beginPath(); ctx.arc(c.x,c.y,8,0,Math.PI*2); ctx.fillStyle='#6F4D38'; ctx.fill(); ctx.strokeStyle='#E8C97A'; ctx.lineWidth=2; ctx.stroke(); ctx.font='8px serif'; ctx.textAlign='center'; ctx.fillText('☕',c.x,c.y+3); });
+  ctx.textAlign='left'; ctx.font='7px "Press Start 2P",monospace'; ctx.fillStyle='#C9A8E2'; ctx.fillText('Bean There',10,20);
+}
+
+function drawChat(canvas, f) {
+  const ctx=canvas.getContext('2d'); canvas.width=300; canvas.height=200;
+  ctx.fillStyle='#0F1A2A'; ctx.fillRect(0,0,300,200);
+  ctx.fillStyle='#1a2a3a'; ctx.fillRect(20,15,260,150); ctx.strokeStyle='#617891'; ctx.lineWidth=2; ctx.strokeRect(20,15,260,150);
+  ctx.fillStyle='#25344F'; ctx.fillRect(20,15,260,22);
+  ctx.font='6px "Press Start 2P",monospace'; ctx.fillStyle='#A8D8C2'; ctx.fillText('TCP Chat | 5 clients',30,30);
+  const msgs=[{t:'hey! 👋',l:true,y:55},{t:'hello! 😊',l:false,y:85},{t:'connected!',l:true,y:115},{t:'5 users online',l:false,y:145}];
+  msgs.forEach((m,i)=>{ if(f>i*60){ const op=Math.min(1,(f-i*60)/30); const x=m.l?35:165; ctx.fillStyle=m.l?`rgba(37,52,79,${op})`:`rgba(111,77,56,${op})`; ctx.beginPath(); if(ctx.roundRect) ctx.roundRect(x,m.y,100,20,4); else ctx.rect(x,m.y,100,20); ctx.fill(); ctx.font='6px sans-serif'; ctx.fillStyle=`rgba(255,248,240,${op})`; ctx.textAlign=m.l?'left':'right'; ctx.fillText(m.t,m.l?x+6:x+94,m.y+13); } });
+  if(f>400) f=0; ctx.textAlign='left';
+}
+
+window.addEventListener('load',()=>{
+  animCanvas(document.getElementById('canvasPixelPlay'), drawPixelPlay);
+  animCanvas(document.getElementById('canvasSecMon'), drawSecMon);
+  animCanvas(document.getElementById('canvasDiagram'), drawDiagram);
+  animCanvas(document.getElementById('canvasCafe'), drawCafe);
+  animCanvas(document.getElementById('canvasChat'), drawChat);
+});
+
 </script>
 </body>
 </html>
