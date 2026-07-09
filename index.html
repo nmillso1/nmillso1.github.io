@@ -1,305 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Noel Mills-Odoi | Portfolio</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <style>
-    /* ---- Home-specific styles ---- */
-    .hero-avatar-area {
-      position: relative;
-      margin: 2rem auto;
-      width: 160px;
-      height: 160px;
-    }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Noel Mills-Odoi | Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#25344F;--slate:#617891;--tan:#D5B893;--coffee:#6F4D38;
+  --crimson:#632024;--lav:#C9A8E2;--mint:#A8D8C2;--cream:#FFF8F0;
+  --gold:#E8C97A;--pink:#F2C4CE;
+  --bg:#0F1A2A;--card:#1a2a3a;--text:#FFF8F0;--accent:#C9A8E2;--nav:#0a1520;
+}
+body.light{--bg:#FFF8F0;--card:#fff;--text:#1a1a2e;--nav:#FFF8F0;--accent:#6F4D38;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s;}
 
-    .hero-avatar-ring {
-      width: 160px;
-      height: 160px;
-      border-radius: 50%;
-      border: 4px solid var(--lavender);
-      box-shadow: 0 0 0 4px var(--coffee), 0 0 30px rgba(201,168,226,0.4);
-      overflow: hidden;
-      background: var(--navy);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: pulse-glow 3s ease-in-out infinite;
-    }
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--nav);border-bottom:3px solid var(--accent);padding:.75rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:'Press Start 2P',monospace;font-size:.65rem;color:var(--accent);text-decoration:none;}
+.nav-links{display:flex;gap:1.2rem;list-style:none;}
+.nav-links a{font-family:'Press Start 2P',monospace;font-size:.45rem;color:var(--text);text-decoration:none;padding:.4rem .7rem;border:2px solid transparent;transition:.3s;letter-spacing:1px;}
+.nav-links a:hover,.nav-links a.active{color:var(--accent);border-color:var(--accent);}
+.theme-btn{background:none;border:2px solid var(--accent);color:var(--accent);font-size:1rem;cursor:pointer;padding:.3rem .6rem;border-radius:4px;}
 
-    .hero-avatar-ring canvas {
-      width: 140px;
-      height: 140px;
-      image-rendering: pixelated;
-    }
+.vinyl-wrap{position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;display:flex;flex-direction:column;align-items:center;gap:.4rem;}
+.vinyl{width:56px;height:56px;border-radius:50%;background:conic-gradient(#1a1a1a 0deg,#333 30deg,#1a1a1a 60deg,#333 90deg,#1a1a1a 120deg,#333 150deg,#1a1a1a 180deg,#333 210deg,#1a1a1a 240deg,#333 270deg,#1a1a1a 300deg,#333 330deg,#1a1a1a 360deg);border:3px solid var(--accent);cursor:pointer;position:relative;box-shadow:0 0 15px rgba(201,168,226,.4);}
+.vinyl::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:var(--lav);border:2px solid var(--coffee);}
+.vinyl.spin{animation:vspin 3s linear infinite;}
+.mute-btn{background:var(--card);border:2px solid var(--accent);color:var(--accent);font-size:.65rem;cursor:pointer;padding:.2rem .4rem;font-family:'Press Start 2P',monospace;}
+.vinyl-label{font-family:'Press Start 2P',monospace;font-size:.32rem;color:var(--accent);text-align:center;opacity:.8;line-height:1.6;}
 
-    .orbit-icons {
-      position: absolute;
-      inset: -20px;
-      animation: spin 12s linear infinite;
-    }
+#floats{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
 
-    .orbit-icon {
-      position: absolute;
-      font-size: 1.2rem;
-    }
+#walker{position:fixed;bottom:90px;z-index:998;pointer-events:none;display:flex;flex-direction:column;align-items:center;}
+.bubble{background:var(--cream);color:#1a1a2e;border:2px solid var(--navy);border-radius:8px;padding:.3rem .5rem;font-family:'Press Start 2P',monospace;font-size:.3rem;margin-bottom:4px;white-space:nowrap;opacity:0;transition:opacity .3s;}
 
-    .orbit-icon:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
-    .orbit-icon:nth-child(2) { top: 50%; right: 0; transform: translateY(-50%); }
-    .orbit-icon:nth-child(3) { bottom: 0; left: 50%; transform: translateX(-50%); }
-    .orbit-icon:nth-child(4) { top: 50%; left: 0; transform: translateY(-50%); }
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;padding:6rem 2rem 2rem;text-align:center;}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(97,120,145,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(97,120,145,.08) 1px,transparent 1px);background-size:32px 32px;}
+.hero-content{position:relative;z-index:2;}
 
-    .typing-cursor {
-      display: inline-block;
-      width: 3px;
-      height: 1em;
-      background: var(--lavender);
-      margin-left: 2px;
-      animation: blink 1s step-end infinite;
-      vertical-align: middle;
-    }
+.av-wrap{position:relative;width:180px;height:180px;margin:0 auto 2rem;}
+.av-ring{width:180px;height:180px;border-radius:50%;border:4px solid var(--lav);box-shadow:0 0 0 4px var(--coffee),0 0 30px rgba(201,168,226,.5);overflow:hidden;background:var(--navy);display:flex;align-items:center;justify-content:center;animation:pglow 3s ease-in-out infinite;}
+.av-ring img{width:180px;height:180px;object-fit:cover;image-rendering:pixelated;}
+.orbit{position:absolute;inset:-20px;animation:vspin 12s linear infinite;pointer-events:none;}
+.orbit span{position:absolute;font-size:1.2rem;}
+.orbit span:nth-child(1){top:0;left:50%;transform:translateX(-50%);}
+.orbit span:nth-child(2){top:50%;right:0;transform:translateY(-50%);}
+.orbit span:nth-child(3){bottom:0;left:50%;transform:translateX(-50%);}
+.orbit span:nth-child(4){top:50%;left:0;transform:translateY(-50%);}
 
-    /* ---- Featured sections ---- */
-    .featured-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
+.greeting{font-family:'Press Start 2P',monospace;font-size:.6rem;color:var(--lav);letter-spacing:3px;margin-bottom:1rem;}
+.hero-name{font-family:'Press Start 2P',monospace;font-size:clamp(.9rem,3.5vw,1.8rem);color:var(--text);line-height:1.5;margin-bottom:1rem;text-shadow:4px 4px 0 var(--coffee);}
+.hero-name span{color:var(--lav);}
+.tagline{font-family:'Playfair Display',serif;font-size:clamp(1rem,2.5vw,1.4rem);color:var(--tan);font-style:italic;margin-bottom:.5rem;min-height:2rem;}
+.cursor{display:inline-block;width:3px;height:1em;background:var(--lav);margin-left:2px;animation:blink 1s step-end infinite;vertical-align:middle;}
+.locs{display:flex;gap:.8rem;justify-content:center;margin:1rem 0;flex-wrap:wrap;}
+.loc{font-family:'Press Start 2P',monospace;font-size:.4rem;padding:.4rem .8rem;border:2px solid var(--mint);color:var(--mint);letter-spacing:.5px;}
+.hero-sub{font-size:.95rem;color:var(--slate);max-width:500px;line-height:1.8;margin:.5rem auto 2rem;}
+.ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
 
-    .feature-card {
-      background: var(--card-bg);
-      border: 3px solid var(--accent);
-      padding: 1.5rem;
-      text-align: center;
-      box-shadow: 5px 5px 0 var(--coffee);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
+.star{position:absolute;pointer-events:none;color:var(--lav);animation:twinkle 2s ease-in-out infinite;}
 
-    .feature-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--lavender), var(--mint), var(--gold));
-      background-size: 200% 100%;
-      animation: shimmer 3s linear infinite;
-    }
+.btn{font-family:'Press Start 2P',monospace;font-size:.5rem;padding:.8rem 1.4rem;border:3px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer;text-decoration:none;letter-spacing:1px;transition:.3s;display:inline-block;box-shadow:4px 4px 0 var(--coffee);}
+.btn:hover{background:var(--accent);color:var(--bg);transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--coffee);}
+.btn.fill{background:var(--accent);color:var(--bg);}
+.btn.fill:hover{background:transparent;color:var(--accent);}
 
-    .feature-card:hover {
-      transform: translate(-3px, -3px);
-      box-shadow: 8px 8px 0 var(--coffee);
-    }
+.marquee-wrap{overflow:hidden;padding:.8rem 0;border-top:2px solid var(--accent);border-bottom:2px solid var(--accent);background:rgba(37,52,79,.3);}
+.marquee-track{display:flex;gap:2rem;width:max-content;animation:mscroll 30s linear infinite;}
+.mi{font-family:'Press Start 2P',monospace;font-size:.5rem;color:var(--tan);white-space:nowrap;letter-spacing:2px;}
+.dot{color:var(--lav);margin:0 .8rem;}
 
-    .feature-icon {
-      font-size: 2.5rem;
-      display: block;
-      margin-bottom: 1rem;
-      animation: bounce-idle 2s ease-in-out infinite;
-    }
+.stats{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;padding:2.5rem 2rem;background:var(--card);border-top:3px solid var(--accent);border-bottom:3px solid var(--accent);}
+.stat{text-align:center;}
+.stat-n{font-family:'Press Start 2P',monospace;font-size:1.3rem;color:var(--lav);display:block;text-shadow:3px 3px 0 var(--coffee);}
+.stat-l{font-family:'Press Start 2P',monospace;font-size:.38rem;color:var(--tan);letter-spacing:1px;margin-top:.3rem;display:block;}
 
-    .feature-title {
-      font-family: var(--font-pixel);
-      font-size: 0.55rem;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-      letter-spacing: 1px;
-    }
+.features{padding:5rem 2rem;max-width:1100px;margin:0 auto;}
+.sec-title{font-family:'Press Start 2P',monospace;font-size:clamp(.7rem,2vw,1rem);color:var(--accent);text-align:center;margin-bottom:.5rem;letter-spacing:2px;}
+.sec-sub{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--tan);text-align:center;font-style:italic;margin-bottom:1rem;}
+.divider{width:80px;height:3px;background:var(--accent);margin:1rem auto 3rem;position:relative;}
+.divider::before,.divider::after{content:'★';position:absolute;top:50%;transform:translateY(-50%);color:var(--accent);font-size:.8rem;}
+.divider::before{left:-1.5rem;}.divider::after{right:-1.5rem;}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;}
+.feat-card{background:var(--card);border:3px solid var(--accent);padding:1.5rem;text-align:center;box-shadow:5px 5px 0 var(--coffee);transition:.3s;position:relative;overflow:hidden;}
+.feat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--lav),var(--mint),var(--gold));background-size:200% 100%;animation:shimmer 3s linear infinite;}
+.feat-card:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--coffee);}
+.feat-icon{font-size:2.5rem;display:block;margin-bottom:1rem;animation:bidl 2s ease-in-out infinite;}
+.feat-title{font-family:'Press Start 2P',monospace;font-size:.5rem;color:var(--accent);margin-bottom:.5rem;letter-spacing:1px;}
+.feat-desc{font-size:.85rem;opacity:.9;line-height:1.6;}
 
-    .feature-desc {
-      font-size: 0.85rem;
-      color: var(--text);
-      opacity: 0.85;
-      line-height: 1.6;
-    }
+.teaser{background:var(--card);border-top:3px solid var(--accent);border-bottom:3px solid var(--accent);padding:4rem 2rem;}
+.teaser-inner{max-width:700px;margin:0 auto;text-align:center;}
+.quote{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--tan);font-style:italic;border-left:4px solid var(--lav);padding-left:1rem;text-align:left;margin:2rem 0;}
+.teaser-inner p{font-size:1rem;line-height:1.9;opacity:.9;margin-bottom:1rem;}
 
-    /* ---- Quick stats ---- */
-    .stats-bar {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      padding: 3rem 2rem;
-      background: var(--card-bg);
-      border-top: 3px solid var(--accent);
-      border-bottom: 3px solid var(--accent);
-      margin: 2rem 0;
-    }
+footer{background:var(--nav);border-top:3px solid var(--accent);padding:2rem;text-align:center;font-family:'Press Start 2P',monospace;font-size:.38rem;opacity:.8;line-height:2.2;letter-spacing:1px;}
+footer a{color:var(--accent);text-decoration:none;}
 
-    .stat-item {
-      text-align: center;
-    }
+@keyframes vspin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes pglow{0%,100%{box-shadow:0 0 0 4px var(--coffee),0 0 15px rgba(201,168,226,.3)}50%{box-shadow:0 0 0 4px var(--coffee),0 0 30px rgba(201,168,226,.7)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes twinkle{0%,100%{opacity:.3;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
+@keyframes bidl{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes mscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes fbounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
 
-    .stat-number {
-      font-family: var(--font-pixel);
-      font-size: 1.5rem;
-      color: var(--lavender);
-      display: block;
-      text-shadow: 3px 3px 0 var(--coffee);
-    }
-
-    .stat-label {
-      font-family: var(--font-pixel);
-      font-size: 0.4rem;
-      color: var(--tan);
-      letter-spacing: 1px;
-      margin-top: 0.3rem;
-      display: block;
-    }
-
-    /* ---- Marquee ---- */
-    .marquee-wrap {
-      overflow: hidden;
-      padding: 1rem 0;
-      border-top: 2px solid var(--accent);
-      border-bottom: 2px solid var(--accent);
-      background: rgba(37,52,79,0.3);
-    }
-
-    .marquee-track {
-      display: flex;
-      gap: 2rem;
-      width: max-content;
-      animation: marqueeScroll 30s linear infinite;
-    }
-
-    .marquee-item {
-      font-family: var(--font-pixel);
-      font-size: 0.55rem;
-      color: var(--tan);
-      white-space: nowrap;
-      letter-spacing: 2px;
-    }
-
-    .marquee-item .dot {
-      color: var(--lavender);
-      margin: 0 1rem;
-    }
-
-    /* ---- About teaser ---- */
-    .about-teaser {
-      max-width: 700px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .about-teaser p {
-      font-size: 1rem;
-      line-height: 1.9;
-      color: var(--text);
-      opacity: 0.9;
-      margin-bottom: 1.5rem;
-    }
-
-    .about-teaser .quote {
-      font-family: var(--font-serif);
-      font-size: 1.3rem;
-      color: var(--tan);
-      font-style: italic;
-      border-left: 4px solid var(--lavender);
-      padding-left: 1rem;
-      text-align: left;
-      margin: 2rem 0;
-    }
-
-    /* ---- Ghana + MD flags ---- */
-    .location-badges {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      margin: 1rem 0;
-      flex-wrap: wrap;
-    }
-
-    .loc-badge {
-      font-family: var(--font-pixel);
-      font-size: 0.45rem;
-      padding: 0.4rem 0.8rem;
-      border: 2px solid var(--mint);
-      color: var(--mint);
-      letter-spacing: 1px;
-    }
-  </style>
+@media(max-width:768px){.nav-links{gap:.6rem}.nav-links a{font-size:.38rem;padding:.3rem .4rem}.hero-name{font-size:1rem}.stats{gap:1rem}}
+</style>
 </head>
 <body>
 
-<!-- Floating ambient elements -->
-<div class="floating-elements" id="floatingElements"></div>
+<div id="floats"></div>
 
-<!-- Walking avatar -->
-<div class="avatar-walker" id="avatarWalker" style="bottom:90px;">
-  <div class="avatar-bubble"></div>
-  <canvas class="avatar-sprite" id="avatarCanvas" width="48" height="64"></canvas>
+<div id="walker">
+  <div class="bubble" id="bubble"></div>
+  <canvas id="walkCanvas" style="image-rendering:pixelated;"></canvas>
 </div>
 
-<!-- Navigation -->
-<nav class="navbar">
-  <a href="index.html" class="nav-logo">NMO ✦</a>
+<nav>
+  <a href="index.html" class="logo">NMO ✦</a>
   <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
+    <li><a href="index.html" class="active">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="projects.html">Projects</a></li>
     <li><a href="skills.html">Skills</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <button class="theme-toggle" id="themeToggle">☀️</button>
+  <button class="theme-btn" id="themeBtn">☀️</button>
 </nav>
 
-<!-- Vinyl audio player -->
-<div class="vinyl-player">
-  <div class="vinyl-record" id="vinyl" title="Click to play ambient music"></div>
+<div class="vinyl-wrap">
+  <div class="vinyl" id="vinyl" title="Click to play music"></div>
   <button class="mute-btn" id="muteBtn">🔈</button>
   <div class="vinyl-label">prod. Metzmusic<br/>free use ✓</div>
 </div>
 
-<!-- ===== HERO ===== -->
 <section class="hero">
-  <div class="hero-bg-grid"></div>
+  <div class="hero-grid"></div>
+  <span class="star" style="top:15%;left:10%;font-size:1rem;animation-delay:.2s;">★</span>
+  <span class="star" style="top:25%;right:15%;font-size:.7rem;color:var(--gold);animation-delay:.8s;">★</span>
+  <span class="star" style="top:70%;left:5%;font-size:.8rem;color:var(--mint);animation-delay:.4s;">★</span>
+  <span class="star" style="bottom:20%;right:8%;font-size:1.2rem;color:var(--pink);animation-delay:1s;">★</span>
+  <span class="star" style="top:40%;left:3%;font-size:.6rem;color:var(--tan);animation-delay:.6s;">★</span>
 
-  <!-- Pixel stars scattered -->
-  <div style="position:absolute;inset:0;pointer-events:none;z-index:1;">
-    <span style="position:absolute;top:15%;left:10%;font-size:1rem;color:var(--lavender);animation:star-twinkle 2s ease-in-out 0.2s infinite;">★</span>
-    <span style="position:absolute;top:25%;right:15%;font-size:0.7rem;color:var(--gold);animation:star-twinkle 2.5s ease-in-out 0.8s infinite;">★</span>
-    <span style="position:absolute;top:70%;left:5%;font-size:0.8rem;color:var(--mint);animation:star-twinkle 1.8s ease-in-out 0.4s infinite;">★</span>
-    <span style="position:absolute;bottom:20%;right:8%;font-size:1.2rem;color:var(--soft-pink);animation:star-twinkle 3s ease-in-out 1s infinite;">★</span>
-    <span style="position:absolute;top:40%;left:3%;font-size:0.6rem;color:var(--tan);animation:star-twinkle 2.2s ease-in-out 0.6s infinite;">★</span>
-    <span style="position:absolute;bottom:30%;left:20%;font-size:0.9rem;color:var(--lavender);animation:star-twinkle 2.8s ease-in-out 1.2s infinite;">★</span>
-  </div>
-
-  <div class="hero-content" style="position:relative;z-index:2;">
-
-    <!-- Avatar -->
-    <div class="hero-avatar-area">
-      <div class="hero-avatar-ring">
-        <canvas id="heroAvatarCanvas" width="140" height="140" class="pixel-art"></canvas>
+  <div class="hero-content">
+    <div class="av-wrap">
+      <div class="av-ring">
+        <img src="assets/avatar_hero.png" alt="Noel Mills-Odoi pixel avatar" id="heroImg"/>
       </div>
-      <div class="orbit-icons">
-        <span class="orbit-icon">🦋</span>
-        <span class="orbit-icon">🍪</span>
-        <span class="orbit-icon">🎵</span>
-        <span class="orbit-icon">🧶</span>
+      <div class="orbit">
+        <span>🦋</span><span>🍪</span><span>🎵</span><span>🧶</span>
       </div>
     </div>
 
-    <p class="hero-greeting">✦ hello world ✦</p>
+    <p class="greeting">✦ hello world ✦</p>
+    <h1 class="hero-name">I'm <span>Noel Mills-Odoi</span></h1>
+    <p class="tagline" id="tagline"><span class="cursor"></span></p>
 
-    <h1 class="hero-name">
-      I'm <span>Noel Mills-Odoi</span>
-    </h1>
-
-    <p class="hero-tagline" id="typingTagline">
-      AI Security Researcher &amp; Software Engineer
-      <span class="typing-cursor"></span>
-    </p>
-
-    <div class="location-badges">
-      <span class="loc-badge">🇬🇭 Ghana</span>
-      <span class="loc-badge">🦅 Maryland</span>
-      <span class="loc-badge">📍 Silver Spring</span>
+    <div class="locs">
+      <span class="loc">🇬🇭 Ghana</span>
+      <span class="loc">🦅 Maryland</span>
+      <span class="loc">📍 Silver Spring</span>
     </div>
 
     <p class="hero-sub">
@@ -307,257 +173,229 @@
       UMBC IS grad. Cookie enthusiast. Yarn wizard.
     </p>
 
-    <div class="hero-cta-group">
-      <a href="projects.html" class="btn-pixel filled">View Projects</a>
-      <a href="about.html" class="btn-pixel">About Me</a>
-      <a href="contact.html" class="btn-pixel">Say Hello</a>
+    <div class="ctas">
+      <a href="projects.html" class="btn fill">View Projects</a>
+      <a href="about.html" class="btn">About Me</a>
+      <a href="contact.html" class="btn">Say Hello</a>
     </div>
   </div>
 </section>
 
-<!-- ===== MARQUEE ===== -->
 <div class="marquee-wrap">
   <div class="marquee-track">
-    <span class="marquee-item">Python<span class="dot">✦</span></span>
-    <span class="marquee-item">AI Security<span class="dot">✦</span></span>
-    <span class="marquee-item">LLM Integration<span class="dot">✦</span></span>
-    <span class="marquee-item">UMBC IS Grad<span class="dot">✦</span></span>
-    <span class="marquee-item">Prompt Engineering<span class="dot">✦</span></span>
-    <span class="marquee-item">Full Stack Dev<span class="dot">✦</span></span>
-    <span class="marquee-item">CompTIA Security+<span class="dot">✦</span></span>
-    <span class="marquee-item">Open to Work<span class="dot">✦</span></span>
-    <span class="marquee-item">Python<span class="dot">✦</span></span>
-    <span class="marquee-item">AI Security<span class="dot">✦</span></span>
-    <span class="marquee-item">LLM Integration<span class="dot">✦</span></span>
-    <span class="marquee-item">UMBC IS Grad<span class="dot">✦</span></span>
-    <span class="marquee-item">Prompt Engineering<span class="dot">✦</span></span>
-    <span class="marquee-item">Full Stack Dev<span class="dot">✦</span></span>
+    <span class="mi">Python<span class="dot">✦</span></span>
+    <span class="mi">AI Security<span class="dot">✦</span></span>
+    <span class="mi">LLM Integration<span class="dot">✦</span></span>
+    <span class="mi">UMBC IS Grad<span class="dot">✦</span></span>
+    <span class="mi">Prompt Engineering<span class="dot">✦</span></span>
+    <span class="mi">Full Stack Dev<span class="dot">✦</span></span>
+    <span class="mi">CompTIA Security+<span class="dot">✦</span></span>
+    <span class="mi">Open to Work<span class="dot">✦</span></span>
+    <span class="mi">Python<span class="dot">✦</span></span>
+    <span class="mi">AI Security<span class="dot">✦</span></span>
+    <span class="mi">LLM Integration<span class="dot">✦</span></span>
+    <span class="mi">UMBC IS Grad<span class="dot">✦</span></span>
+    <span class="mi">Prompt Engineering<span class="dot">✦</span></span>
+    <span class="mi">Full Stack Dev<span class="dot">✦</span></span>
   </div>
 </div>
 
-<!-- ===== STATS ===== -->
-<div class="stats-bar">
-  <div class="stat-item">
-    <span class="stat-number">4+</span>
-    <span class="stat-label">Projects Built</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">3</span>
-    <span class="stat-label">Years Client Delivery</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">6</span>
-    <span class="stat-label">Workflows Automated</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">2</span>
-    <span class="stat-label">Anthropic Certs</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">∞</span>
-    <span class="stat-label">Cookies Eaten</span>
-  </div>
+<div class="stats">
+  <div class="stat"><span class="stat-n">4+</span><span class="stat-l">Projects Built</span></div>
+  <div class="stat"><span class="stat-n">3</span><span class="stat-l">Years Client Delivery</span></div>
+  <div class="stat"><span class="stat-n">6</span><span class="stat-l">Workflows Automated</span></div>
+  <div class="stat"><span class="stat-n">2</span><span class="stat-l">Anthropic Certs</span></div>
+  <div class="stat"><span class="stat-n">∞</span><span class="stat-l">Cookies Eaten</span></div>
 </div>
 
-<!-- ===== FEATURES ===== -->
-<section class="section" style="max-width:1100px;margin:0 auto;">
-  <h2 class="section-title">What I Do</h2>
-  <p class="section-sub">where code meets creativity</p>
-  <div class="section-divider"></div>
-
-  <div class="featured-grid">
-    <div class="feature-card reveal">
-      <span class="feature-icon">🔐</span>
-      <h3 class="feature-title">AI Security</h3>
-      <p class="feature-desc">Building security monitoring systems with MITRE ATT&CK-aligned detection logic, prompt injection defenses, and human-in-the-loop validation.</p>
-    </div>
-    <div class="feature-card reveal">
-      <span class="feature-icon">🤖</span>
-      <h3 class="feature-title">LLM Integration</h3>
-      <p class="feature-desc">Integrating Claude and other LLMs via REST API into production workflows with responsible AI practices and output validation.</p>
-    </div>
-    <div class="feature-card reveal">
-      <span class="feature-icon">💻</span>
-      <h3 class="feature-title">Full Stack Dev</h3>
-      <p class="feature-desc">Python, JavaScript, PHP, SQL — from database design to Linux server deployment. End-to-end ownership of every project.</p>
-    </div>
-    <div class="feature-card reveal">
-      <span class="feature-icon">✨</span>
-      <h3 class="feature-title">Creative Projects</h3>
-      <p class="feature-desc">From AI music players with pixel art to visual learning tools — I build things that make people smile and think.</p>
-    </div>
+<section class="features">
+  <h2 class="sec-title">What I Do</h2>
+  <p class="sec-sub">where code meets creativity</p>
+  <div class="divider"></div>
+  <div class="feat-grid">
+    <div class="feat-card"><span class="feat-icon">🔐</span><h3 class="feat-title">AI Security</h3><p class="feat-desc">Building security monitoring systems with MITRE ATT&CK-aligned detection logic, prompt injection defenses, and human-in-the-loop validation.</p></div>
+    <div class="feat-card"><span class="feat-icon">🤖</span><h3 class="feat-title">LLM Integration</h3><p class="feat-desc">Integrating Claude and other LLMs via REST API into production workflows with responsible AI practices and output validation.</p></div>
+    <div class="feat-card"><span class="feat-icon">💻</span><h3 class="feat-title">Full Stack Dev</h3><p class="feat-desc">Python, JavaScript, PHP, SQL — from database design to Linux server deployment. End-to-end ownership of every project.</p></div>
+    <div class="feat-card"><span class="feat-icon">✨</span><h3 class="feat-title">Creative Projects</h3><p class="feat-desc">From AI music players with pixel art to visual learning tools — I build things that make people smile and think.</p></div>
   </div>
 </section>
 
-<!-- ===== ABOUT TEASER ===== -->
-<section class="section" style="background: var(--card-bg); border-top: 3px solid var(--accent); border-bottom: 3px solid var(--accent);">
-  <div class="about-teaser reveal">
-    <h2 class="section-title">A Little About Me</h2>
-    <div class="section-divider"></div>
-
-    <blockquote class="quote">
-      "I'm not just someone focused on working hard and making money —
-      I'm the person who makes you smile when you see me."
-    </blockquote>
-
-    <p>
-      I'm a May 2026 UMBC Information Systems graduate who builds AI systems by day
-      and crochets pixel-inspired blankets by night. The first thing out of my mouth
-      will make you laugh or grin from ear to ear — and I'll show up when you need me.
-    </p>
-
-    <p>
-      From Silver Spring, MD. Proud Ghanaian-American. 🇬🇭🇺🇸
-      WiCyS president. Delegate Jheanelle Wilkins Scholar. Cookie scientist.
-    </p>
-
-    <a href="about.html" class="btn-pixel" style="margin-top:1.5rem;display:inline-block;">
-      Read My Story →
-    </a>
+<section class="teaser">
+  <div class="teaser-inner">
+    <h2 class="sec-title">A Little About Me</h2>
+    <div class="divider"></div>
+    <blockquote class="quote">"I'm not just someone focused on working hard and making money — I'm the person who makes you smile when you see me."</blockquote>
+    <p>I'm a May 2026 UMBC Information Systems graduate who builds AI systems by day and crochets pixel-inspired blankets by night. From Silver Spring, MD. Proud Ghanaian-American. 🇬🇭🇺🇸</p>
+    <a href="about.html" class="btn" style="margin-top:1.5rem;display:inline-block;">Read My Story →</a>
   </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
 <footer>
   <p>✦ crafted with 🍪 + 🧶 + ☕ by Noel Mills-Odoi ✦</p>
-  <p>nmillso1.github.io | <a href="mailto:nmills6635@gmail.com">nmills6635@gmail.com</a></p>
-  <p>🎵 Ambient music: <a href="https://bsta.rs/40xWSc" target="_blank">prod. Metzmusic</a> (free use, credited)</p>
+  <p><a href="mailto:nmills6635@gmail.com">nmills6635@gmail.com</a> | <a href="https://linkedin.com/in/noel-mills-odoi" target="_blank">LinkedIn</a> | <a href="https://github.com/nmillso1" target="_blank">GitHub</a></p>
+  <p>🎵 Music: <a href="https://bsta.rs/40xWSc" target="_blank">prod. Metzmusic</a> (free use, credited)</p>
 </footer>
 
-<script src="js/avatar.js"></script>
-<script src="js/audio.js"></script>
-<script src="js/main.js"></script>
 <script>
-  // Draw pixel avatar on hero canvas
-  function drawHeroAvatar(canvas) {
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    ctx.imageSmoothingEnabled = false;
-    const s = 10; // scale per pixel
+// ── THEME ──
+const body = document.body;
+const themeBtn = document.getElementById('themeBtn');
+if(localStorage.getItem('theme')==='light'){body.classList.add('light');themeBtn.textContent='🌙';}
+themeBtn.addEventListener('click',()=>{
+  body.classList.toggle('light');
+  const l=body.classList.contains('light');
+  themeBtn.textContent=l?'🌙':'☀️';
+  localStorage.setItem('theme',l?'light':'dark');
+});
 
-    // Simple pixel portrait based on avatar (purple/brown tones, headphones, jacket)
-    const pixels = [
-      // Row 0-1: headphones top
-      [0,0,0,0,2,2,2,2,2,2,2,2,0,0],
-      [0,0,2,2,1,1,1,1,1,1,1,1,2,2],
-      // Row 2-5: face
-      [0,2,1,1,3,3,3,3,3,3,1,1,2,0],
-      [0,2,1,3,3,3,3,3,3,3,3,1,2,0],
-      [0,2,1,3,4,3,3,3,3,4,3,1,2,0],
-      [0,2,1,3,3,3,3,3,3,3,3,1,2,0],
-      // Row 6: smile
-      [0,2,1,3,3,5,3,3,5,3,3,1,2,0],
-      [0,2,1,1,3,3,3,3,3,3,1,1,2,0],
-      // Row 8-11: body/jacket (blue/purple)
-      [0,0,6,6,6,6,6,6,6,6,6,6,0,0],
-      [0,6,6,7,6,6,6,6,6,6,7,6,6,0],
-      [0,6,6,6,6,6,6,6,6,6,6,6,6,0],
-      [0,6,6,6,6,6,6,6,6,6,6,6,6,0],
-      // Row 12-13: bottom of jacket
-      [0,0,6,6,6,6,6,6,6,6,6,6,0,0],
-      [0,0,0,6,6,6,0,0,6,6,6,0,0,0],
-    ];
-
-    const colors = {
-      1: '#A8D8C2',   // headphone pad
-      2: '#25344F',   // headphone frame (dark)
-      3: '#8B5E52',   // skin tone
-      4: '#3a2520',   // eyes
-      5: '#D4826E',   // lips
-      6: '#617891',   // jacket blue-gray
-      7: '#C9A8E2',   // jacket accents
-    };
-
-    canvas.width = 14 * s;
-    canvas.height = 14 * s;
-
-    pixels.forEach((row, y) => {
-      row.forEach((cell, x) => {
-        if (cell && colors[cell]) {
-          ctx.fillStyle = colors[cell];
-          ctx.fillRect(x * s, y * s, s, s);
-        }
-      });
-    });
+// ── AUDIO ──
+let audio=null,playing=false;
+const vinyl=document.getElementById('vinyl');
+const muteBtn=document.getElementById('muteBtn');
+function toggleAudio(){
+  if(!audio){audio=new Audio('assets/ambient.mp3');audio.loop=true;audio.volume=0.35;}
+  if(!playing){
+    audio.play().catch(()=>{});
+    playing=true;vinyl.classList.add('spin');muteBtn.textContent='🔊';
+  }else{
+    audio.pause();playing=false;vinyl.classList.remove('spin');muteBtn.textContent='🔈';
   }
+}
+vinyl.addEventListener('click',toggleAudio);
+muteBtn.addEventListener('click',toggleAudio);
 
-  drawHeroAvatar(document.getElementById('heroAvatarCanvas'));
+// ── CUTE CHIBI WALK SPRITE ──
+const AV={
+  '_':null,'S':'#7A4528','s':'#9B6040','d':'#5C3317',
+  'H':'#2C1A0E','h':'#4A2C1A','L':'#3D2310',
+  'f':'#D4826E','g':'#E8C97A','e':'#2C1A0E','W':'#FFF8F0',
+  'P':'#C47A5A','K':'#D4926A',
+  'A':'#7B5EA7','B':'#9B7EC7','C':'#5B3E87',
+  'T':'#FFF8F0','t':'#E8DCC8',
+  'N':'#E8C97A','R':'#D4A870',
+  'J':'#3A5A8A','j':'#4A6A9A',
+  'X':'#6B3D1E','G':'#6F4D38',
+};
 
-  // Draw walking avatar (same sprite, smaller)
-  function drawWalkAvatar(canvas) {
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    ctx.imageSmoothingEnabled = false;
-    const s = 4;
+// Frame A -- left leg forward
+const FA=[
+  ['_','_','H','H','H','H','H','H','H','H','H','H','_','_','_','_'],
+  ['_','H','h','L','h','H','H','H','h','L','h','H','H','_','_','_'],
+  ['_','H','h','L','L','L','h','h','L','L','h','H','H','_','_','_'],
+  ['H','H','H','H','H','S','S','S','S','H','H','H','H','_','_','_'],
+  ['H','H','_','S','e','W','e','e','W','e','S','H','H','_','_','_'],
+  ['H','H','_','S','S','P','P','P','P','S','S','H','H','_','_','_'],
+  ['_','H','H','H','S','S','d','d','S','S','H','H','H','_','_','_'],
+  ['_','_','A','A','A','T','T','T','T','A','A','A','_','_','_','_'],
+  ['_','A','B','A','A','A','A','A','A','A','A','B','A','_','_','_'],
+  ['_','A','A','C','A','A','A','A','A','A','C','A','A','_','_','_'],
+  ['A','A','A','A','S','A','A','A','A','S','A','A','A','A','_','_'],
+  ['_','_','_','A','A','A','A','A','A','A','A','A','_','_','_','_'],
+  ['_','_','_','_','A','A','_','_','A','A','_','_','_','_','_','_'],
+  ['_','_','_','A','A','_','_','_','_','_','A','_','_','_','_','_'],
+  ['_','_','A','A','_','_','_','_','_','_','A','A','_','_','_','_'],
+  ['_','_','G','G','_','_','_','_','_','_','G','G','_','_','_','_'],
+  ['_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_'],
+  ['_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_'],
+];
 
-    const pixels = [
-      [0,0,2,2,2,2,2,2,0,0],
-      [0,2,1,1,1,1,1,1,2,0],
-      [0,2,3,3,3,3,3,3,2,0],
-      [0,2,3,4,3,3,4,3,2,0],
-      [0,2,3,3,5,3,3,3,2,0],
-      [0,0,6,6,6,6,6,6,0,0],
-      [0,6,6,7,6,6,7,6,6,0],
-      [0,6,6,6,6,6,6,6,6,0],
-    ];
+// Frame B -- right leg forward
+const FB=[
+  ['_','_','H','H','H','H','H','H','H','H','H','H','_','_','_','_'],
+  ['_','H','h','L','h','H','H','H','h','L','h','H','H','_','_','_'],
+  ['_','H','h','L','L','L','h','h','L','L','h','H','H','_','_','_'],
+  ['H','H','H','H','H','S','S','S','S','H','H','H','H','_','_','_'],
+  ['H','H','_','S','e','W','e','e','W','e','S','H','H','_','_','_'],
+  ['H','H','_','S','S','P','P','P','P','S','S','H','H','_','_','_'],
+  ['_','H','H','H','S','S','d','d','S','S','H','H','H','_','_','_'],
+  ['_','_','A','A','A','T','T','T','T','A','A','A','_','_','_','_'],
+  ['_','A','B','A','A','A','A','A','A','A','A','B','A','_','_','_'],
+  ['_','A','A','C','A','A','A','A','A','A','C','A','A','_','_','_'],
+  ['A','A','A','A','S','A','A','A','A','S','A','A','A','A','_','_'],
+  ['_','_','_','A','A','A','A','A','A','A','A','A','_','_','_','_'],
+  ['_','_','_','_','A','A','_','_','A','A','_','_','_','_','_','_'],
+  ['_','_','_','_','A','_','_','_','_','A','A','_','_','_','_','_'],
+  ['_','_','_','_','A','A','_','_','_','_','A','A','_','_','_','_'],
+  ['_','_','_','_','G','G','_','_','_','_','G','G','_','_','_','_'],
+  ['_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_'],
+  ['_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_'],
+];
 
-    const colors = {
-      1: '#A8D8C2', 2: '#25344F', 3: '#8B5E52',
-      4: '#3a2520', 5: '#D4826E', 6: '#617891', 7: '#C9A8E2',
-    };
+const walkCanvas=document.getElementById('walkCanvas');
+let walkFrame=0,walkerX=-80,walkerDir=1,bubbleTimer=0,sayIdx=0;
+const sayings=['hello world! ✨','hire me pls 👩‍💻','i love cookies 🍪','SZA is life 🎵','be kind 💜','debug mode: on 🐛','crocheting 🧶','Ghana represent 🇬🇭'];
+const bubbleEl=document.getElementById('bubble');
+const walker=document.getElementById('walker');
 
-    canvas.width = 10 * s;
-    canvas.height = 8 * s;
+function drawWalk(){
+  const sprite=Math.floor(walkFrame/12)%2===0?FA:FB;
+  const ctx=walkCanvas.getContext('2d');
+  ctx.imageSmoothingEnabled=false;
+  const W=sprite[0].length,H=sprite.length,SC=4;
+  walkCanvas.width=W*SC;walkCanvas.height=H*SC;
+  ctx.clearRect(0,0,walkCanvas.width,walkCanvas.height);
+  sprite.forEach((row,y)=>row.forEach((cell,x)=>{
+    const c=AV[cell];if(c){ctx.fillStyle=c;ctx.fillRect(x*SC,y*SC,SC,SC);}
+  }));
+}
 
-    pixels.forEach((row, y) => {
-      row.forEach((cell, x) => {
-        if (cell && colors[cell]) {
-          ctx.fillStyle = colors[cell];
-          ctx.fillRect(x * s, y * s, s, s);
-        }
-      });
-    });
+function animateWalker(){
+  walkerX+=0.8*walkerDir;
+  if(walkerX>window.innerWidth+80){walkerDir=-1;walker.style.transform='scaleX(-1)';}
+  if(walkerX<-80){walkerDir=1;walker.style.transform='scaleX(1)';}
+  walker.style.left=walkerX+'px';
+  // counter-flip bubble so text stays readable
+  bubbleEl.style.transform=walkerDir===-1?'scaleX(-1)':'scaleX(1)';
+  walkFrame++;
+  bubbleTimer++;
+  if(bubbleTimer>280){
+    bubbleTimer=0;
+    bubbleEl.textContent=sayings[sayIdx++%sayings.length];
+    bubbleEl.style.opacity='1';
+    setTimeout(()=>{bubbleEl.style.opacity='0';},2500);
   }
+  drawWalk();
+  requestAnimationFrame(animateWalker);
+}
+animateWalker();
 
-  drawWalkAvatar(document.getElementById('avatarCanvas'));
+// ── CURSOR TRAIL ──
+document.addEventListener('mousemove',e=>{
+  const el=document.createElement('div');
+  el.textContent=['✨','⭐','💜','🌸','🍪'][Math.floor(Math.random()*5)];
+  el.style.cssText=`position:fixed;left:${e.clientX}px;top:${e.clientY}px;font-size:.8rem;pointer-events:none;z-index:9999;opacity:1;transition:opacity .8s,transform .8s;transform:translateY(0);`;
+  document.body.appendChild(el);
+  requestAnimationFrame(()=>{el.style.opacity='0';el.style.transform='translateY(-20px)';});
+  setTimeout(()=>el.remove(),800);
+});
 
-  // Typing tagline effect
-  const taglines = [
-    'AI Security Researcher',
-    'Software Engineer',
-    'Cookie Scientist 🍪',
-    'LLM Whisperer',
-    'UMBC IS Grad \'26',
-    'Crochet Enthusiast 🧶',
-  ];
+// ── FLOATING ELEMENTS ──
+const floats=document.getElementById('floats');
+const emojis=['🦋','🍪','🎵','🧶','⭐','🌸','✨','🎶'];
+function spawnFloat(){
+  const el=document.createElement('div');
+  el.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+  el.style.cssText=`position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;font-size:${.8+Math.random()*.8}rem;opacity:${.3+Math.random()*.4};animation:fbounce ${3+Math.random()*4}s ease-in-out ${Math.random()*2}s infinite;pointer-events:none;`;
+  floats.appendChild(el);
+  setTimeout(()=>el.remove(),12000);
+}
+for(let i=0;i<8;i++)setTimeout(spawnFloat,i*400);
+setInterval(spawnFloat,2500);
 
-  let taglineIndex = 0;
-  let charIndex = 0;
-  let deleting = false;
-  const taglineEl = document.getElementById('typingTagline');
-
-  function typeEffect() {
-    const current = taglines[taglineIndex];
-    if (!deleting) {
-      charIndex++;
-      if (taglineEl) taglineEl.innerHTML = current.substring(0, charIndex) + '<span class="typing-cursor"></span>';
-      if (charIndex === current.length) {
-        deleting = true;
-        setTimeout(typeEffect, 2000);
-        return;
-      }
-    } else {
-      charIndex--;
-      if (taglineEl) taglineEl.innerHTML = current.substring(0, charIndex) + '<span class="typing-cursor"></span>';
-      if (charIndex === 0) {
-        deleting = false;
-        taglineIndex = (taglineIndex + 1) % taglines.length;
-      }
-    }
-    setTimeout(typeEffect, deleting ? 50 : 80);
+// ── TYPING TAGLINE ──
+const tags=['AI Security Researcher','Software Engineer','Cookie Scientist 🍪','LLM Whisperer','UMBC IS Grad \'26','Crochet Enthusiast 🧶'];
+let ti=0,ci=0,del=false;
+const tagEl=document.getElementById('tagline');
+function type(){
+  const cur=tags[ti];
+  if(!del){ci++;tagEl.innerHTML=cur.substring(0,ci)+'<span class="cursor"></span>';
+    if(ci===cur.length){del=true;setTimeout(type,2000);return;}
+  }else{ci--;tagEl.innerHTML=cur.substring(0,ci)+'<span class="cursor"></span>';
+    if(ci===0){del=false;ti=(ti+1)%tags.length;}
   }
-
-  typeEffect();
+  setTimeout(type,del?50:80);
+}
+type();
 </script>
 </body>
 </html>
