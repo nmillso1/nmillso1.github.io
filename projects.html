@@ -117,28 +117,27 @@ footer a{color:var(--accent);text-decoration:none;}
 .page-title{font-family:"Press Start 2P",monospace;font-size:clamp(.8rem,2vw,1.2rem);color:var(--accent);margin-bottom:.5rem;letter-spacing:2px;}
 .page-sub{font-family:"Playfair Display",serif;font-size:1.1rem;color:var(--tan);font-style:italic;margin-bottom:1rem;}
 .divider{width:80px;height:3px;background:var(--accent);margin:1rem auto 2rem;position:relative;}
-.divider::before,.divider::after{content:"&#9733;";position:absolute;top:50%;transform:translateY(-50%);color:var(--accent);font-size:.8rem;}
-.divider::before{left:-1.5rem;}.divider::after{right:-1.5rem;}
-.project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2.5rem;max-width:1200px;margin:0 auto;padding:0 2rem 6rem;}
+.divider::before{content:"★";position:absolute;top:50%;transform:translateY(-50%);color:var(--accent);font-size:.8rem;left:-1.5rem;}
+.divider::after{content:"★";position:absolute;top:50%;transform:translateY(-50%);color:var(--accent);font-size:.8rem;right:-1.5rem;}
+.project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2.5rem;max-width:1200px;margin:0 auto;padding:0 2rem 6rem;}
 .proj-card{background:var(--card);border:3px solid var(--accent);overflow:hidden;box-shadow:6px 6px 0 var(--coffee);transition:.3s;}
 .proj-card:hover{transform:translate(-4px,-4px);box-shadow:10px 10px 0 var(--coffee);}
 .proj-card.featured{grid-column:span 2;}
 .proj-preview{width:100%;height:200px;background:var(--navy);position:relative;overflow:hidden;border-bottom:3px solid var(--accent);}
-.proj-preview canvas{width:100%;height:100%;display:block;image-rendering:pixelated;}
-.proj-preview-label{position:absolute;top:.5rem;right:.5rem;font-family:"Press Start 2P",monospace;font-size:.32rem;color:var(--accent);background:var(--card);border:1px solid var(--accent);padding:.2rem .4rem;}
+.proj-preview canvas{position:absolute;top:0;left:0;display:block;}
+.lbl{position:absolute;top:.5rem;right:.5rem;font-family:"Press Start 2P",monospace;font-size:.3rem;color:var(--accent);background:var(--card);border:1px solid var(--accent);padding:.2rem .4rem;z-index:2;}
 .proj-info{padding:1.5rem;}
 .proj-num{font-family:"Press Start 2P",monospace;font-size:.38rem;color:var(--slate);margin-bottom:.3rem;}
-.proj-name{font-family:"Press Start 2P",monospace;font-size:.6rem;color:var(--accent);margin-bottom:.8rem;letter-spacing:1px;line-height:1.5;}
+.proj-name{font-family:"Press Start 2P",monospace;font-size:.6rem;color:var(--accent);margin-bottom:.8rem;line-height:1.5;}
 .proj-desc{font-size:.88rem;opacity:.9;line-height:1.7;margin-bottom:1rem;}
 .proj-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem;}
-.tag{font-family:"Press Start 2P",monospace;font-size:.32rem;padding:.25rem .5rem;border:1px solid var(--lav);color:var(--lav);}
+.tag{font-family:"Press Start 2P",monospace;font-size:.3rem;padding:.25rem .5rem;border:1px solid var(--lav);color:var(--lav);}
 .tag.g{border-color:var(--mint);color:var(--mint);}
 .tag.y{border-color:var(--gold);color:var(--gold);}
 .tag.p{border-color:var(--pink);color:var(--pink);}
-.proj-link{font-family:"Press Start 2P",monospace;font-size:.38rem;padding:.5rem .8rem;border:2px solid var(--mint);color:var(--mint);text-decoration:none;transition:.3s;display:inline-flex;align-items:center;gap:.4rem;}
+.proj-link{font-family:"Press Start 2P",monospace;font-size:.38rem;padding:.5rem .8rem;border:2px solid var(--mint);color:var(--mint);text-decoration:none;transition:.3s;display:inline-block;}
 .proj-link:hover{background:var(--mint);color:var(--bg);}
 @media(max-width:768px){.proj-card.featured{grid-column:span 1;}}
-
 </style>
 </head>
 <body>
@@ -146,77 +145,76 @@ footer a{color:var(--accent);text-decoration:none;}
 <div id="walker"><div class="bubble" id="bubble"></div><canvas id="walkCanvas" style="image-rendering:pixelated;"></canvas></div>
 <nav>
   <a href="index.html" class="logo">NMO ✦</a>
-  <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="projects.html" class="active">Projects</a></li><li><a href="skills.html">Skills</a></li><li><a href="contact.html">Contact</a></li></ul>
-  <button class="theme-btn" id="themeBtn">&#x2600;&#xFE0F;</button>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <button class="theme-btn" id="themeBtn">☀️</button>
 </nav>
 <div class="vinyl-wrap">
   <div class="vinyl" id="vinyl"></div>
-  <button class="mute-btn" id="muteBtn">&#x1F508;</button>
-  <div class="vinyl-label">prod. Metzmusic<br/>free use &#x2713;</div>
+  <button class="mute-btn" id="muteBtn">🔈</button>
+  <div class="vinyl-label">prod. Metzmusic<br/>free use ✓</div>
 </div>
 
 <section class="page-hero">
   <h1 class="page-title">Projects</h1>
-  <p class="page-sub">things I built with love (and a lot of coffee)</p>
+  <p class="page-sub">things I built with love (and a lot of coffee ☕)</p>
   <div class="divider"></div>
-  <p style="font-size:.9rem;opacity:.8;max-width:600px;margin:0 auto;">Every project here is something I built end-to-end.</p>
+  <p style="font-size:.9rem;opacity:.8;max-width:600px;margin:0 auto;">Every project here is something I built end-to-end — from idea through deployment.</p>
 </section>
+
 <div class="project-grid">
   <div class="proj-card featured">
-    <div class="proj-preview"><canvas id="canvasPixelPlay"></canvas><span class="proj-preview-label">LIVE ANIMATION</span></div>
-    <div class="proj-info">
-      <p class="proj-num">01</p><h2 class="proj-name">PixelPlay</h2>
-      <p class="proj-desc">A browser-based AI music player in vanilla JavaScript. Local file playback, YouTube streaming, AI-generated pixel art per song via Pollinations.ai, queue system, listening history, localStorage persistence. Built during Anthropic AI Fluency course.</p>
-      <div class="proj-tags"><span class="tag">JavaScript</span><span class="tag g">Pollinations.ai</span><span class="tag g">YouTube IFrame API</span><span class="tag y">AI Art</span><span class="tag p">Anthropic</span></div>
-      <a href="https://github.com/nmillso1/PixelPlay" target="_blank" class="proj-link">GitHub</a>
-    </div>
+    <div class="proj-preview" id="p1"><canvas id="cvPlay"></canvas><span class="lbl">LIVE ANIMATION ▶</span></div>
+    <div class="proj-info"><p class="proj-num">01 ✦</p><h2 class="proj-name">PixelPlay</h2>
+    <p class="proj-desc">A browser-based AI music player in vanilla JavaScript. Local file playback, YouTube streaming, AI-generated pixel art per song via Pollinations.ai, queue system, listening history, localStorage persistence. Built during Anthropic AI Fluency course.</p>
+    <div class="proj-tags"><span class="tag">JavaScript</span><span class="tag g">Pollinations.ai</span><span class="tag g">YouTube IFrame API</span><span class="tag y">AI Art</span><span class="tag p">Anthropic</span></div>
+    <a href="https://github.com/nmillso1/PixelPlay" target="_blank" class="proj-link">💻 GitHub →</a></div>
   </div>
   <div class="proj-card">
-    <div class="proj-preview"><canvas id="canvasSecMon"></canvas><span class="proj-preview-label">LIVE ANIMATION</span></div>
-    <div class="proj-info">
-      <p class="proj-num">02</p><h2 class="proj-name">AI Security Monitor</h2>
-      <p class="proj-desc">AI-powered security monitoring system. Ingests logs, applies MITRE ATT&amp;CK detection logic, integrates Claude via REST API for automated incident reports, with prompt injection defenses and human-in-the-loop safety checkpoints.</p>
-      <div class="proj-tags"><span class="tag">Python</span><span class="tag g">Claude API</span><span class="tag y">MITRE ATT&amp;CK</span><span class="tag p">NIST AI RMF</span></div>
-      <a href="https://github.com/nmillso1" target="_blank" class="proj-link">GitHub</a>
-    </div>
+    <div class="proj-preview" id="p2"><canvas id="cvSec"></canvas><span class="lbl">LIVE ANIMATION ▶</span></div>
+    <div class="proj-info"><p class="proj-num">02 ✦</p><h2 class="proj-name">AI Security Monitor</h2>
+    <p class="proj-desc">AI-powered security monitoring. Ingests logs, applies MITRE ATT&amp;CK detection logic, integrates Claude via REST API for automated incident reports, with prompt injection defenses and human-in-the-loop safety checkpoints.</p>
+    <div class="proj-tags"><span class="tag">Python</span><span class="tag g">Claude API</span><span class="tag y">MITRE ATT&amp;CK</span><span class="tag p">NIST AI RMF</span></div>
+    <a href="https://github.com/nmillso1" target="_blank" class="proj-link">💻 GitHub →</a></div>
   </div>
   <div class="proj-card">
-    <div class="proj-preview"><canvas id="canvasDiagram"></canvas><span class="proj-preview-label">LIVE ANIMATION</span></div>
-    <div class="proj-info">
-      <p class="proj-num">03</p><h2 class="proj-name">Diagram Tutor</h2>
-      <p class="proj-desc">Floating desktop AI study assistant co-built with a research partner and Dr. Dillon at UMBC. Uses Ollama qwen3:4b for chat and Claude API for diagram generation. Helps visual learners without replacing teacher judgment.</p>
-      <div class="proj-tags"><span class="tag">Python</span><span class="tag">PyQt5</span><span class="tag g">Claude API</span><span class="tag y">Ollama</span></div>
-      <a href="https://github.com/nmillso1/diagram-generator" target="_blank" class="proj-link">GitHub</a>
-    </div>
+    <div class="proj-preview" id="p3"><canvas id="cvDiag"></canvas><span class="lbl">LIVE ANIMATION ▶</span></div>
+    <div class="proj-info"><p class="proj-num">03 ✦</p><h2 class="proj-name">Diagram Tutor</h2>
+    <p class="proj-desc">Floating desktop AI study assistant co-built with Dr. Dillon at UMBC. Uses Ollama qwen3:4b for chat and Claude API for diagram generation. Helps visual learners without replacing teacher judgment.</p>
+    <div class="proj-tags"><span class="tag">Python</span><span class="tag">PyQt5</span><span class="tag g">Claude API</span><span class="tag y">Ollama</span></div>
+    <a href="https://github.com/nmillso1/diagram-generator" target="_blank" class="proj-link">💻 GitHub →</a></div>
   </div>
   <div class="proj-card">
-    <div class="proj-preview"><canvas id="canvasCafe"></canvas><span class="proj-preview-label">LIVE ANIMATION</span></div>
-    <div class="proj-info">
-      <p class="proj-num">04</p><h2 class="proj-name">Bean There Cafe Finder</h2>
-      <p class="proj-desc">Progressive Web App for discovering local cafes in the Baltimore/Catonsville area. Built with Leaflet.js, OpenStreetMap, and Overpass API with a manually curated cafes.json dataset.</p>
-      <div class="proj-tags"><span class="tag">JavaScript</span><span class="tag g">Leaflet.js</span><span class="tag y">Overpass API</span><span class="tag p">PWA</span></div>
-      <a href="https://github.com/nmillso1/Bean-There-Cafe-Finder" target="_blank" class="proj-link">GitHub</a>
-    </div>
+    <div class="proj-preview" id="p4"><canvas id="cvCafe"></canvas><span class="lbl">LIVE ANIMATION ▶</span></div>
+    <div class="proj-info"><p class="proj-num">04 ✦</p><h2 class="proj-name">Bean There Cafe Finder</h2>
+    <p class="proj-desc">Progressive Web App for discovering local cafes in Baltimore/Catonsville. Built with Leaflet.js, OpenStreetMap, and Overpass API with a manually curated cafes.json dataset.</p>
+    <div class="proj-tags"><span class="tag">JavaScript</span><span class="tag g">Leaflet.js</span><span class="tag y">Overpass API</span><span class="tag p">PWA</span></div>
+    <a href="https://github.com/nmillso1/Bean-There-Cafe-Finder" target="_blank" class="proj-link">💻 GitHub →</a></div>
   </div>
   <div class="proj-card">
-    <div class="proj-preview"><canvas id="canvasChat"></canvas><span class="proj-preview-label">LIVE ANIMATION</span></div>
-    <div class="proj-info">
-      <p class="proj-num">05</p><h2 class="proj-name">IS436 Group Chat App</h2>
-      <p class="proj-desc">Multi-client networked chat app built in a 5-person Agile team for UMBC IS 436 capstone. Multithreaded Python TCP socket server, Tkinter GUI, thread-safe state management, persistent logging. Supports 5+ simultaneous clients.</p>
-      <div class="proj-tags"><span class="tag">Python</span><span class="tag g">TCP Sockets</span><span class="tag y">Tkinter</span><span class="tag p">Agile/Scrum</span></div>
-      <a href="https://github.com/nmillso1/IS436-Group-Chat-Application" target="_blank" class="proj-link">GitHub</a>
-    </div>
+    <div class="proj-preview" id="p5"><canvas id="cvChat"></canvas><span class="lbl">LIVE ANIMATION ▶</span></div>
+    <div class="proj-info"><p class="proj-num">05 ✦</p><h2 class="proj-name">IS436 Group Chat App</h2>
+    <p class="proj-desc">Multi-client networked chat app in a 5-person Agile team for UMBC IS 436. Multithreaded Python TCP socket server, Tkinter GUI, thread-safe state management, persistent logging. Supports 5+ simultaneous clients.</p>
+    <div class="proj-tags"><span class="tag">Python</span><span class="tag g">TCP Sockets</span><span class="tag y">Tkinter</span><span class="tag p">Agile/Scrum</span></div>
+    <a href="https://github.com/nmillso1/IS436-Group-Chat-Application" target="_blank" class="proj-link">💻 GitHub →</a></div>
   </div>
 </div>
-<div style="text-align:center;padding:2rem 0 4rem;">
-  <a href="https://github.com/nmillso1" target="_blank" class="btn">See All Projects on GitHub</a>
+<div style="text-align:center;padding:0 0 4rem;">
+  <a href="https://github.com/nmillso1" target="_blank" class="btn">See All Projects on GitHub →</a>
 </div>
 
 <footer>
-  <p>&#x2726; crafted with &#x1F36A; + &#x1F9F6; + &#x2615; by Noel Mills-Odoi &#x2726;</p>
+  <p>✦ crafted with 🍪 + 🧶 + ☕ by Noel Mills-Odoi ✦</p>
   <p><a href="mailto:nmills6635@gmail.com">nmills6635@gmail.com</a> | <a href="https://linkedin.com/in/noel-mills-odoi" target="_blank">LinkedIn</a> | <a href="https://github.com/nmillso1" target="_blank">GitHub</a></p>
-  <p>&#x1F3B5; Music: <a href="https://bsta.rs/40xWSc" target="_blank">prod. Metzmusic</a> (free use, credited)</p>
+  <p>🎵 Music: <a href="https://bsta.rs/40xWSc" target="_blank">prod. Metzmusic</a> (free use, credited)</p>
 </footer>
+
+<!-- Shared JS (walker, theme, audio, floats, cursor) -->
 <script>
 
 // ── THEME ──
@@ -379,137 +377,151 @@ function type(){
 }
 type();
 
-
-function runCanvas(id, fn) {
-  var cv = document.getElementById(id);
-  if (!cv) return;
-  var f = 0;
-  (function loop(){ fn(cv, f++); requestAnimationFrame(loop); })();
-}
-
-function drawPixelPlay(cv, f) {
-  cv.width=300; cv.height=200;
-  var c=cv.getContext('2d');
-  c.fillStyle='#0F1A2A'; c.fillRect(0,0,300,200);
-  c.save(); c.translate(70,100); c.rotate(f*.05);
-  c.beginPath(); c.arc(0,0,45,0,Math.PI*2); c.fillStyle='#1a1a2e'; c.fill();
-  c.strokeStyle='#C9A8E2'; c.lineWidth=2; c.stroke();
-  for(var r=15;r<43;r+=6){c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.strokeStyle='rgba(201,168,226,.15)';c.lineWidth=1;c.stroke();}
-  c.beginPath();c.arc(0,0,8,0,Math.PI*2);c.fillStyle='#C9A8E2';c.fill();
-  c.restore();
-  [140,165,190].forEach(function(x,i){
-    c.font='16px serif';
-    c.fillStyle='rgba(201,168,226,'+(0.3+Math.sin(f*.05+i)*.3)+')';
-    c.fillText('\u266A',x,((f*2+i*40)%120)+40);
-  });
-  c.beginPath(); c.moveTo(130,150);
-  for(var x=0;x<140;x++){c.lineTo(130+x,150+Math.sin((x*.15)+f*.1)*15);}
-  c.strokeStyle='#A8D8C2'; c.lineWidth=2; c.stroke();
-  c.font='8px "Press Start 2P",monospace'; c.fillStyle='#E8C97A'; c.fillText('PixelPlay',130,120);
-}
-
-function drawSecMon(cv, f) {
-  cv.width=300; cv.height=200;
-  var c=cv.getContext('2d');
-  c.fillStyle='#0a0f1a'; c.fillRect(0,0,300,200);
-  c.strokeStyle='#A8D8C2'; c.lineWidth=2; c.strokeRect(5,5,290,190);
-  c.fillStyle='#0F2A1A'; c.fillRect(5,5,290,20);
-  c.font='5px "Press Start 2P",monospace'; c.fillStyle='#A8D8C2'; c.fillText('AI SECURITY MONITOR',12,17);
-  var al=[
-    {t:'ALERT: Anomaly detected',s:'HIGH',col:'#CE1126'},
-    {t:'LOG: Auth failure x3',s:'MED',col:'#E8C97A'},
-    {t:'PASS: Output validated',s:'OK',col:'#A8D8C2'},
-    {t:'AI: Report generated',s:'INFO',col:'#C9A8E2'}
-  ];
-  al.forEach(function(a,i){
-    var y=40+i*36;
-    c.fillStyle=a.col+'22'; c.fillRect(10,y-10,280,28);
-    c.strokeStyle=a.col; c.lineWidth=1; c.strokeRect(10,y-10,280,28);
-    c.font='5px "Press Start 2P",monospace'; c.fillStyle=a.col; c.fillText('['+a.s+']',15,y+4);
-    c.fillStyle='#FFF8F0'; c.font='5px sans-serif'; c.fillText(a.t,62,y+4);
-    if(Math.floor(f/20)%2===0&&a.s==='HIGH'){c.beginPath();c.arc(278,y,4,0,Math.PI*2);c.fillStyle=a.col;c.fill();}
-  });
-}
-
-function drawDiagram(cv, f) {
-  cv.width=300; cv.height=200;
-  var c=cv.getContext('2d');
-  c.fillStyle='#0F1A2A'; c.fillRect(0,0,300,200);
-  c.fillStyle='#1a2a3a'; c.fillRect(30,20,240,140);
-  c.strokeStyle='#C9A8E2'; c.lineWidth=2; c.strokeRect(30,20,240,140);
-  c.fillStyle='#25344F'; c.fillRect(30,20,240,20);
-  c.font='6px "Press Start 2P",monospace'; c.fillStyle='#C9A8E2'; c.fillText('Diagram Tutor',40,33);
-  var nodes=[{x:80,y:100,l:'Input'},{x:150,y:80,l:'AI'},{x:220,y:100,l:'Output'}];
-  var pulse=Math.sin(f*.05)*5;
-  nodes.forEach(function(n,i){
-    if(i<2){
-      c.beginPath(); c.moveTo(n.x+20,n.y); c.lineTo(nodes[i+1].x-20,nodes[i+1].y);
-      c.strokeStyle='rgba(168,216,194,'+(0.5+Math.sin(f*.05+i)*.3)+')';
-      c.lineWidth=2; c.stroke();
-    }
-    var py=n.y+(i===1?pulse:0);
-    c.beginPath(); c.arc(n.x,py,18,0,Math.PI*2);
-    c.fillStyle=i===1?'#6F4D38':'#25344F'; c.fill();
-    c.strokeStyle=i===1?'#E8C97A':'#C9A8E2'; c.lineWidth=2; c.stroke();
-    c.font='5px sans-serif'; c.fillStyle='#FFF8F0'; c.textAlign='center'; c.fillText(n.l,n.x,py+2);
-  });
-  c.textAlign='left';
-}
-
-function drawCafe(cv, f) {
-  cv.width=300; cv.height=200;
-  var c=cv.getContext('2d');
-  c.fillStyle='#1a2a3a'; c.fillRect(0,0,300,200);
-  c.strokeStyle='rgba(97,120,145,.2)'; c.lineWidth=1;
-  for(var x=0;x<300;x+=30){c.beginPath();c.moveTo(x,0);c.lineTo(x,200);c.stroke();}
-  for(var y=0;y<200;y+=30){c.beginPath();c.moveTo(0,y);c.lineTo(300,y);c.stroke();}
-  c.strokeStyle='rgba(97,120,145,.4)'; c.lineWidth=6;
-  c.beginPath();c.moveTo(0,90);c.lineTo(300,90);c.stroke();
-  c.beginPath();c.moveTo(150,0);c.lineTo(150,200);c.stroke();
-  [{x:80,y:100},{x:140,y:70},{x:190,y:120},{x:230,y:80},{x:110,y:130}].forEach(function(cafe,i){
-    var p=Math.sin(f*.05+i*.8)*4;
-    c.beginPath();c.arc(cafe.x,cafe.y,12+p,0,Math.PI*2);c.fillStyle='rgba(111,77,56,.3)';c.fill();
-    c.beginPath();c.arc(cafe.x,cafe.y,8,0,Math.PI*2);c.fillStyle='#6F4D38';c.fill();
-    c.strokeStyle='#E8C97A';c.lineWidth=2;c.stroke();
-    c.font='10px serif';c.textAlign='center';c.fillText('\u2615',cafe.x,cafe.y+4);
-  });
-  c.textAlign='left';
-  c.font='6px "Press Start 2P",monospace';c.fillStyle='#C9A8E2';c.fillText('Bean There',10,18);
-}
-
-function drawChat(cv, f) {
-  cv.width=300; cv.height=200;
-  var c=cv.getContext('2d');
-  c.fillStyle='#0F1A2A'; c.fillRect(0,0,300,200);
-  c.fillStyle='#1a2a3a'; c.fillRect(20,15,260,150);
-  c.strokeStyle='#617891'; c.lineWidth=2; c.strokeRect(20,15,260,150);
-  c.fillStyle='#25344F'; c.fillRect(20,15,260,22);
-  c.font='5px "Press Start 2P",monospace'; c.fillStyle='#A8D8C2'; c.fillText('TCP Chat | 5 clients',28,29);
-  var lf=f%360;
-  var msgs=[{t:'hey! :wave:',l:true,y:55},{t:'hello! :smile:',l:false,y:85},{t:'connected!',l:true,y:115},{t:'5 users online',l:false,y:145}];
-  msgs.forEach(function(m,i){
-    if(lf>i*80){
-      var op=Math.min(1,(lf-i*80)/30);
-      var x=m.l?35:165;
-      c.fillStyle=m.l?'rgba(37,52,79,'+op+')':'rgba(111,77,56,'+op+')';
-      c.fillRect(x,m.y,100,20);
-      c.font='6px sans-serif'; c.fillStyle='rgba(255,248,240,'+op+')';
-      c.textAlign=m.l?'left':'right';
-      c.fillText(m.t,m.l?x+6:x+94,m.y+13);
-    }
-  });
-  c.textAlign='left';
-}
-
-// Start immediately using setTimeout(0) -- guaranteed after DOM is parsed
-setTimeout(function(){
-  runCanvas('canvasPixelPlay', drawPixelPlay);
-  runCanvas('canvasSecMon', drawSecMon);
-  runCanvas('canvasDiagram', drawDiagram);
-  runCanvas('canvasCafe', drawCafe);
-  runCanvas('canvasChat', drawChat);
-}, 0);
-
 </script>
+
+<!-- Canvas animations -- runs AFTER everything else, uses image() trick to force layout -->
+<script>
+(function() {
+  function initCanvas(cvId, parentId, drawFn) {
+    var cv = document.getElementById(cvId);
+    var parent = document.getElementById(parentId);
+    if (!cv || !parent) return;
+
+    function start() {
+      var W = parent.offsetWidth;
+      var H = parent.offsetHeight;
+      if (W === 0 || H === 0) {
+        // Container not laid out yet, retry
+        setTimeout(start, 50);
+        return;
+      }
+      cv.width  = W;
+      cv.height = H;
+      var f = 0;
+      (function loop() {
+        drawFn(cv, f++);
+        requestAnimationFrame(loop);
+      })();
+    }
+    start();
+  }
+
+  function pixelPlay(cv, f) {
+    var c=cv.getContext('2d'), W=cv.width, H=cv.height;
+    c.fillStyle='#0F1A2A'; c.fillRect(0,0,W,H);
+    c.save(); c.translate(W*0.22,H*0.5); c.rotate(f*0.05);
+    c.beginPath(); c.arc(0,0,44,0,Math.PI*2); c.fillStyle='#1a1a2e'; c.fill();
+    c.strokeStyle='#C9A8E2'; c.lineWidth=2; c.stroke();
+    for(var r=14;r<42;r+=6){c.beginPath();c.arc(0,0,r,0,Math.PI*2);c.strokeStyle='rgba(201,168,226,.12)';c.lineWidth=1;c.stroke();}
+    c.beginPath();c.arc(0,0,8,0,Math.PI*2);c.fillStyle='#C9A8E2';c.fill();
+    c.restore();
+    var ox=W*0.42;
+    [0,25,50].forEach(function(dx,i){
+      var y=((f*1.5+i*50)%120)+28;
+      c.font='15px serif'; c.fillStyle='rgba(201,168,226,'+(0.3+Math.sin(f*.05+i)*.3)+')';
+      c.fillText('♪', ox+dx, y);
+    });
+    c.beginPath(); c.moveTo(ox, H*0.76);
+    for(var x=0;x<W*0.52;x++) c.lineTo(ox+x, H*0.76+Math.sin((x*.15)+f*.1)*13);
+    c.strokeStyle='#A8D8C2'; c.lineWidth=2; c.stroke();
+    c.font='7px "Press Start 2P",monospace'; c.fillStyle='#E8C97A'; c.fillText('PixelPlay', ox, H*0.6);
+    c.font='5px "Press Start 2P",monospace'; c.fillStyle='#617891'; c.fillText('AI Music Player', ox, H*0.69);
+  }
+
+  function secMon(cv, f) {
+    var c=cv.getContext('2d'), W=cv.width, H=cv.height;
+    c.fillStyle='#0a0f1a'; c.fillRect(0,0,W,H);
+    c.strokeStyle='#A8D8C2'; c.lineWidth=2; c.strokeRect(4,4,W-8,H-8);
+    c.fillStyle='#0F2A1A'; c.fillRect(4,4,W-8,20);
+    c.font='5px "Press Start 2P",monospace'; c.fillStyle='#A8D8C2'; c.fillText('AI SECURITY MONITOR v1.0',10,17);
+    var al=[
+      {t:'ALERT: Anomaly detected',s:'HIGH',col:'#CE1126'},
+      {t:'LOG: Auth failure x3',s:'MED',col:'#E8C97A'},
+      {t:'PASS: Output validated',s:'OK',col:'#A8D8C2'},
+      {t:'AI: Report generated',s:'INFO',col:'#C9A8E2'}
+    ];
+    al.forEach(function(a,i){
+      var y=40+i*36;
+      c.fillStyle=a.col+'22'; c.fillRect(8,y-10,W-16,28);
+      c.strokeStyle=a.col; c.lineWidth=1; c.strokeRect(8,y-10,W-16,28);
+      c.font='5px "Press Start 2P",monospace'; c.fillStyle=a.col; c.fillText('['+a.s+']',12,y+4);
+      c.fillStyle='#FFF8F0'; c.font='5px sans-serif'; c.fillText(a.t,56,y+4);
+      if(Math.floor(f/20)%2===0&&a.s==='HIGH'){c.beginPath();c.arc(W-14,y,4,0,Math.PI*2);c.fillStyle=a.col;c.fill();}
+    });
+  }
+
+  function diagram(cv, f) {
+    var c=cv.getContext('2d'), W=cv.width, H=cv.height;
+    c.fillStyle='#0F1A2A'; c.fillRect(0,0,W,H);
+    c.fillStyle='#1a2a3a'; c.fillRect(16,16,W-32,H-32);
+    c.strokeStyle='#C9A8E2'; c.lineWidth=2; c.strokeRect(16,16,W-32,H-32);
+    c.fillStyle='#25344F'; c.fillRect(16,16,W-32,22);
+    c.font='6px "Press Start 2P",monospace'; c.fillStyle='#C9A8E2'; c.fillText('Diagram Tutor',24,30);
+    var cx=W/2, cy=H/2, pulse=Math.sin(f*.05)*6;
+    var nodes=[{x:cx-70,y:cy,l:'Input'},{x:cx,y:cy-18,l:'AI'},{x:cx+70,y:cy,l:'Output'}];
+    nodes.forEach(function(n,i){
+      if(i<2){
+        c.beginPath();c.moveTo(n.x+20,n.y);c.lineTo(nodes[i+1].x-20,nodes[i+1].y);
+        c.strokeStyle='rgba(168,216,194,'+(0.5+Math.sin(f*.05+i)*.3)+')';c.lineWidth=2;c.stroke();
+      }
+      var py=n.y+(i===1?pulse:0);
+      c.beginPath();c.arc(n.x,py,18,0,Math.PI*2);c.fillStyle=i===1?'#6F4D38':'#25344F';c.fill();
+      c.strokeStyle=i===1?'#E8C97A':'#C9A8E2';c.lineWidth=2;c.stroke();
+      c.font='5px sans-serif';c.fillStyle='#FFF8F0';c.textAlign='center';c.fillText(n.l,n.x,py+2);
+    });
+    c.textAlign='left';
+  }
+
+  function cafe(cv, f) {
+    var c=cv.getContext('2d'), W=cv.width, H=cv.height;
+    c.fillStyle='#1a2a3a'; c.fillRect(0,0,W,H);
+    c.strokeStyle='rgba(97,120,145,.18)'; c.lineWidth=1;
+    for(var x=0;x<W;x+=30){c.beginPath();c.moveTo(x,0);c.lineTo(x,H);c.stroke();}
+    for(var y=0;y<H;y+=30){c.beginPath();c.moveTo(0,y);c.lineTo(W,y);c.stroke();}
+    c.strokeStyle='rgba(97,120,145,.4)'; c.lineWidth=5;
+    c.beginPath();c.moveTo(0,H/2);c.lineTo(W,H/2);c.stroke();
+    c.beginPath();c.moveTo(W/2,0);c.lineTo(W/2,H);c.stroke();
+    [[.27,.5],[.47,.35],[.63,.6],[.77,.4],[.37,.65]].forEach(function(pt,i){
+      var px=W*pt[0], py=H*pt[1], p=Math.sin(f*.05+i*.8)*4;
+      c.beginPath();c.arc(px,py,12+p,0,Math.PI*2);c.fillStyle='rgba(111,77,56,.3)';c.fill();
+      c.beginPath();c.arc(px,py,8,0,Math.PI*2);c.fillStyle='#6F4D38';c.fill();
+      c.strokeStyle='#E8C97A';c.lineWidth=2;c.stroke();
+      c.font='10px serif';c.textAlign='center';c.fillText('☕',px,py+4);
+    });
+    c.textAlign='left';
+    c.font='5px "Press Start 2P",monospace';c.fillStyle='#C9A8E2';c.fillText('Bean There Cafe Finder',8,16);
+  }
+
+  function chat(cv, f) {
+    var c=cv.getContext('2d'), W=cv.width, H=cv.height;
+    c.fillStyle='#0F1A2A'; c.fillRect(0,0,W,H);
+    c.fillStyle='#1a2a3a'; c.fillRect(12,10,W-24,H-20);
+    c.strokeStyle='#617891'; c.lineWidth=2; c.strokeRect(12,10,W-24,H-20);
+    c.fillStyle='#25344F'; c.fillRect(12,10,W-24,22);
+    c.font='5px "Press Start 2P",monospace'; c.fillStyle='#A8D8C2'; c.fillText('TCP Chat  |  5 clients',18,24);
+    var lf=f%360;
+    [{'t':'hey! 👋','l':true,'y':50},{'t':'hello! 😊','l':false,'y':80},{'t':'connected!','l':true,'y':110},{'t':'5 users online','l':false,'y':140}].forEach(function(m,i){
+      if(lf>i*80){
+        var op=Math.min(1,(lf-i*80)/30), bx=m.l?18:W/2+8, bw=W/2-28;
+        c.fillStyle=m.l?'rgba(37,52,79,'+op+')':'rgba(111,77,56,'+op+')';
+        c.fillRect(bx,m.y,bw,20);
+        c.font='6px sans-serif'; c.fillStyle='rgba(255,248,240,'+op+')';
+        c.textAlign=m.l?'left':'right';
+        c.fillText(m.t,m.l?bx+5:bx+bw-4,m.y+13);
+      }
+    });
+    c.textAlign='left';
+  }
+
+  // Init all canvases -- start() retries every 50ms until parent has dimensions
+  initCanvas('cvPlay','p1',pixelPlay);
+  initCanvas('cvSec', 'p2',secMon);
+  initCanvas('cvDiag','p3',diagram);
+  initCanvas('cvCafe','p4',cafe);
+  initCanvas('cvChat','p5',chat);
+
+})();
+</script>
+
 </body>
 </html>
